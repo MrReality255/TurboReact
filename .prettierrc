@@ -1,0 +1,9 @@
+{
+  "parser": "typescript",
+  "tabWidth": 2,
+  "useTabs": true,
+  "jsxSingleQuote": true,
+  "bracketSameLine": true,
+  "html.voidElements": true,
+  "jsxBracketSameLine": true
+} 

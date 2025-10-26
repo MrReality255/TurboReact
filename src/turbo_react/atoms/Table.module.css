@@ -1,0 +1,74 @@
+table.tb {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width:100%;
+    height:100%;
+    border-collapse: collapse;
+    overflow: auto; 
+}
+
+tr.hdr {
+    background-color: #000;
+}
+
+table.tb > thead > tr > th {
+    font-weight: normal;
+    color: #fff;
+    padding:3px;
+
+    position: sticky; 
+    top: 0; 
+    z-index: 2;
+    background-color: inherit;
+}
+
+
+.ptr {
+    cursor: pointer;
+}
+
+table.tb > tbody > tr > td {
+    padding:3px
+}
+
+table.tb > tbody > tr.alt > td {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+table.tb > tbody > tr:hover  {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+th > span.icon {
+    position: absolute;
+    right:0;
+}
+
+th > span.iconR {
+    left:0;
+    right: unset;   
+}
+
+
+/* PALETTE */
+
+table.tb.blue > thead > tr > th {
+    color: #0ff;
+}
+
+table.tb.red > thead > tr > th {
+    color: #fff;
+    background-color: #500;
+}
+
+table.tb.green > thead > tr > th {
+    color: #ff0;
+    background-color: #050;
+}
+
+
+table.tb.dialog > thead > tr > th {
+    color: #ff0;
+    background-color: #055;
+}

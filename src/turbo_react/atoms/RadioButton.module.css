@@ -1,0 +1,77 @@
+label.rb {
+    cursor: pointer;
+}
+
+input.rb::before {
+    content: '( )';
+}
+
+input.rb:checked::before {
+    content: '(•)';
+}
+
+input.rb {
+    cursor:pointer;
+    font-family: monospace;
+    color: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+input.rb:disabled {
+    color: #999!important;
+}
+
+label.rb.disabled {
+    color: #999!important;
+}
+
+input.rb + label.rb:hover {
+  color: #fff;
+}
+
+input.rb:hover {
+    color: #fff;
+}
+
+input.rb.mono:disabled {
+    color: #444!important;
+}
+
+label.rb.mono.disabled {
+    color: #444!important;
+}
+
+input.rb.dialog:disabled {
+    color: #999;
+}
+
+label.rb.dialog.disabled {
+    color: #999;
+}
+
+
+input.rb.green + label.rb:hover {
+  color: #ff0;
+}
+
+input.rb.green:hover {
+    color: #ff0;
+}
+
+input.rb.dialog + label.rb:hover {
+  color: #ff0;
+}
+
+input.rb.dialog:hover {
+    color: #ff0;
+}
+
+label.rb.dialog {
+    color: #fff;
+}
+
+input.rb.dialog {
+    color: #fff;
+}

@@ -1,0 +1,11 @@
+div.field {
+        display: flex;
+}
+
+div.field > div {
+    flex:1;
+}
+
+div.err {
+    color:red;
+}

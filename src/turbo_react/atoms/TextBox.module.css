@@ -1,0 +1,95 @@
+input.tb {
+    flex-grow: 1;
+    margin:0;
+    padding:0;
+    border-style: solid;
+    border-width:0;
+    font-family: monospace;
+    text-decoration: none;
+    outline: none;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    background-color: inherit;
+    color:inherit;
+}
+
+input.tb:disabled {
+    color: #999;
+}
+
+input.tb[type="number"]::-webkit-inner-spin-button,
+input.tb[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+div.tb {
+    background-color: #000;
+    color: #ff0;
+    width: 100%;
+    display: flex;
+}
+
+div.tb:focus-within {
+    background-color: #222;
+}
+
+div.tb > div.prefix {
+    min-width: 1em;
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+}
+
+div.tb > div.prefix.empty {
+    min-width: 0.25em
+}
+
+/* PALETTE */
+
+
+div.tb.dialog {
+    background-color: #006;
+    color:#fff;
+}
+
+div.tb.dialog:focus-within {
+    background-color: #008;
+}
+
+
+div.tb.blue {
+    background-color: #000;
+}
+
+div.tb.blue:focus-within {
+    background-color: #222;
+}
+
+div.tb.grey {
+    color: #fff;
+}
+
+
+div.tb.mono {
+    background-color: #333;
+    color: #fff;
+}
+
+div.tb.red {
+    background-color: #600;
+    color: #ff0;
+}
+
+div.tb.red:focus-within {
+    background-color: #000;
+    color: #ff0;
+}
+
+div.tb.green {
+    background-color: #020;
+}
+
+div.tb.green:focus-within {
+    background-color: #000;
+}
+

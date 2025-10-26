@@ -1,0 +1,23 @@
+div.nv {
+    width: 100%
+}
+
+div.nv > .label {
+    color: #fff;
+}
+
+.value {
+    flex-grow: 1;
+}
+
+div.nv > .label.blue {
+    color: #0ff
+}
+
+div.nv > .label.green {
+    color: #ff0
+}
+
+div.nv > .label.grey {
+    color: #333
+}

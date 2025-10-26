@@ -1,0 +1,315 @@
+/* BASE STUFF */
+div.clickable {
+    cursor: pointer;
+}
+
+div.fullSize {
+    width: 100%;
+    height: 100%;
+}
+
+div.main {
+    position: relative;
+}
+
+div.shadow {
+    box-shadow: 0.5em 0.5em 0em 0em rgba(0, 0, 0, 0.75);
+}
+
+div.frameStd {
+    border-style: double;
+    border-width: 3px;
+    position: relative;
+}
+
+div.frameStd.single {
+    border-style: solid;
+    border-width: 2px;
+}
+
+div.frameStd.borderless {
+    border-style: hidden;
+    border-width: 2px;
+}
+
+div.contentWithTitle {
+    margin-top: 0.75em;
+}
+
+div.close {
+    position: absolute;
+}
+
+div.titleWrapper {
+    background-color: unset;;
+    text-align: center;
+    width: calc(100% - 8em);
+    position: absolute;
+    left: 4em;
+    top: -0.5em;
+}
+
+
+div.title {
+    display:inline-block;
+    width:auto;
+    background-color: inherit;
+    padding: 0em 0.5em;
+}
+
+
+div.close button.btn {
+    background-color: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+    border-style: none;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    transform: scale(1.25);
+    outline: none;
+}
+
+div.close button.btn:active {
+    transform: scale(1);
+}
+
+div.contentInsideWrapper {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+/* FILL MODE */
+div.outerBox {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+div.outerBox.shadow {
+    width: calc(100% - 0.5em);
+    height: calc(100% - 0.5em);
+    position: relative;
+}
+
+div.outerBox > div > div > div.frameStd {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    bottom: 6px;
+    right: 6px;
+
+}
+
+div.outerBox > div.fullSize > div.wrapper > div.frame > div > div.title {
+    top: -0.555em;
+    left: 3em;
+}
+
+
+div.outerBox > div.fullSize > div.wrapper.padding {
+    top: 1em;
+    left: 1em;
+    height: calc(100% - 2em);
+    width: calc(100% - 2em);
+    position: relative;
+}
+
+div.outerBox div.content {
+    height: calc(100% - 1em);
+    overflow: auto;
+    position: relative;
+}
+
+div.outerBox div.content {
+    height: 100%;
+    overflow: auto;
+}
+
+div.outerBox div.content.contentPadding {
+    height: calc(100% - 1em);
+    margin-right: 0.5em;
+}
+
+div.outerBox div.content.contentPaddingSpace {
+    height: calc(100% - 3em);
+}
+
+
+div.outerBox div.contentWithTitle {
+    height: calc(100% - 0.75em);
+}
+
+div.outerBox > div.fullSize > div.wrapper > div.frame > div.close {
+    top: -0.75em;
+    left: 0.5em;
+}
+
+/* AUTO SIZE MODE */
+
+div.outerMargin {
+    padding: 6px
+}
+
+div.autoSize.space {
+    margin-bottom: 0.5em;
+}
+
+div.autoSize div.shadow {
+    width: calc(100% - 0.5em);
+}
+
+div.autoSize div.padding {
+    padding: 1em;
+    position: relative;
+}
+
+
+div.autoSize div.close {
+    top: -0.75em;
+    left: 1.25em;
+}
+
+div.autoSize div.title {
+    top: 0;
+    left: 3.5em;
+}
+
+
+div.autoSize div.padding div.close {
+    left: 2em;
+    top: 0.5em;
+}
+
+div.autoSize div.title {
+    top: 0;
+    left: 3.5em;
+}
+
+div.autoSize div.padding div.title {
+    top: 0.5em;
+    left: 4.5em;
+}
+
+div.contentPadding {
+    margin: 0.5em 1.0em 0.5em 0.5em;
+}
+
+div.contentWithTitle.contentPadding {
+    margin-top: 0.75em;
+}
+
+div.contentPaddingSpace {
+    margin: 1.5em;
+}
+
+
+/* PALETTE */
+
+/* FRAME */
+div.main.blue > div.frameBck,
+div.main.blue > div.frameBck > div.outerMargin > div > div.frameStd > div > div.title,
+div.main.blue > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
+div.main.blue > div.outerBox > div.frameBck,
+div.main.blue > div.outerBox > div.fullSize > div.wrapper > div.frame > div.close,
+div.main.blue > div.outerBox > div.fullSize > div.wrapper > div.frame > div > div.title {
+    background-color: #006;
+    color: #fff;
+}
+
+div.main.cyan > div.frameBck,
+div.main.cyan > div.frameBck > div.outerMargin > div > div.frameStd > div > div.title,
+div.main.cyan > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
+div.main.cyan > div.outerBox > div.frameBck,
+div.main.cyan > div.outerBox > div.fullSize > div.wrapper > div.frame > div.close,
+div.main.cyan > div.outerBox > div.fullSize > div.wrapper > div.frame > div > div.title {
+    background-color: #066;
+    color: #fff;
+}
+
+div.main.dark > div.frameBck,
+div.main.dark > div.frameBck > div.outerMargin > div > div.frameStd > div > div.title,
+div.main.dark > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
+div.main.dark > div.outerBox > div.frameBck,
+div.main.dark > div.outerBox > div.fullSize > div.wrapper > div.frame > div.close,
+div.main.dark > div.outerBox > div.fullSize > div.wrapper > div.frame > div > div.title {
+    background-color: #222;
+    color: #ff0;
+}
+
+div.main.green > div.frameBck,
+div.main.green > div.frameBck > div.outerMargin > div > div.frameStd > div > div.title,
+div.main.green > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
+div.main.green > div.outerBox > div.frameBck,
+div.main.green > div.outerBox > div.fullSize > div.wrapper > div.frame > div.close,
+div.main.green > div.outerBox > div.fullSize > div.wrapper > div.frame > div > div.title {
+    background-color: #030;
+    color: #0f0;
+}
+
+div.main.grey > div.frameBck,
+div.main.grey > div.frameBck > div.outerMargin > div > div.frameStd > div > div.title,
+div.main.grey > div.outerBox > div.frameBck,
+div.main.grey > div.outerBox > div.fullSize > div.wrapper > div.frame > div.close,
+div.main.grey > div.outerBox > div.fullSize > div.wrapper > div.frame > div > div.title {
+    background-color: #999;
+    color: #000;
+}
+
+div.main.grey > div.frameBck > div.outerMargin > div > div.frameStd > div.close {
+    background-color: #999;
+    color: #000;
+}
+
+div.main.grey > div.frameBck > div.outerMargin > div > div.frameStd > div.close > button {
+    color: #090;
+}
+
+div.main.dialog > div.frameBck,
+div.main.dialog > div.frameBck > div.outerMargin > div > div.frameStd > div > div.title,
+div.main.dialog > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
+div.main.dialog > div.outerBox > div.frameBck,
+div.main.dialog > div.outerBox > div.fullSize > div.wrapper > div.frame > div.close,
+div.main.dialog > div.outerBox > div.fullSize > div.wrapper > div.frame > div > div.title {
+    background-color: #666;
+    color: #fff;
+}
+
+div.main.dialog > div.outerBox > div.fullSize > div.wrapper > div.frame > div.close > button {
+    color: #0f0
+}
+
+div.main.mono > div.frameBck,
+div.main.mono > div.frameBck > div.outerMargin > div > div.frameStd > div > div.title,
+div.main.mono > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
+div.main.mono > div.outerBox > div.frameBck,
+div.main.mono > div.outerBox > div.fullSize > div.wrapper > div.frame > div.close,
+div.main.mono > div.outerBox > div.fullSize > div.wrapper > div.frame > div > div.title {
+    background-color: #000;
+    color: #999;
+}
+
+div.main.red > div.frameBck,
+div.main.red > div.frameBck > div.outerMargin > div > div.frameStd > div > div.title,
+div.main.red > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
+div.main.red > div.outerBox > div.frameBck,
+div.main.red > div.outerBox > div.fullSize > div.wrapper > div.frame > div.close,
+div.main.red > div.outerBox > div.fullSize > div.wrapper > div.frame > div > div.title {
+    background-color: #900;
+    color: #ff0;
+}
+
+/* CONTENT */
+div.main.blue div.content {
+    color: #ff0;
+}
+
+div.main.cyan div.content {
+    color: #ff0;
+}
+
+/* CLOSE BUTTON */
+div.main.blue button.btn {
+    color: #0f0;
+}

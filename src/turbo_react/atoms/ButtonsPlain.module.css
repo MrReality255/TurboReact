@@ -1,0 +1,77 @@
+.btn {
+  font-weight: bolder;
+  margin:0;
+  display: inline-block;
+  padding: 4px 10px;
+  font-family: monospace;
+  font-size: 0.9em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+
+  color: #000;
+  background-color: #777;
+  border: 0px solid #666;
+  box-shadow: 0 0 4px #666;
+}
+
+.btn:disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+}
+
+
+.btn:hover {
+  background-color: #BBB;
+  color: #000;
+  box-shadow: 0 0 6px #ddd;
+}
+
+.btn:active {
+  transform: translate(1px, 1px) scale(0.98); /* Move and shrink */
+}
+
+/* Green theme */
+.btn.green {
+  color: #00ff00;
+  background-color: #003300;
+  border: 1px solid #00ff00;
+  box-shadow: 0 0 4px #00ff00;
+}
+
+.btn.green:hover {
+  background-color: #005500;
+  color: #00ff88;
+  box-shadow: 0 0 6px #00ff88;
+}
+
+/* Blue theme */
+.btn.blue {
+  color: #0ff;
+  background-color: #006666;
+  border: 1px solid #00ffff;
+  box-shadow: 0 0 4px #00ffff;
+}
+
+.btn.blue:hover {
+  background-color: #009999;
+  color: #aaffff;
+  box-shadow: 0 0 6px #aabbff;
+}
+
+/* Mono theme */
+
+.btn.mono {
+  color: #ccc;
+  background-color: #666666;
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 4px #ffffff;
+}
+
+.btn.mono:hover {
+  background-color: #999999;
+  color: #ffffff;
+  box-shadow: 0 0 6px #ddd;
+}
+

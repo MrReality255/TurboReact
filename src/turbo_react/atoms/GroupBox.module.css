@@ -1,0 +1,43 @@
+div.gb {
+    background-color: #066;
+    overflow: hidden;
+    padding: 0.25em;
+    position: relative;
+}
+
+label.gb {
+    color:#fff;
+}
+
+label.gb.green {
+    color:#ff0;
+}
+
+label.gb.dialog {
+    color:#fff;
+}
+
+div.gb.cyan {
+    background-color: #000;
+}
+
+div.gb.grey {
+    background-color: #088;
+}
+
+div.gb.red {
+    background-color: #400;
+}
+
+div.gb.green {
+    background-color: #020;
+}
+
+div.gb.dark {
+    background-color: #000;
+}
+
+div.gb.mono {
+    background-color: #222;
+}
+
