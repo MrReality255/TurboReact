@@ -1,8 +1,11 @@
 {
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "author": "Martin Mojzis",
   "description": "DOS-Like ReactComponents",
-  "name": "mm-turboreact",
-    "version": "0.1.0",
+  "name": "@mrreality255/mm-turboreact",
+    "version": "0.1.1",
   "main": "dist/mm-turbo-react.cjs.js",
   "module": "dist/mm-turbo-react.esm.js",
   "types": "dist/index.d.ts",
