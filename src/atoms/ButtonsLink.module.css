@@ -1,0 +1,35 @@
+div.btn {
+  display: inline-flex;
+  align-items: center;
+}
+
+div.btn.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+div.btn:active {
+  transform: translate(1px, 1px) scale(0.98); /* Move and shrink */
+}
+
+span.btn {
+  color: #ff0;
+  margin-right: 0.5em;
+}
+
+a.btn {
+  pointer-events: auto;
+  margin-right: 0.5em;
+  color: #ff0;
+  text-decoration: none;
+}
+
+a.btn.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: #999;
+}
+
+a.btn:hover {
+  color: #fff;
+}
