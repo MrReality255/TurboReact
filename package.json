@@ -18,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config vite.demo.config.ts",
     "build": "tsc && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -46,8 +46,9 @@
     "vitest": "^4.0.5"
   },
   "dependencies": {
+    "luxon": "^3.7.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "luxon": "^3.7.2"
+    "react-router-dom": "^7.9.5"
   }
 }

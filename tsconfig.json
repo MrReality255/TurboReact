@@ -21,9 +21,9 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/turbo-react/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src/turbo-react"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
