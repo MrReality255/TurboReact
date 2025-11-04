@@ -178,6 +178,12 @@ export type TViewportProps = {
   scrollbar?: boolean;
   divRef?: RefObject<HTMLDivElement | null>;
   style?: CSSProperties;
+  padding?: {
+    left?: string | number;
+    right?: string | number;
+    top?: string | number;
+    bottom?: string | number;
+  };
 };
 
 export type TWindowProps = TPaletteProps & {

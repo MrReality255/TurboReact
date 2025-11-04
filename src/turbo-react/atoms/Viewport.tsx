@@ -26,6 +26,10 @@ export function Viewport(p: TViewportProps) {
         height: p.fill ? "100%" : p.height,
         overflow: p.scrollbar ? "auto" : "clip",
         transform,
+        paddingLeft: p.padding?.left,
+        paddingRight: p.padding?.right,
+        paddingTop: p.padding?.top,
+        paddingBottom: p.padding?.bottom,
       }}
     >
       {p.children}

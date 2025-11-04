@@ -151,3 +151,45 @@ export const SampleTableData: TableItem[] = [
 		date: DateTime.fromISO("2025-02-03T17:05:00"),
 	},
 ];
+
+export const LoremIpsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+		  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+		  minim veniam, quis nostrud exercitation ullamco laboris. Duis aute
+		  irure dolor in reprehenderit in voluptate velit esse cillum. Excepteur
+		  sint occaecat cupidatat non proident, sunt in culpa qui. Officia
+		  deserunt mollit anim id est laborum. Curabitur pretium tincidunt
+		  lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo
+		  pharetra, est eros bibendum elit. Aliquam erat volutpat. Nam dui
+		  ligula, fringilla a, euismod sodales. Pellentesque habitant morbi
+		  tristique senectus et netus et malesuada. Fames ac turpis egestas.
+		  Vestibulum tortor quam, feugiat vitae. Ultrices in, iaculis eu, lacus.
+		  Quisque imperdiet, erat nonummy ultricies. Ornare, elit elit fermentum
+		  risus, at fringilla purus mauris a nunc. In at pede. Cras vulputate
+		  velit eu sem. Pellentesque habitant morbi. Tristique senectus et netus
+		  et malesuada fames ac turpis egestas. Proin sodales libero eget ante.
+		  Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac,
+		  facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor,
+		  cursus quis, aliquet eget, justo. Sed vel, enim. Aliquam erat
+		  volutpat. Curabitur pretium tincidunt lacus. Nulla gravida orci a
+		  odio. Nullam varius, turpis et commodo pharetra. Est eros bibendum
+		  elit, nec luctus magna felis sollicitudin mauris. Integer in mi quis
+		  velit dapibus dictum. Donec elementum, lorem ut. Aliquam iaculis,
+		  lorem non pretium. Vestibulum ante ipsum primis in. Faucibus orci
+		  luctus et ultrices posuere cubilia Curae; Donec tincidunt. Donec vitae
+		  erat vel pede blandit congue. In scelerisque scelerisque dui.
+		  Suspendisse ac metus vitae velit egestas lacinia. Sed consectetur,
+		  massa id. Viverra suscipit, tortor non, sodales quis, orci. Integer in
+		  mi quis. Velit dapibus dictum. Donec elementum, lorem ut aliquam
+		  iaculis, lorem non. Pretium vestibulum ante ipsum primis in faucibus
+		  orci luctus et. Ultrices posuere cubilia Curae; Donec tincidunt. Donec
+		  vitae erat vel pede. Blandit congue. In scelerisque scelerisque dui.
+		  Suspendisse ac metus vitae velit. Egestas lacinia. Sed consectetur,
+		  massa id viverra suscipit, tortor non sodales. Quisque orci. Integer
+		  in mi quis velit dapibus dictum. Donec elementum. Lorem ut aliquam
+		  iaculis, lorem non pretium. Vestibulum ante ipsum primis. In faucibus
+		  orci luctus et ultrices posuere cubilia Curae; Donec tincidunt. Donec
+		  vitae erat vel pede blandit congue. In scelerisque scelerisque dui.
+		  Suspendisse ac metus vitae velit egestas lacinia. Sed consectetur,
+		  massa id. Viverra suscipit, tortor non, sodales quis, orci. Integer in
+		  mi quis. Velit dapibus dictum. Donec elementum, lorem ut aliquam
+		  iaculis, lorem non.`
