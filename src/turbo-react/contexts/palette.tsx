@@ -3,7 +3,7 @@ import { TPalette } from "../utils/types";
 
 export const CtxPalette = createContext<TPalette>("blue");
 
-export function PaletteProvider(p: {
+export function TPaletteProvider(p: {
   palette: TPalette;
   children?: React.ReactNode;
 }) {

@@ -1,17 +1,17 @@
 import { TTableColumnProps, TTableProps, TTableValueProvider } from "./types";
 import usePalette from "../hooks/usePalette";
-import { PaletteProvider } from "../contexts/palette";
+import { TPaletteProvider } from "../contexts/palette";
 import { TPalette } from "../utils/types";
 import { useState } from "react";
 
 import styles from "./Table.module.css";
 import { DateTime } from "luxon";
 
-export function Table<T extends object>(props: TTableProps<T>) {
+export function TTable<T extends object>(props: TTableProps<T>) {
   const plt = usePalette(styles, props);
 
   return (
-    <PaletteProvider palette={plt.palette}>
+    <TPaletteProvider palette={plt.palette}>
       <table className={plt.styles(styles.tb)}>
         <thead>
           <tr className={styles.hdr}>
@@ -54,7 +54,7 @@ export function Table<T extends object>(props: TTableProps<T>) {
           })}
         </tbody>
       </table>
-    </PaletteProvider>
+    </TPaletteProvider>
   );
 }
 

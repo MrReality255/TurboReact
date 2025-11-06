@@ -5,7 +5,7 @@ import styles from "./TextBox.module.css";
 import { TTextBoxProps } from "./types";
 import { useValue } from "../hooks/useValue";
 
-export function TextBox(p: TTextBoxProps) {
+export function TTextBox(p: TTextBoxProps) {
   const plt = usePalette(styles, p);
   const id = useId();
   const ref = useRef<HTMLInputElement>(null);

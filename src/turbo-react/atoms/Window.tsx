@@ -1,9 +1,9 @@
 import { TWindowProps } from ".";
-import { PaletteProvider, StrUtils } from "..";
+import { TPaletteProvider, StrUtils } from "..";
 import usePalette from "../hooks/usePalette";
 import styles from "./Window.module.css";
 
-export function Window(p: TWindowProps) {
+export function TWindow(p: TWindowProps) {
   return p.fill ? (
     <WindowFill {...p}></WindowFill>
   ) : (
@@ -14,7 +14,7 @@ export function Window(p: TWindowProps) {
 function WindowAutoSize(p: TWindowProps) {
   const plt = usePalette(styles, p);
   return (
-    <PaletteProvider palette={plt.palette}>
+    <TPaletteProvider palette={plt.palette}>
       <div
         className={plt.styles(styles.main, styles.autoSize, {
           [styles.space]: !!p.space,
@@ -44,14 +44,14 @@ function WindowAutoSize(p: TWindowProps) {
           </div>
         </div>
       </div>
-    </PaletteProvider>
+    </TPaletteProvider>
   );
 }
 
 function WindowFill(p: TWindowProps) {
   const plt = usePalette(styles, p);
   return (
-    <PaletteProvider palette={plt.palette}>
+    <TPaletteProvider palette={plt.palette}>
       <div
         className={plt.styles(styles.main, styles.fullSize, {
           [styles.clickable]: !!p.onClick,
@@ -89,7 +89,7 @@ function WindowFill(p: TWindowProps) {
           </div>
         </div>
       </div>
-    </PaletteProvider>
+    </TPaletteProvider>
   );
 }
 

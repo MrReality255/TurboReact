@@ -1,5 +1,5 @@
 import { TDataContent, TDialogContext, TDialogProps, TDialogResult } from "..";
-import { DialogWrapper } from "../forms/Dialog";
+import { TDialogWrapper } from "../forms/Dialog";
 import { InputUtils } from "../utils/input";
 import { useLayer } from "./useLayer";
 
@@ -13,7 +13,7 @@ export function useDialog<T = any>(
       return new Promise<TDialogResult<T> | null>((resolve) => {
         l.show(() => {
           return (
-            <DialogWrapper
+            <TDialogWrapper
               initialState={InputUtils.getInitialState(inputData)}
               onSubmit={(result, data, frm) => {
                 resolve({
@@ -26,7 +26,7 @@ export function useDialog<T = any>(
                 resolve(null);
               }}
               fct={p}
-            ></DialogWrapper>
+            ></TDialogWrapper>
           );
         });
       });

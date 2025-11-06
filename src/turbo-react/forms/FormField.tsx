@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo } from "react";
 
-import { TextBox } from "../atoms/TextBox";
+import { TTextBox } from "../atoms/TextBox";
 import {
   TFormFieldProps,
   TFormFieldType,
@@ -8,19 +8,19 @@ import {
   TFormValueType,
 } from "./types";
 import { CtxFormPanel, TFormContext } from "../contexts/forms";
-import { DropDown } from "../atoms/DropDown";
+import { TDropDown } from "../atoms/DropDown";
 import styles from "./FormField.module.css";
 import usePalette from "../hooks/usePalette";
-import { PaletteProvider } from "../contexts/palette";
-import { Form } from "./Form";
+import { TPaletteProvider } from "../contexts/palette";
+import { TForm } from "./Form";
 import { InputUtils } from "../utils/input";
-import { FormTemplate } from "./FormTemplate";
-import { Checkbox } from "../atoms/Checkbox";
-import { ProgressBar } from "../atoms/ProgressBar";
+import { TFormTemplate } from "./FormTemplate";
+import { TCheckbox } from "../atoms/Checkbox";
+import { TProgressBar } from "../atoms/ProgressBar";
 
 const alwaysValid = new Set<TFormFieldType>(["checkbox", "progress"]);
 
-export function FormField(p: TFormFieldProps) {
+export function TFormField(p: TFormFieldProps) {
   const ctx = useContext(CtxFormPanel);
   const item = ctx?.data[p.id] as TFormValue | undefined;
   const plt = usePalette(styles, p);
@@ -49,7 +49,7 @@ export function FormField(p: TFormFieldProps) {
   const wrapperFct = p.wrapperFct ?? defaultWrapperFct;
 
   return (
-    <PaletteProvider palette={plt.palette}>
+    <TPaletteProvider palette={plt.palette}>
       <div>
         <div className={plt.styles(styles.field)}>
           <div>
@@ -75,7 +75,7 @@ export function FormField(p: TFormFieldProps) {
           <div className={plt.styles(styles.err)}>x</div>
         )}
       </div>
-    </PaletteProvider>
+    </TPaletteProvider>
   );
 }
 
@@ -130,18 +130,18 @@ function FormFieldControl(
   switch (p.type) {
     case "checkbox":
       return (
-        <Checkbox
+        <TCheckbox
           caption={p.caption}
           value={p.value ?? strValue}
           defaultValue={p.defaultValue}
           onChange={(value: string) => update(value)}
           disabled={p.disabled}
           {...p.checkBoxProps}
-        ></Checkbox>
+        ></TCheckbox>
       );
     case "dropdown":
       return (
-        <DropDown
+        <TDropDown
           {...p.dropDownProps}
           items={p.dropDownProps?.items || []}
           caption={p.caption}
@@ -149,11 +149,11 @@ function FormFieldControl(
           defaultValue={p.defaultValue}
           disabled={p.disabled}
           onChange={(value) => update(value)}
-        ></DropDown>
+        ></TDropDown>
       );
     case "form":
       return (
-        <Form
+        <TForm
           {...p.formProps}
           context={formContext}
           onAction={
@@ -165,41 +165,41 @@ function FormFieldControl(
           }
         >
           {p.children}
-        </Form>
+        </TForm>
       );
     case "progress":
       return (
-        <ProgressBar
+        <TProgressBar
           {...p.progressBarProps}
           caption={p.caption}
           value={p.value}
           defaultValue={p.defaultValue}
           disabled={p.disabled}
           onChange={(value) => update(value, true)}
-        ></ProgressBar>
+        ></TProgressBar>
       );
     case "template":
       return p.templateProps ? (
-        <FormTemplate
+        <TFormTemplate
           {...p.templateProps}
           items={templateItemsValue}
           onUpdateItems={(newItems) =>
             update({ mode: "list", items: newItems })
           }
-        ></FormTemplate>
+        ></TFormTemplate>
       ) : (
         <div></div>
       );
     case "textbox":
       return (
-        <TextBox
+        <TTextBox
           caption={p.caption}
           value={p.value ?? strValue}
           defaultValue={p.defaultValue}
           onChange={(value: string) => update(value)}
           disabled={p.disabled}
           {...p.textBoxProps}
-        ></TextBox>
+        ></TTextBox>
       );
   }
 
@@ -207,6 +207,49 @@ function FormFieldControl(
 
   function update(newValue: TFormValueType, isValid?: boolean) {
     p.ctx?.update(p.id, newValue, isValid ?? validate(p, newValue) ?? false);
+  }
+}
+
+function InvalidControl() {
+  return <div>Invalid control</div>;
+}
+
+function createEmptyValue(p: TFormFieldProps): TFormValueType {
+  switch (p.type) {
+    case "form":
+      return {
+        data: {},
+        mode: "datacontext",
+        isDisabled: false,
+        isLoading: false,
+        isValid: true,
+        isValidated: false,
+      };
+    case "template":
+      return { mode: "list", items: [] };
+    default:
+      return "";
+  }
+}
+
+function createInitValue(p: TFormFieldProps): TFormValueType {
+  switch (p.type) {
+    case "form":
+      return {
+        mode: "datacontext",
+        data: {},
+        isLoading: false,
+        isValidated: false,
+        isDisabled: p.disabled || false,
+        isValid: true,
+      };
+    case "template":
+      return {
+        mode: "list",
+        items: [],
+      };
+    default:
+      return "";
   }
 }
 
@@ -244,31 +287,6 @@ function validate(p: TFormFieldProps, value: TFormValueType | undefined) {
   return false;
 }
 
-function createInitValue(p: TFormFieldProps): TFormValueType {
-  switch (p.type) {
-    case "form":
-      return {
-        mode: "datacontext",
-        data: {},
-        isLoading: false,
-        isValidated: false,
-        isDisabled: p.disabled || false,
-        isValid: true,
-      };
-    case "template":
-      return {
-        mode: "list",
-        items: [],
-      };
-    default:
-      return "";
-  }
-}
-
-function InvalidControl() {
-  return <div>Invalid control</div>;
-}
-
 function validateInitValue(p: TFormFieldProps): boolean | undefined {
   if (p.type === "progress") {
     return true;
@@ -276,20 +294,3 @@ function validateInitValue(p: TFormFieldProps): boolean | undefined {
   return undefined;
 }
 
-function createEmptyValue(p: TFormFieldProps): TFormValueType {
-  switch (p.type) {
-    case "form":
-      return {
-        data: {},
-        mode: "datacontext",
-        isDisabled: false,
-        isLoading: false,
-        isValid: true,
-        isValidated: false,
-      };
-    case "template":
-      return { mode: "list", items: [] };
-    default:
-      return "";
-  }
-}

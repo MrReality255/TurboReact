@@ -1,6 +1,6 @@
 import { TRowLayoutProps } from ".";
 
-export function RowLayout(p: TRowLayoutProps) {
+export function TRowLayout(p: TRowLayoutProps) {
   return (
     <div
       style={{

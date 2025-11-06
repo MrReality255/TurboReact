@@ -5,7 +5,7 @@ import usePalette from "../hooks/usePalette";
 import { KeyboardEvent, useRef } from "react";
 import { MathUtils } from "../utils/math";
 
-export function Menu(p: TMenuProps) {
+export function TMenu(p: TMenuProps) {
   const plt = usePalette(styles, p);
   const mySelRef = useRef<HTMLAnchorElement>(null);
   const firstSelected = MathUtils.clamp(

@@ -1,6 +1,6 @@
 import { THorizLayoutProps } from ".";
 
-export function HorizLayout(p: THorizLayoutProps) {
+export function THorizLayout(p: THorizLayoutProps) {
   return (
     <div style={{ display: "flex", gap: p.gap }}>
       <div

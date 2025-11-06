@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { RowLayout } from "..";
+import { TRowLayout } from "..";
 
 type TLayerState = {
   layers: TLayerRenderer[];
@@ -26,7 +26,7 @@ export const CtxLayerRenderContext = createContext<TLayerRenderContext | null>(
 );
 export const CtxLayerManager = createContext<ILayerManager | null>(null);
 
-export function LayerContainer(p: { children?: React.ReactNode }) {
+export function TLayerContainer(p: { children?: React.ReactNode }) {
   const [container, updateContainer] = useState<TLayerState>({
     layers: [],
     rows: [],
@@ -66,7 +66,7 @@ function Rows({
   updateContainer: React.Dispatch<React.SetStateAction<TLayerState>>;
 }) {
   return (
-    <RowLayout>
+    <TRowLayout>
       {container.rows.map((renderer, idx) => {
         const mgr = createLayerManager(idx, container, updateContainer, true);
         return (
@@ -75,7 +75,7 @@ function Rows({
           </CtxLayerManager.Provider>
         );
       })}
-    </RowLayout>
+    </TRowLayout>
   );
 }
 

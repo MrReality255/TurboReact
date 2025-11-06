@@ -4,7 +4,7 @@ import styles from "./NameValue.module.css";
 import usePalette from "../hooks/usePalette";
 import { ViewUtils } from "../utils/view";
 
-export function NameValue(p: TNameValueProps) {
+export function TNameValue(p: TNameValueProps) {
   if (!p.items) {
     return <NameValueSingleItem {...p}></NameValueSingleItem>;
   }

@@ -3,18 +3,18 @@ import { useContext } from "react";
 import { TFormTemplateProps } from "./types";
 import { CtxFormPanel } from "../contexts/forms";
 import usePalette from "../hooks/usePalette";
-import { PaletteProvider } from "../contexts/palette";
-import { Form } from "./Form";
+import { TPaletteProvider } from "../contexts/palette";
+import { TForm } from "./Form";
 import { InputUtils } from "../utils/input";
 
-export function FormTemplate(props: TFormTemplateProps) {
+export function TFormTemplate(props: TFormTemplateProps) {
   const ctx = useContext(CtxFormPanel);
   const plt = usePalette(undefined, props);
 
   const myWrapperFct = props.wrapperFct ?? ((x: React.ReactNode) => x);
 
   return (
-    <PaletteProvider palette={plt.palette}>
+    <TPaletteProvider palette={plt.palette}>
       {myWrapperFct(
         <>
           {props.items.map((item, idx) => {
@@ -24,7 +24,7 @@ export function FormTemplate(props: TFormTemplateProps) {
               ? undefined
               : (result as React.ReactNode);
             return (
-              <Form
+              <TForm
                 key={idx}
                 children={formContent}
                 items={formItems}
@@ -35,7 +35,7 @@ export function FormTemplate(props: TFormTemplateProps) {
                   );
                   props.onUpdateItems?.(newItems);
                 })}
-              ></Form>
+              ></TForm>
             );
           })}
         </>,
@@ -53,7 +53,7 @@ export function FormTemplate(props: TFormTemplateProps) {
           ]);
         },
       )}
-    </PaletteProvider>
+    </TPaletteProvider>
   );
 }
 

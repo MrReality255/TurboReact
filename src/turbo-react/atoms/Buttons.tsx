@@ -3,7 +3,7 @@ import styles from "./Buttons.module.css";
 import usePalette from "../hooks/usePalette";
 import { TButtonProps } from "./types";
 
-export function Button(p: TButtonProps) {
+export function TButton(p: TButtonProps) {
   const plt = usePalette(styles, p);
   return (
     <button

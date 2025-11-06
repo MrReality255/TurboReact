@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Glass.module.css";
 import { TGlassEvent, TGlassProps } from "./types";
 
-export function Glass(p: TGlassProps) {
+export function TGlass(p: TGlassProps) {
   const [lastTouch, setLastTouch] = useState<TGlassEvent | null>(null);
   return p.visible ? (
     <div

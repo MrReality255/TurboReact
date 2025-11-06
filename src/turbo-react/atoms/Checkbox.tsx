@@ -5,7 +5,7 @@ import styles from "./CheckBox.module.css";
 import usePalette from "../hooks/usePalette";
 import { useValue } from "../hooks/useValue";
 
-export function Checkbox(p: TCheckBoxProps) {
+export function TCheckbox(p: TCheckBoxProps) {
   const id = useId();
   const plt = usePalette(styles, p);
   const v = useValue(p);

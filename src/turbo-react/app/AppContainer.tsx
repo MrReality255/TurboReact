@@ -1,6 +1,6 @@
 import { TAppContainerProps } from ".";
-import { LayerContainer } from "../contexts/layer";
+import { TLayerContainer } from "../contexts/layer";
 
 export function AppContainer(p: TAppContainerProps) {
-  return <LayerContainer>{p.children}</LayerContainer>;
+  return <TLayerContainer>{p.children}</TLayerContainer>;
 }

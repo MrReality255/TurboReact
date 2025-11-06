@@ -1,17 +1,17 @@
-import { Form } from ".";
+import { TForm } from ".";
 import {
-  ClosingEffect,
-  Glass,
-  ErrorPanel,
-  LoadingBar,
-  Viewport,
-  Window,
+  TClosingEffectProvider,
+  TGlass,
+  TErrorPanel,
+  TLoadingBar,
+  TViewport,
+  TWindow,
 } from "../atoms";
 import { CtxDialogControl } from "../contexts/dialog_control";
 import { CtxLayerManager } from "../contexts/layer";
 import { useNewFormContext, useLayer } from "../hooks";
 import usePalette from "../hooks/usePalette";
-import { VertLayout } from "../layout";
+import { TVertLayout } from "../layout";
 import {
   TDialogWrapperProps,
   TDialogModalResult,
@@ -19,7 +19,7 @@ import {
   TDialogSubmitResult,
 } from "./types";
 
-export function Dialog<T>(props: TDialogWrapperProps<T>) {
+export function TDialog<T>(props: TDialogWrapperProps<T>) {
   const frm = useNewFormContext(props.initialState);
 
   const closer = {
@@ -39,8 +39,8 @@ export function Dialog<T>(props: TDialogWrapperProps<T>) {
 
   return (
     <>
-      <Glass backdrop visible></Glass>
-      <Glass visible>
+      <TGlass backdrop visible></TGlass>
+      <TGlass visible>
         <CtxDialogControl.Provider
           value={{
             cancel: () => closeDialog(),
@@ -48,14 +48,14 @@ export function Dialog<T>(props: TDialogWrapperProps<T>) {
               submitDialog(result, data as T | undefined),
           }}
         >
-          <Viewport
+          <TViewport
             {...p.pos}
             center
             style={{
               ...props.style,
             }}
           >
-            <Window
+            <TWindow
               palette={plt.palette}
               fill
               caption={p.caption}
@@ -68,15 +68,15 @@ export function Dialog<T>(props: TDialogWrapperProps<T>) {
                   position: "relative",
                 }}
               >
-                <VertLayout
+                <TVertLayout
                   header={
                     <>
-                      {frm.error && <ErrorPanel>{frm.error}</ErrorPanel>}
-                      {p.header && <Form context={frm}>{p.header}</Form>}
+                      {frm.error && <TErrorPanel>{frm.error}</TErrorPanel>}
+                      {p.header && <TForm context={frm}>{p.header}</TForm>}
                     </>
                   }
                   footer={
-                    <>{p.footer && <Form context={frm}>{p.footer}</Form>}</>
+                    <>{p.footer && <TForm context={frm}>{p.footer}</TForm>}</>
                   }
                 >
                   {frm.isLoading && (
@@ -99,7 +99,7 @@ export function Dialog<T>(props: TDialogWrapperProps<T>) {
                           height: "1.5em",
                         }}
                       >
-                        <LoadingBar></LoadingBar>
+                        <TLoadingBar></TLoadingBar>
                       </div>
                     </div>
                   )}
@@ -109,16 +109,16 @@ export function Dialog<T>(props: TDialogWrapperProps<T>) {
                       height: "100%",
                     }}
                   >
-                    <Form context={frm} items={p.items}>
+                    <TForm context={frm} items={p.items}>
                       {p.content}
-                    </Form>
+                    </TForm>
                   </div>
-                </VertLayout>
+                </TVertLayout>
               </div>
-            </Window>
-          </Viewport>
+            </TWindow>
+          </TViewport>
         </CtxDialogControl.Provider>
-      </Glass>
+      </TGlass>
     </>
   );
 
@@ -158,18 +158,18 @@ export function Dialog<T>(props: TDialogWrapperProps<T>) {
   }
 }
 
-export function DialogWrapper<T>(p: TDialogWrapperProps<T>) {
+export function TDialogWrapper<T>(p: TDialogWrapperProps<T>) {
   const l = useLayer();
 
   return (
-    <ClosingEffect
+    <TClosingEffectProvider
       animationDuration={100}
       onClose={() => l.hide()}
       emptyMode
       onRender={(onClose, props) => {
         return (
           <CtxLayerManager.Provider value={{ ...l, hide: () => onClose() }}>
-            <Dialog
+            <TDialog
               fct={p.fct}
               initialState={p.initialState}
               onSubmit={(result, data, frm) => {
@@ -181,10 +181,10 @@ export function DialogWrapper<T>(p: TDialogWrapperProps<T>) {
                 p.onCancel();
               }}
               style={props}
-            ></Dialog>
+            ></TDialog>
           </CtxLayerManager.Provider>
         );
       }}
-    ></ClosingEffect>
+    ></TClosingEffectProvider>
   );
 }

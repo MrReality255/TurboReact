@@ -1,12 +1,12 @@
-import { PaletteProvider } from "../contexts/palette";
+import { TPaletteProvider } from "../contexts/palette";
 import usePalette from "../hooks/usePalette";
 import { TNotificationProps } from "./types";
-import { Viewport } from "./Viewport";
-import { Window } from "./Window";
+import { TViewport } from "./Viewport";
+import { TWindow } from "./Window";
 import { useClosingEffect } from "../hooks/useClosingEffect";
 import { useEffect } from "react";
 
-export function Notification(p: TNotificationProps) {
+export function TNotification(p: TNotificationProps) {
   const plt = usePalette(undefined, p);
   const cl = useClosingEffect("opacity", 300);
 
@@ -28,7 +28,7 @@ export function Notification(p: TNotificationProps) {
   }, []);
 
   return (
-    <PaletteProvider palette={plt.palette}>
+    <TPaletteProvider palette={plt.palette}>
       <div
         style={{
           width: "fit-content",
@@ -38,7 +38,7 @@ export function Notification(p: TNotificationProps) {
           transform: "translate(-50%, 0)",
         }}
       >
-        <Viewport
+        <TViewport
           style={{
             ...cl.get(),
             minHeight: "1em",
@@ -47,17 +47,17 @@ export function Notification(p: TNotificationProps) {
           }}
         >
           <div style={{ marginBottom: "1em" }}>
-            <Window
+            <TWindow
               border="none"
               onClick={() => {
                 cl.close();
               }}
             >
               <div style={{ textAlign: "center" }}>{p.children}</div>
-            </Window>
+            </TWindow>
           </div>
-        </Viewport>
+        </TViewport>
       </div>
-    </PaletteProvider>
+    </TPaletteProvider>
   );
 }

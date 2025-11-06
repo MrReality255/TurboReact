@@ -1,7 +1,7 @@
 import { MiscUtils } from "../utils/misc";
 import { TViewportProps } from "./types";
 
-export function Viewport(p: TViewportProps) {
+export function TViewport(p: TViewportProps) {
   const top = ((p.center || p.centerV) && "50%") || p.rect?.y;
   const left = ((p.center || p.centerH) && "50%") || p.rect?.x;
   const transform =

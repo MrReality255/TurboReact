@@ -2,8 +2,8 @@ import { TAppLayoutProps } from "./types";
 
 import styles from "./AppLayout.module.css";
 import usePalette from "../hooks/usePalette";
-import { Viewport } from "../atoms/Viewport";
-import { PaletteProvider } from "../contexts/palette";
+import { TViewport } from "../atoms/Viewport";
+import { TPaletteProvider } from "../contexts/palette";
 import { useMobile } from "../hooks/useMobile";
 
 export function AppLayout(p: TAppLayoutProps) {
@@ -36,22 +36,22 @@ export function AppLayout(p: TAppLayoutProps) {
 
   return (
     <div className={plt.styles(styles.appLayout)}>
-      <PaletteProvider palette={plt.palette}>
-        <Viewport rect={{ x: 0, y: 0, x2: 0, y2: 0 }}>
+      <TPaletteProvider palette={plt.palette}>
+        <TViewport rect={{ x: 0, y: 0, x2: 0, y2: 0 }}>
           {has.header && (
-            <Viewport rect={{ x: 0, y: 0, x2: 0 }} height={sizes.header}>
+            <TViewport rect={{ x: 0, y: 0, x2: 0 }} height={sizes.header}>
               {layout.header}
-            </Viewport>
+            </TViewport>
           )}
           {has.left && (
-            <Viewport
+            <TViewport
               rect={{ x: 0, y: sizes.header, y2: sizes.footer }}
               width={size(layout.sizes?.left)}
             >
               {layout.left}
-            </Viewport>
+            </TViewport>
           )}
-          <Viewport
+          <TViewport
             rect={{
               x: sizes.left,
               y: sizes.header,
@@ -61,22 +61,22 @@ export function AppLayout(p: TAppLayoutProps) {
             scrollbar
           >
             {p.children}
-          </Viewport>
+          </TViewport>
           {has.right && (
-            <Viewport
+            <TViewport
               rect={{ x2: 0, y: sizes.header, y2: sizes.footer }}
               width={size(layout.sizes?.right)}
             >
               {layout.right}
-            </Viewport>
+            </TViewport>
           )}
           {has.footer && (
-            <Viewport rect={{ x: 0, x2: 0, y2: 0 }} height={sizes.footer}>
+            <TViewport rect={{ x: 0, x2: 0, y2: 0 }} height={sizes.footer}>
               {layout.footer}
-            </Viewport>
+            </TViewport>
           )}
-        </Viewport>
-      </PaletteProvider>
+        </TViewport>
+      </TPaletteProvider>
     </div>
   );
 

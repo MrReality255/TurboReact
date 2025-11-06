@@ -1,12 +1,12 @@
 import { useContext, useId } from "react";
 
-import { Form, TGroupBoxProps } from "..";
+import { TForm, TGroupBoxProps } from "..";
 
 import styles from "./GroupBox.module.css";
 import usePalette from "../hooks/usePalette";
 import { CtxFormPanel } from "../contexts/forms";
 
-export function GroupBox(p: TGroupBoxProps) {
+export function TGroupBox(p: TGroupBoxProps) {
   const plt = usePalette(styles, p);
   const id = useId();
   const oldCtx = useContext(CtxFormPanel);
@@ -16,7 +16,7 @@ export function GroupBox(p: TGroupBoxProps) {
       <label htmlFor={id} className={plt.styles(styles.gb)}>
         {p.caption}
       </label>
-      <Form context={oldCtx || undefined} disabled={p.disabled}>
+      <TForm context={oldCtx || undefined} disabled={p.disabled}>
         <div
           id={id}
           className={plt.styles(styles.gb)}
@@ -24,7 +24,7 @@ export function GroupBox(p: TGroupBoxProps) {
         >
           {p.children}
         </div>
-      </Form>
+      </TForm>
     </div>
   );
 }

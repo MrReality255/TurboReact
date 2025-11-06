@@ -1,7 +1,7 @@
 import React from "react";
 import { TColLayoutProps } from "./types";
 
-export function ColLayout(p: TColLayoutProps) {
+export function TColLayout(p: TColLayoutProps) {
   const childArray = React.Children.toArray(p.children);
   const rowCount = Math.ceil(childArray.length / p.cols);
   const lines = [...Array(rowCount)].map((_, idx) => {

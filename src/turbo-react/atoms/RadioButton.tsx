@@ -4,7 +4,7 @@ import styles from "./RadioButton.module.css";
 import usePalette from "../hooks/usePalette";
 import { TRadioButtonProps } from "./types";
 
-export function RadioButton(p: TRadioButtonProps) {
+export function TRadioButton(p: TRadioButtonProps) {
   const id = useId();
   const plt = usePalette(styles, p);
   return (

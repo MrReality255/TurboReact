@@ -2,9 +2,9 @@ import { useState } from "react";
 import { IDataContext, TFormProps } from "./types";
 import { CtxFormPanel } from "../contexts/forms";
 import { InputUtils } from "../utils/input";
-import { FormField } from "./FormField";
+import { TFormField } from "./FormField";
 
-export function Form(p: TFormProps) {
+export function TForm(p: TFormProps) {
   const [dataContext, updateDataContext] = useState<IDataContext>({
     data: {},
     isDisabled: p.disabled ?? false,
@@ -26,7 +26,7 @@ export function Form(p: TFormProps) {
     <CtxFormPanel.Provider value={formContext}>
       <ValidFields ctx={formContext}></ValidFields>
       {p.items?.map((item) => {
-        return <FormField {...item} key={item.id}></FormField>;
+        return <TFormField {...item} key={item.id}></TFormField>;
       })}
       {p.children}
     </CtxFormPanel.Provider>

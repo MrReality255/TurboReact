@@ -1,7 +1,7 @@
 import { TClosingEffectProps } from "./types";
 import { useClosingEffect } from "../hooks/useClosingEffect";
 
-export function ClosingEffect(p: TClosingEffectProps) {
+export function TClosingEffectProvider(p: TClosingEffectProps) {
   const ce = useClosingEffect(p.effect, p.animationDuration);
 
   const style = ce.get();

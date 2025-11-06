@@ -1,6 +1,6 @@
 import { TVertLayoutProps } from ".";
 
-export function VertLayout(p: TVertLayoutProps) {
+export function TVertLayout(p: TVertLayoutProps) {
   return (
     <div
       style={{

@@ -2,12 +2,12 @@ import { useEffect, useRef } from "react";
 import usePalette from "../hooks/usePalette";
 import styles from "./ProgressBar.module.css";
 import { TProgressBarProps } from "./types";
-import { Glass } from "./Glass";
+import { TGlass } from "./Glass";
 import { useMouseValue } from "../hooks/useMouseValue";
 import { TMouseState } from "../utils/types";
 import { useValue } from "../hooks/useValue";
 
-export function ProgressBar(p: TProgressBarProps) {
+export function TProgressBar(p: TProgressBarProps) {
   const plt = usePalette(styles, p);
 
   const ref = useRef<HTMLDivElement | null>(null);
@@ -45,11 +45,11 @@ export function ProgressBar(p: TProgressBarProps) {
           : undefined
       }
     >
-      <Glass
+      <TGlass
         visible={m.mousePos !== null}
         onMouseMove={(p) => m.setPos(p)}
         onMouseUp={(e) => m.done(e)}
-      ></Glass>
+      ></TGlass>
       {p.caption && <label>{p.caption}</label>}
       <div className={plt.styles(styles.wrapper, styles.editable)}>
         <div
