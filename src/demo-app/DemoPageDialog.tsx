@@ -1,20 +1,20 @@
-import { Heading } from '../turbo-react/atoms/Heading';
-import { Window } from '../turbo-react/atoms/Window';
+import { THeading } from '../turbo-react/atoms/Heading';
+import { TWindow } from '../turbo-react/atoms/Window';
 import { DemoAppLayout } from './DemoAppLayout';
-import { Button } from '../turbo-react/atoms/Buttons';
-import { Form } from '../turbo-react/forms/Form';
-import { FormField } from '../turbo-react/forms/FormField';
+import { TButton } from '../turbo-react/atoms/Buttons';
+import { TForm } from '../turbo-react/forms/Form';
+import { TFormField } from '../turbo-react/forms/FormField';
 import { useNewFormContext } from '../turbo-react/hooks/useFormContext';
-import { GroupBox } from '../turbo-react/atoms/GroupBox';
-import { ColLayout } from '../turbo-react/layout/ColLayout';
-import { FormButton } from '../turbo-react/forms/FormButton';
+import { TGroupBox } from '../turbo-react/atoms/GroupBox';
+import { TColLayout } from '../turbo-react/layout/ColLayout';
+import { TFormButton } from '../turbo-react/forms/FormButton';
 import { useDialog } from '../turbo-react/hooks/useDialog';
 import { TDialogModalResult } from '../turbo-react/forms/types';
 import { useState } from 'react';
-import { NameValue } from '../turbo-react/atoms/NameValue';
+import { TNameValue } from '../turbo-react/atoms/NameValue';
 import { InputUtils } from '../turbo-react/utils/input';
-import { HorizLayout } from '../turbo-react/layout/HorizLayout';
-import { RowLayout } from '../turbo-react/layout/RowLayout';
+import { THorizLayout } from '../turbo-react/layout/HorizLayout';
+import { TRowLayout } from '../turbo-react/layout/RowLayout';
 
 export function DemoPageDialogs() {
   const [data, setData] = useState<string | null>(null);
@@ -27,8 +27,8 @@ export function DemoPageDialogs() {
         width: '99%',
       },
       footer: (
-        <HorizLayout alignMode="right">
-          <FormButton
+        <THorizLayout alignMode="right">
+          <TFormButton
             w0
             default
             disabled={!ctx.frm.isValid}
@@ -60,35 +60,35 @@ export function DemoPageDialogs() {
             }}
           >
             OK
-          </FormButton>
-          <FormButton w0 cancel>
+          </TFormButton>
+          <TFormButton w0 cancel>
             Cancel
-          </FormButton>
-        </HorizLayout>
+          </TFormButton>
+        </THorizLayout>
       ),
       content: (
-        <HorizLayout>
-          <RowLayout>
-            <NameValue name="Form is valid">{ctx.frm.isValid ? 'yes' : 'no'}</NameValue>
-            <FormField type="textbox" caption="Name" id="name"></FormField>
+        <THorizLayout>
+          <TRowLayout>
+            <TNameValue name="Form is valid">{ctx.frm.isValid ? 'yes' : 'no'}</TNameValue>
+            <TFormField type="textbox" caption="Name" id="name"></TFormField>
 
-            <GroupBox caption={'A group box'} disabled={!!ctx.frm.checked('chk1')}>
-              <RowLayout>
-                <FormField type="textbox" caption="Name 1" id="name1"></FormField>
-                <FormField type="textbox" caption="Name 2" id="name2"></FormField>
-                <FormField type="textbox" caption="Name 3" id="name3"></FormField>
-              </RowLayout>
-            </GroupBox>
+            <TGroupBox caption={'A group box'} disabled={!!ctx.frm.checked('chk1')}>
+              <TRowLayout>
+                <TFormField type="textbox" caption="Name 1" id="name1"></TFormField>
+                <TFormField type="textbox" caption="Name 2" id="name2"></TFormField>
+                <TFormField type="textbox" caption="Name 3" id="name3"></TFormField>
+              </TRowLayout>
+            </TGroupBox>
 
-            <GroupBox>
-              <FormField type="checkbox" caption="Disable group box" id="chk1"></FormField>
-              <FormField type="checkbox" caption="The submit fails" id="chkFails"></FormField>
-              <FormField type="checkbox" caption="The submit needs to load a while" id="chkLoading"></FormField>
-            </GroupBox>
+            <TGroupBox>
+              <TFormField type="checkbox" caption="Disable group box" id="chk1"></TFormField>
+              <TFormField type="checkbox" caption="The submit fails" id="chkFails"></TFormField>
+              <TFormField type="checkbox" caption="The submit needs to load a while" id="chkLoading"></TFormField>
+            </TGroupBox>
 
-            <FormField type="progress" id="setting1" caption="Setting #1"></FormField>
-          </RowLayout>
-        </HorizLayout>
+            <TFormField type="progress" id="setting1" caption="Setting #1"></TFormField>
+          </TRowLayout>
+        </THorizLayout>
       ),
       onBeforeClose: function (modalResult: TDialogModalResult | null) {
         console.log(
@@ -103,11 +103,11 @@ export function DemoPageDialogs() {
 
   return (
     <DemoAppLayout selected="dialogs">
-      <Heading>Dialogs</Heading>
-      <RowLayout>
-        <Window border="none" palette="dark">
+      <THeading>Dialogs</THeading>
+      <TRowLayout>
+        <TWindow border="none" palette="dark">
           <p>This is the panel with the dialog.</p>
-          <Button
+          <TButton
             variant="text"
             onClick={async () => {
               const result = await myDlg.show({
@@ -123,11 +123,11 @@ export function DemoPageDialogs() {
             }}
           >
             Open dialog
-          </Button>
-        </Window>
-        {data && <Window caption="Dialog result">{data}</Window>}
+          </TButton>
+        </TWindow>
+        {data && <TWindow caption="Dialog result">{data}</TWindow>}
         <DemoForm></DemoForm>
-      </RowLayout>
+      </TRowLayout>
     </DemoAppLayout>
   );
 }
@@ -135,14 +135,14 @@ export function DemoPageDialogs() {
 function DemoForm() {
   const frm = useNewFormContext(InputUtils.getInitialState({ lastname: 'Your name' }));
   return (
-    <Window palette="dialog" caption="Form panel">
-      <NameValue name="Form is valid:" labelWidth={110}>
+    <TWindow palette="dialog" caption="Form panel">
+      <TNameValue name="Form is valid:" labelWidth={110}>
         {frm.isValid ? 'yes' : 'no'}
-      </NameValue>
-      <Form context={frm}>
-        <FormField type="textbox" id="firstname" caption="First name"></FormField>
-        <FormField type="textbox" id="lastname" caption="Last name"></FormField>
-        <FormField
+      </TNameValue>
+      <TForm context={frm}>
+        <TFormField type="textbox" id="firstname" caption="First name"></TFormField>
+        <TFormField type="textbox" id="lastname" caption="Last name"></TFormField>
+        <TFormField
           type="dropdown"
           id="option"
           caption="Special option"
@@ -152,74 +152,74 @@ function DemoForm() {
               { id: 'option2', label: 'Special option 2' },
             ],
           }}
-        ></FormField>
-        <Heading>Subform</Heading>
-        <FormField
+        ></TFormField>
+        <THeading>Subform</THeading>
+        <TFormField
           type="form"
           id="Subform"
           caption="Subform"
           formProps={{
             items: [{ id: 'caption', type: 'textbox', caption: 'Caption' }],
           }}
-        ></FormField>
-        <Heading>Progress</Heading>
-        <FormField type="progress" id="progress1" caption="Progress"></FormField>
-        <FormField
+        ></TFormField>
+        <THeading>Progress</THeading>
+        <TFormField type="progress" id="progress1" caption="Progress"></TFormField>
+        <TFormField
           type="progress"
           id="progress2"
           caption="Progress"
           progressBarProps={{ readOnly: true }}
           value="75"
-        ></FormField>
-        <Heading>Template</Heading>
-        <FormField
+        ></TFormField>
+        <THeading>Template</THeading>
+        <TFormField
           type="template"
           id="items"
           templateProps={{
             itemFct: (_ctx, deleteFct) => (
               <div style={{ display: 'flex', width: '100%', gap: 20 }}>
                 <div style={{ flexGrow: 1 }}>
-                  <ColLayout cols={2} gap={20}>
-                    <FormField type="textbox" caption="First Name" id="firstname" />
-                    <FormField type="textbox" caption="Last Name" id="lastname" />
-                  </ColLayout>
+                  <TColLayout cols={2} gap={20}>
+                    <TFormField type="textbox" caption="First Name" id="firstname" />
+                    <TFormField type="textbox" caption="Last Name" id="lastname" />
+                  </TColLayout>
                 </div>
                 <div style={{ height: '100%', marginTop: '1.5em' }}>
-                  <Button onClick={() => deleteFct()}>Delete</Button>
+                  <TButton onClick={() => deleteFct()}>Delete</TButton>
                 </div>
               </div>
             ),
             wrapperFct: (content, addFct) => {
               return (
                 <div style={{ marginBottom: '1em' }}>
-                  <GroupBox>
+                  <TGroupBox>
                     {content}
                     <div style={{ padding: '1em 0' }}>
-                      <Button palette="cyan" onClick={() => addFct()}>
+                      <TButton palette="cyan" onClick={() => addFct()}>
                         New item
-                      </Button>
+                      </TButton>
                     </div>
-                  </GroupBox>
+                  </TGroupBox>
                 </div>
               );
             },
           }}
-        ></FormField>
-      </Form>
-      <HorizLayout>
-        <Button
+        ></TFormField>
+      </TForm>
+      <THorizLayout>
+        <TButton
           onClick={() => {
             validate();
           }}
         >
           Validate
-        </Button>
-        <Button onClick={() => console.log(JSON.stringify(frm.data, null, 2))}>Output raw</Button>
-        <Button onClick={() => console.log(JSON.stringify(InputUtils.getDataContent(frm), null, 2))}>
+        </TButton>
+        <TButton onClick={() => console.log(JSON.stringify(frm.data, null, 2))}>Output raw</TButton>
+        <TButton onClick={() => console.log(JSON.stringify(InputUtils.getDataContent(frm), null, 2))}>
           Output data
-        </Button>
-      </HorizLayout>
-    </Window>
+        </TButton>
+      </THorizLayout>
+    </TWindow>
   );
 
   function validate() {

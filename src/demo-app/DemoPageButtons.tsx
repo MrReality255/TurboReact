@@ -1,8 +1,8 @@
 import { DemoAppLayout } from './DemoAppLayout';
-import { Window } from '../turbo-react/atoms/Window';
-import { Heading } from '../turbo-react/atoms/Heading';
-import { Button } from '../turbo-react/atoms/Buttons';
-import { ColLayout } from '../turbo-react/layout/ColLayout';
+import { TWindow } from '../turbo-react/atoms/Window';
+import { THeading } from '../turbo-react/atoms/Heading';
+import { TButton } from '../turbo-react/atoms/Buttons';
+import { TColLayout } from '../turbo-react/layout/ColLayout';
 import { TPalette } from '../turbo-react/utils/types';
 
 const colors: TPalette[] = ['blue', 'green', 'cyan', 'dark', 'grey', 'mono', 'red', 'dialog'];
@@ -11,16 +11,16 @@ export function DemoPageButtons() {
   return (
     <DemoAppLayout selected="buttons">
       <div style={{ marginBottom: '1em' }}>
-        <Heading>Standard buttons</Heading>
-        <Button>Standard</Button>
-        <Button default>Default</Button>
-        <Button disabled>Disabled</Button>
-        <Button default disabled>
+        <THeading>Standard buttons</THeading>
+        <TButton>Standard</TButton>
+        <TButton default>Default</TButton>
+        <TButton disabled>Disabled</TButton>
+        <TButton default disabled>
           Default disabled
-        </Button>
+        </TButton>
       </div>
       <div style={{ marginBottom: '1em' }}>
-        <Heading>Buttons with full fill</Heading>
+        <THeading>Buttons with full fill</THeading>
         <div
           style={{
             height: '3em',
@@ -29,53 +29,53 @@ export function DemoPageButtons() {
             width: 'calc(100% - 1em)',
           }}
         >
-          <Button fill>Test button</Button>
+          <TButton fill>Test button</TButton>
         </div>
       </div>
       <div style={{ marginBottom: '1em' }}>
-        <Heading>Buttons with predefined width</Heading>
+        <THeading>Buttons with predefined width</THeading>
         <div style={{ height: '3em', marginTop: '1em' }}>
-          <Button width="110px">A</Button>
-          <Button width="110px">wide</Button>
-          <Button width="110px">button</Button>
+          <TButton width="110px">A</TButton>
+          <TButton width="110px">wide</TButton>
+          <TButton width="110px">button</TButton>
         </div>
       </div>
       <div style={{ marginBottom: '1em' }}>
-        <Heading>Plain buttons</Heading>
-        <Button variant="plain">Standard</Button>
-        <Button variant="plain" default>
+        <THeading>Plain buttons</THeading>
+        <TButton variant="plain">Standard</TButton>
+        <TButton variant="plain" default>
           Default
-        </Button>
-        <Button variant="plain" disabled>
+        </TButton>
+        <TButton variant="plain" disabled>
           Disabled
-        </Button>
-        <Button variant="plain" default disabled>
+        </TButton>
+        <TButton variant="plain" default disabled>
           Default disabled
-        </Button>
+        </TButton>
       </div>
-      <ColLayout cols={2} lineHeight={'13em'}>
+      <TColLayout cols={2} lineHeight={'13em'}>
         {colors.map((c, key) => (
-          <Window key={key} palette={c} caption={'Palette ' + c}>
+          <TWindow key={key} palette={c} caption={'Palette ' + c}>
             <div style={{ marginBottom: '1em' }}> Sample button</div>
-            <Button>Std button</Button>
-            <Button variant="plain">Plain button</Button>
-            <Button variant="plain" default>
+            <TButton>Std button</TButton>
+            <TButton variant="plain">Plain button</TButton>
+            <TButton variant="plain" default>
               Plain default
-            </Button>
+            </TButton>
             <div style={{ marginBottom: '1em', marginTop: '1em' }}>Text buttons</div>
-            <ColLayout cols={4}>
-              <Button variant="link">Link button</Button>
-              <Button variant="link" disabled>
+            <TColLayout cols={4}>
+              <TButton variant="link">Link button</TButton>
+              <TButton variant="link" disabled>
                 Link button disabled
-              </Button>
-              <Button variant="text">Text button</Button>
-              <Button variant="text" disabled>
+              </TButton>
+              <TButton variant="text">Text button</TButton>
+              <TButton variant="text" disabled>
                 Text button disabled
-              </Button>
-            </ColLayout>
-          </Window>
+              </TButton>
+            </TColLayout>
+          </TWindow>
         ))}
-      </ColLayout>
+      </TColLayout>
     </DemoAppLayout>
   );
 }

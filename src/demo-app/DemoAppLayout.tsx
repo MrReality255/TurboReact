@@ -1,14 +1,14 @@
 import { AppLayout } from '../turbo-react/app/AppLayout';
-import { Window } from '../turbo-react/atoms/Window';
-import { Menu } from '../turbo-react/atoms/Menu';
+import { TWindow } from '../turbo-react/atoms/Window';
+import { TMenu } from '../turbo-react/atoms/Menu';
 import { useNavigate } from 'react-router-dom';
 import { useMobile } from '../turbo-react/hooks/useMobile';
-import { HorizLayout } from '../turbo-react/layout/HorizLayout';
-import { Button } from '../turbo-react/atoms/Buttons';
+import { THorizLayout } from '../turbo-react/layout/HorizLayout';
+import { TButton } from '../turbo-react/atoms/Buttons';
 import { useLayer } from '../turbo-react/hooks/useLayer';
-import { Glass } from '../turbo-react/atoms/Glass';
-import { PaletteProvider } from '../turbo-react/contexts/palette';
-import { ClosingEffect } from '../turbo-react/atoms/ClosingEffect';
+import { TGlass } from '../turbo-react/atoms/Glass';
+import { TPaletteProvider } from '../turbo-react/contexts/palette';
+import { TClosingEffectProvider } from '../turbo-react/atoms/ClosingEffect';
 
 export type TDemoAppProps = {
   selected: string;
@@ -54,8 +54,8 @@ export function DemoAppLayout(p: TDemoAppProps) {
         header: <HeaderMobile onNavigate={n} {...p} />,
       }}
       header={
-        <Window palette="dark" noShadow border="none">
-          <HorizLayout
+        <TWindow palette="dark" noShadow border="none">
+          <THorizLayout
             alignMode="right"
             left={
               <span
@@ -70,18 +70,18 @@ export function DemoAppLayout(p: TDemoAppProps) {
             }
           >
             mobile mode: {isMobile ? 'y' : 'n'}
-          </HorizLayout>
-        </Window>
+          </THorizLayout>
+        </TWindow>
       }
       footer={
-        <Window palette="dark" noShadow border="none" innerPadding="none">
+        <TWindow palette="dark" noShadow border="none" innerPadding="none">
           TurboReact
-        </Window>
+        </TWindow>
       }
       left={
-        <Window outerPadding border="single" caption="Menu" palette="grey" innerPadding="none">
+        <TWindow outerPadding border="single" caption="Menu" palette="grey" innerPadding="none">
           <MainMenu {...p} onNavigate={n} />
-        </Window>
+        </TWindow>
       }
     >
       {p.children}
@@ -93,33 +93,33 @@ function HeaderMobile(p: TDemoAppProps & { onNavigate: (url: string) => void }) 
   const l = useLayer();
 
   return (
-    <Window palette="dark" innerPadding="none" border="none" noShadow>
-      <PaletteProvider palette="blue">
-        <HorizLayout
+    <TWindow palette="dark" innerPadding="none" border="none" noShadow>
+      <TPaletteProvider palette="blue">
+        <THorizLayout
           gap={'1em'}
           left={
-            <Button onClick={() => showMenu()} variant="plain">
+            <TButton onClick={() => showMenu()} variant="plain">
               Menu
-            </Button>
+            </TButton>
           }
         >
           TurboReact 1.0
-        </HorizLayout>
-      </PaletteProvider>
-    </Window>
+        </THorizLayout>
+      </TPaletteProvider>
+    </TWindow>
   );
 
   function showMenu() {
     l.show((hideFct) => {
       return (
         <>
-          <Glass backdrop visible></Glass>
-          <Glass visible>
-            <ClosingEffect
+          <TGlass backdrop visible></TGlass>
+          <TGlass visible>
+            <TClosingEffectProvider
               onClose={hideFct}
               onRender={(oc) => {
                 return (
-                  <Window palette="grey" innerPadding="none" onClose={() => oc()}>
+                  <TWindow palette="grey" innerPadding="none" onClose={() => oc()}>
                     <MainMenu
                       {...p}
                       onNavigate={(url) => {
@@ -127,11 +127,11 @@ function HeaderMobile(p: TDemoAppProps & { onNavigate: (url: string) => void }) 
                         oc();
                       }}
                     ></MainMenu>
-                  </Window>
+                  </TWindow>
                 );
               }}
-            ></ClosingEffect>
-          </Glass>
+            ></TClosingEffectProvider>
+          </TGlass>
         </>
       );
     });
@@ -140,14 +140,14 @@ function HeaderMobile(p: TDemoAppProps & { onNavigate: (url: string) => void }) 
 
 function MainMenu(p: TDemoAppProps & { onNavigate: (url: string) => void }) {
   return (
-    <Menu
+    <TMenu
       onClick={(id) => handleMenu(id)}
       items={menuItems.map((item) => ({
         ...item,
         selected: item.id == p.selected,
         prefix: item.id == p.selected ? '•' : undefined,
       }))}
-    ></Menu>
+    ></TMenu>
   );
 
   function handleMenu(id: string) {

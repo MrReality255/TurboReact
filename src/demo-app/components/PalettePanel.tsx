@@ -1,6 +1,6 @@
-import { ColLayout } from '../../turbo-react';
+import { TColLayout } from '../../turbo-react';
 import { TPalette } from '../../turbo-react/utils/types';
-import { Window } from '../../turbo-react/atoms/Window';
+import { TWindow } from '../../turbo-react/atoms/Window';
 import { useMobile } from '../../turbo-react/hooks/useMobile';
 
 const colors: TPalette[] = ['blue', 'green', 'cyan', 'dark', 'grey', 'mono', 'red', 'dialog'];
@@ -9,12 +9,12 @@ export function PalettePanel(p: { children?: React.ReactNode; lineHeight?: strin
   const isMobile = useMobile();
 
   return (
-    <ColLayout cols={isMobile ? 1 : 2} gap={'2em'} lineHeight={p.lineHeight || '10em'}>
+    <TColLayout cols={isMobile ? 1 : 2} gap={'2em'} lineHeight={p.lineHeight || '10em'}>
       {colors.map((c, idx) => (
-        <Window key={idx} palette={c} caption={'Palette ' + c} fill>
+        <TWindow key={idx} palette={c} caption={'Palette ' + c} fill>
           {p.children}
-        </Window>
+        </TWindow>
       ))}
-    </ColLayout>
+    </TColLayout>
   );
 }

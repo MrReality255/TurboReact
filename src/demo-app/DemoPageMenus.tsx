@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, TMenuItem } from '../turbo-react';
+import { TMenu, TMenuItem } from '../turbo-react';
 import { PalettePanel } from './components/PalettePanel';
 import { DemoAppLayout } from './DemoAppLayout';
 
@@ -15,13 +15,13 @@ export function DemoPageMenus() {
   return (
     <DemoAppLayout selected="menus">
       <PalettePanel lineHeight={'12em'}>
-        <Menu
+        <TMenu
           onClick={(x) => setSelected(x)}
           items={menu.map((item) => ({
             ...item,
             selected: selected == item.id,
           }))}
-        ></Menu>
+        ></TMenu>
       </PalettePanel>
     </DemoAppLayout>
   );

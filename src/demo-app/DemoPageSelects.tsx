@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DropDown } from '../turbo-react/atoms/DropDown';
+import { TDropDown } from '../turbo-react/atoms/DropDown';
 import { PalettePanel } from './components/PalettePanel';
 import { DemoAppLayout } from './DemoAppLayout';
 import { TMenuItem } from '../turbo-react/atoms/types';
@@ -30,38 +30,38 @@ export function DemoPageSelects() {
     <DemoAppLayout selected="selects">
       <PalettePanel lineHeight="29em">
         <div style={dropDownStyle}>
-          <DropDown caption="Select" items={menu} value={selected} onChange={(v) => setSelected(v)}></DropDown>
+          <TDropDown caption="Select" items={menu} value={selected} onChange={(v) => setSelected(v)}></TDropDown>
         </div>
         <div style={dropDownStyle}>
-          <DropDown
+          <TDropDown
             caption="Select disabled"
             items={menu}
             value={selected}
             disabled
             onChange={(v) => setSelected(v)}
-          ></DropDown>
+          ></TDropDown>
         </div>
         <div style={dropDownStyle}>
-          <DropDown
+          <TDropDown
             caption="Select with 8"
             items={menu.slice(0, 8)}
             value={selected}
             onChange={(v) => setSelected(v)}
-          ></DropDown>
+          ></TDropDown>
         </div>
         <div style={dropDownStyle}>
-          <DropDown
+          <TDropDown
             caption="Select with 2"
             items={menu.slice(0, 2)}
             value={selected}
             onChange={(v) => setSelected(v)}
-          ></DropDown>
+          ></TDropDown>
         </div>
         <div style={dropDownStyle}>
-          <DropDown caption="Select with 0" items={[]} value={selected} onChange={(v) => setSelected(v)}></DropDown>
+          <TDropDown caption="Select with 0" items={[]} value={selected} onChange={(v) => setSelected(v)}></TDropDown>
         </div>
         <div style={dropDownStyle}>
-          <DropDown caption="Select bottom" items={menu} value={selected} onChange={(v) => setSelected(v)}></DropDown>
+          <TDropDown caption="Select bottom" items={menu} value={selected} onChange={(v) => setSelected(v)}></TDropDown>
         </div>
       </PalettePanel>
     </DemoAppLayout>

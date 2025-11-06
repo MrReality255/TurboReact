@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Table } from '../turbo-react/atoms/Table';
+import { TTable } from '../turbo-react/atoms/Table';
 import { PalettePanel } from './components/PalettePanel';
 import { SampleTableData } from './demo_data';
 import { DemoAppLayout } from './DemoAppLayout';
-import { NameValue } from '../turbo-react/atoms/NameValue';
-import { RowLayout, VertLayout } from '../turbo-react/layout';
+import { TNameValue } from '../turbo-react/atoms/NameValue';
+import { TRowLayout, TVertLayout } from '../turbo-react/layout';
 
 export function DemoPageTables() {
   const [selectedRow, setSelectedRow] = useState('');
@@ -12,20 +12,20 @@ export function DemoPageTables() {
 
   return (
     <DemoAppLayout selected="tables">
-      <RowLayout>
+      <TRowLayout>
         <PalettePanel lineHeight={'20em'}>
-          <VertLayout
+          <TVertLayout
             gap={'1em'}
             header={
               (selectedRow || selectedCol) && (
-                <RowLayout>
-                  <NameValue name="Selected col">{selectedCol}</NameValue>
-                  <NameValue name="Selected row">{selectedRow}</NameValue>
-                </RowLayout>
+                <TRowLayout>
+                  <TNameValue name="Selected col">{selectedCol}</TNameValue>
+                  <TNameValue name="Selected row">{selectedRow}</TNameValue>
+                </TRowLayout>
               )
             }
           >
-            <Table
+            <TTable
               data={SampleTableData}
               columns={[
                 { id: 'Name', caption: 'Name', data: 'name', sortIcon: 'down' },
@@ -39,16 +39,16 @@ export function DemoPageTables() {
                   id: 'Custom value',
                   data: 'customValue2',
                   align: 'right',
-                  icon: '↑',
+                  icon: 'up',
                 },
-                { id: 'Date', data: 'date', align: 'center', icon: '↓' },
+                { id: 'Date', data: 'date', align: 'center', icon: 'down' },
               ]}
               onRowClick={(item) => setSelectedRow(JSON.stringify(item))}
               onHeaderClick={(hdr) => setSelectedCol(hdr.id)}
-            ></Table>
-          </VertLayout>
+            ></TTable>
+          </TVertLayout>
         </PalettePanel>
-      </RowLayout>
+      </TRowLayout>
     </DemoAppLayout>
   );
 }
