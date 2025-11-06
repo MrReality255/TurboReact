@@ -6,7 +6,7 @@ import { TViewport } from "../atoms/Viewport";
 import { TPaletteProvider } from "../contexts/palette";
 import { useMobile } from "../hooks/useMobile";
 
-export function AppLayout(p: TAppLayoutProps) {
+export function TAppLayout(p: TAppLayoutProps) {
   const plt = usePalette(styles, p);
   const isMobile = useMobile();
 

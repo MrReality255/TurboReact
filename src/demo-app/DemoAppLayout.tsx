@@ -1,4 +1,4 @@
-import { AppLayout } from '../turbo-react/app/AppLayout';
+import { TAppLayout } from '../turbo-react/app/AppLayout';
 import { TWindow } from '../turbo-react/atoms/Window';
 import { TMenu } from '../turbo-react/atoms/Menu';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +37,7 @@ export function DemoAppLayout(p: TDemoAppProps) {
   const n = useNavigate();
 
   return (
-    <AppLayout
+    <TAppLayout
       sizeUnit="em"
       sizes={{
         header: 3.5,
@@ -85,7 +85,7 @@ export function DemoAppLayout(p: TDemoAppProps) {
       }
     >
       {p.children}
-    </AppLayout>
+    </TAppLayout>
   );
 }
 

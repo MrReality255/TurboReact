@@ -6,15 +6,15 @@ import { DemoPageOtherControls, DemoPageTextBoxes } from './DemoAppInputs';
 import { DemoPageSelects } from './DemoPageSelects';
 import { DemoPageMenus } from './DemoPageMenus';
 import { DemoPageTables } from './DemoPageTables';
-import { AppContainer } from '../turbo-react/app/AppContainer';
+import { TAppContainer } from '../turbo-react/app/AppContainer';
 import { DemoPageMisc } from './DemoPageMisc';
 import { DemoPageDialogs } from './DemoPageDialog';
 
 export default function DemoApp() {
   return (
-    <AppContainer>
+    <TAppContainer>
       <AppRouter />
-    </AppContainer>
+    </TAppContainer>
   );
 }
 
