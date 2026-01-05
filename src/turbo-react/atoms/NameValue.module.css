@@ -21,3 +21,7 @@ div.nv > .label.green {
 div.nv > .label.grey {
   color: #333;
 }
+
+div.nv > .label.dialog {
+  color: #111;
+}

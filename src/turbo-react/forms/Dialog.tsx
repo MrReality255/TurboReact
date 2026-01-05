@@ -19,7 +19,7 @@ import {
   TDialogSubmitResult,
 } from "./types";
 
-export function TDialog<T>(props: TDialogWrapperProps<T>) {
+export function TDialog<T, C>(props: TDialogWrapperProps<T, C>) {
   const frm = useNewFormContext(props.initialState);
 
   const closer = {
@@ -27,6 +27,7 @@ export function TDialog<T>(props: TDialogWrapperProps<T>) {
   };
 
   const ctx = {
+    ctx: props.ctx,
     frm,
     close: () => closeDialog(),
     submit: (result: TDialogSubmitFctResult<T>) => submitHandler(result),
@@ -158,7 +159,7 @@ export function TDialog<T>(props: TDialogWrapperProps<T>) {
   }
 }
 
-export function TDialogWrapper<T>(p: TDialogWrapperProps<T>) {
+export function TDialogWrapper<T, C>(p: TDialogWrapperProps<T, C>) {
   const l = useLayer();
 
   return (
@@ -169,7 +170,8 @@ export function TDialogWrapper<T>(p: TDialogWrapperProps<T>) {
       onRender={(onClose, props) => {
         return (
           <CtxLayerManager.Provider value={{ ...l, hide: () => onClose() }}>
-            <TDialog
+            <TDialog<T, C>
+              ctx={p.ctx}
               fct={p.fct}
               initialState={p.initialState}
               onSubmit={(result, data, frm) => {

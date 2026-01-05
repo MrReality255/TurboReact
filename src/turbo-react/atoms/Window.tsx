@@ -1,6 +1,7 @@
 import { TWindowProps } from ".";
 import { TPaletteProvider, StrUtils } from "..";
 import usePalette from "../hooks/usePalette";
+
 import styles from "./Window.module.css";
 
 export function TWindow(p: TWindowProps) {
@@ -78,7 +79,7 @@ function WindowFill(p: TWindowProps) {
                   {
                     [styles.single]: p.border == "single",
                     [styles.borderless]: p.border == "none",
-                  },
+                  }
                 )}
               >
                 <WindowClose {...p}></WindowClose>

@@ -468,3 +468,7 @@ div.main.cyan div.content {
 div.main.blue button.btn {
   color: #0f0;
 }
+
+div.main.dialog div.contentInsideWrapper {
+  color: #000;
+}

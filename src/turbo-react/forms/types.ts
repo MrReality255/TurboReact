@@ -21,8 +21,9 @@ export type TDialogSubmitFctResult<T> =
   | TDialogSubmitResult<T>
   | Promise<TDialogSubmitResult<T>>;
 
-export type TDialogContext<T> = {
+export type TDialogContext<T, C> = {
   frm: TFormContext;
+  ctx: C | undefined;
   close: () => void;
   submit: (result: TDialogSubmitFctResult<T>) => void;
 };
@@ -36,8 +37,9 @@ export type TDialogResult<T> = {
   data?: T;
 };
 
-export type TDialogWrapperProps<T> = {
-  fct: (ctx: TDialogContext<T>) => TDialogProps;
+export type TDialogWrapperProps<T, C> = {
+  ctx: C | undefined;
+  fct: (ctx: TDialogContext<T, C>) => TDialogProps;
   initialState: IDataContext | undefined;
   style?: CSSProperties;
 
@@ -45,7 +47,7 @@ export type TDialogWrapperProps<T> = {
   onSubmit: (
     result: TDialogModalResult,
     data: T | undefined,
-    frm: TFormContext,
+    frm: TFormContext
   ) => void;
 };
 
@@ -132,7 +134,7 @@ export type TFormFieldProps = TPaletteProps & {
     src: React.ReactNode,
     value: TFormValue | undefined,
     props: TFormFieldProps,
-    onAction?: (id: string, customData: unknown) => void,
+    onAction?: (id: string, customData: unknown) => void
   ) => React.ReactNode;
 
   children?: React.ReactNode;
@@ -151,11 +153,11 @@ export type TFormTemplateProps = TPaletteProps & {
   items: IDataContext[];
   itemFct: (
     ctx: IDataContext,
-    deleteFct: () => void,
+    deleteFct: () => void
   ) => React.ReactNode | TFormFieldProps[];
   wrapperFct?: (
     content: React.ReactNode,
-    addFct: () => void,
+    addFct: () => void
   ) => React.ReactNode;
 
   onNewRow?: () => Record<string, TFormValue>;
