@@ -10,6 +10,7 @@ import { TColLayout } from "../turbo-react/layout/ColLayout";
 import { TRowLayout } from "../turbo-react/layout/RowLayout";
 import { THorizLayout } from "../turbo-react/layout/HorizLayout";
 import { TVertLayout } from "../turbo-react/layout/VertLayout";
+import { StrUtils } from "../turbo-react";
 
 export function DemoPageMisc() {
   const n = useNotifications();
@@ -19,6 +20,19 @@ export function DemoPageMisc() {
       <TRowLayout>
         <THeading>Loading</THeading>
         <TLoadingBar></TLoadingBar>
+        <TWindow caption="Date+Time">
+          <TRowLayout>
+            <TNameValue name="Datetime" labelWidth={100}>
+              {StrUtils.formatDateTime(1767768486, "datetime")}
+            </TNameValue>
+            <TNameValue name="Date" labelWidth={100}>
+              {StrUtils.formatDateTime(1767768486, "date")}
+            </TNameValue>
+            <TNameValue name="Time" labelWidth={100}>
+              {StrUtils.formatDateTime(1767768486, "time")}
+            </TNameValue>
+          </TRowLayout>
+        </TWindow>
         <TWindow caption="Horizontal layout">
           <THorizLayout gap={"5em"} left={<p>Some text on the left side</p>}>
             <p>Some context on the right side</p>
