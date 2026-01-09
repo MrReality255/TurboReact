@@ -4,6 +4,8 @@ import { MiscUtils } from "./misc";
 export type CssOption = string | Record<string, boolean>;
 export type TDateTimeFormat = "datetime" | "date" | "time";
 
+const dateTimeFormats = ["dd. mm. YYYY"];
+
 export const StrUtils = {
   classes: function (...options: CssOption[]) {
     const strOptions = options.map((item) => {
@@ -37,6 +39,8 @@ export const StrUtils = {
         return undefined;
       case "number":
         return parseDateTimeNr(x);
+      case "string":
+        return parseDateTimeStr(x);
     }
   },
 };
@@ -65,4 +69,29 @@ function parseDateTimeNr(x: number): DateTime | undefined {
     default:
       return DateTime.fromMillis(x);
   }
+}
+
+function parseDateTimeStr(dtStr: string): DateTime | undefined {
+  const fcts = [
+    DateTime.fromISO,
+    function (x: string) {
+      for (let i = 0; i < dateTimeFormats.length; i++) {
+        const fmt = dateTimeFormats[i];
+        const dt = DateTime.fromFormat(x, fmt);
+        if (dt.isValid) {
+          return dt;
+        }
+      }
+      return undefined;
+    },
+  ];
+
+  for (let i = 0; i < fcts.length; i++) {
+    const dt = fcts[i](dtStr);
+    if (dt && dt.isValid) {
+      return dt;
+    }
+  }
+
+  return undefined;
 }
