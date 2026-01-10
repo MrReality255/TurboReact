@@ -1,15 +1,25 @@
-import { DateTime } from "luxon";
-import { MiscUtils } from "./misc";
+import { DateTime } from 'luxon';
+import { MiscUtils } from './misc';
 
 export type CssOption = string | Record<string, boolean>;
-export type TDateTimeFormat = "datetime" | "date" | "time";
+export type TDateTimeFormat = 'datetime' | 'date' | 'time';
 
-const dateTimeFormats = ["dd. mm. YYYY"];
+const dateTimeFormats = [
+  'dd.MM.yyyy HH:mm:ss',
+  'dd.MM.yyyy HH:mm',
+  'yyyyMMddHHmmss',
+  'yyyyMMdd HHmmss',
+  'yyyy-MM-dd HH:mm:ss',
+  'dd.MM.yyyy',
+  'dd.MM.yy',
+  'yyyy-MM-dd',
+  'yyyyMMdd',
+];
 
 export const StrUtils = {
   classes: function (...options: CssOption[]) {
     const strOptions = options.map((item) => {
-      if (typeof item === "string") {
+      if (typeof item === 'string') {
         return [item];
       }
 
@@ -18,28 +28,23 @@ export const StrUtils = {
         .map((c) => c[0]);
     });
 
-    return MiscUtils.distint(strOptions).join(" ");
+    return MiscUtils.distint(strOptions).join(' ');
   },
 
-  formatDateTime: function (
-    x: DateTime | string | number | undefined,
-    fmt: TDateTimeFormat
-  ) {
-    if (typeof x !== "object") {
+  formatDateTime: function (x: DateTime | string | number | undefined, fmt: TDateTimeFormat) {
+    if (typeof x !== 'object') {
       x = StrUtils.parseDateTime(x);
     }
     return formatDateTime(x, fmt);
   },
 
-  parseDateTime: function (
-    x: string | number | undefined
-  ): DateTime | undefined {
+  parseDateTime: function (x: string | number | undefined): DateTime | undefined {
     switch (typeof x) {
-      case "undefined":
+      case 'undefined':
         return undefined;
-      case "number":
+      case 'number':
         return parseDateTimeNr(x);
-      case "string":
+      case 'string':
         return parseDateTimeStr(x);
     }
   },
@@ -47,16 +52,16 @@ export const StrUtils = {
 
 function formatDateTime(dt: DateTime | undefined, fmt: TDateTimeFormat) {
   if (!dt || dt.toUnixInteger() == 0) {
-    return "---";
+    return '--';
   }
 
   switch (fmt) {
-    case "datetime":
-      return dt.toLocaleString({ dateStyle: "short", timeStyle: "medium" });
-    case "date":
-      return dt.toLocaleString({ dateStyle: "short" });
-    case "time":
-      return dt.toLocaleString({ timeStyle: "medium" });
+    case 'datetime':
+      return dt.toLocaleString({ dateStyle: 'short', timeStyle: 'medium' });
+    case 'date':
+      return dt.toLocaleString({ dateStyle: 'short' });
+    case 'time':
+      return dt.toLocaleString({ timeStyle: 'medium' });
   }
 }
 
