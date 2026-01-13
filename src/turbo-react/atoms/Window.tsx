@@ -119,7 +119,9 @@ function WindowContent(p: TWindowProps) {
         [styles.contentPaddingSpace]: p.innerPadding == "space",
       })}
     >
-      <div className={styles.contentInsideWrapper}>{p.children}</div>
+      <div className={plt.styles(styles.contentInsideWrapper)}>
+        {p.children}
+      </div>
     </div>
   );
 }

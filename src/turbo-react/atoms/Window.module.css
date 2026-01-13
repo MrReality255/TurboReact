@@ -469,6 +469,6 @@ div.main.blue button.btn {
   color: #0f0;
 }
 
-div.main.dialog div.contentInsideWrapper {
+div.contentInsideWrapper.dialog {
   color: #000;
 }
