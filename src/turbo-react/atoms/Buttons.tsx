@@ -11,7 +11,8 @@ export function TButton(p: TButtonProps) {
       disabled={p.disabled}
       className={plt.styles({
         [styles.default]: !!p.default,
-        [styles.diabled]: !!p.disabled,
+        [styles.disabled]: !!p.disabled,
+        [styles.down]: !!p.down,
         [styles.fill]: !!p.fill,
         [styles.btn]: !p.variant || p.variant == "standard",
         [styles.plain]: p.variant == "plain",

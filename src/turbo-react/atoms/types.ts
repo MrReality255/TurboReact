@@ -17,6 +17,7 @@ export type TButtonProps = TControlProps & {
   children?: React.ReactNode;
 
   default?: boolean;
+  down?: boolean;
   fill?: boolean;
   variant?: TButtonVariant;
   width?: string | number;
