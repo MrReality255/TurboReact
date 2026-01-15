@@ -77,6 +77,13 @@ export function DemoPageButtons() {
             <TButton variant="plain" default>
               Plain default
             </TButton>
+            <TButton
+              variant="plain"
+              down={state}
+              onClick={() => setState(!state)}
+            >
+              Toggle
+            </TButton>
             <div style={{ marginBottom: "1em", marginTop: "1em" }}>
               Text buttons
             </div>

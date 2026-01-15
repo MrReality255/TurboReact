@@ -104,6 +104,13 @@ button.plain:active {
   transform: translate(1px, 1px) scale(0.98); /* Move and shrink */
 }
 
+button.plain.down {
+  background-color: #bbb;
+  color: #000;
+  box-shadow: 0 0 6px #ddd;
+  transform: translate(1px, 1px) scale(0.98); /* Move and shrink */
+}
+
 /* BUTTONS - LINK */
 button.link {
   background-color: inherit;
@@ -142,6 +149,12 @@ button.link:active {
   box-shadow: 0 0 6px #00ff88;
 }
 
+.plain.green.down {
+  background-color: #005500;
+  color: #00ff88;
+  box-shadow: 0 0 6px #00ff88;
+}
+
 .plain.green.default {
   color: #ff0;
 }
@@ -155,6 +168,12 @@ button.link:active {
 }
 
 .plain.blue:hover {
+  background-color: #099;
+  color: #0ff;
+  box-shadow: 0 0 6px #00ff88;
+}
+
+.plain.blue.down {
   background-color: #099;
   color: #0ff;
   box-shadow: 0 0 6px #00ff88;
@@ -178,6 +197,12 @@ button.link:active {
 }
 
 .plain.cyan:hover {
+  background-color: #005555;
+  color: #00ffaa;
+  box-shadow: 0 0 6px #00ff88;
+}
+
+.plain.cyan.down {
   background-color: #005555;
   color: #00ffaa;
   box-shadow: 0 0 6px #00ff88;
@@ -267,6 +292,12 @@ button.btn.red:active:not(:disabled) {
 }
 
 .plain.red:hover {
+  background-color: #500;
+  color: #ff0;
+  box-shadow: 0 0 6px #f00;
+}
+
+.plain.red.down {
   background-color: #500;
   color: #ff0;
   box-shadow: 0 0 6px #f00;
