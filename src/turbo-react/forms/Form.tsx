@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { IDataContext, TFormProps } from "./types";
-import { CtxFormPanel } from "../contexts/forms";
-import { InputUtils } from "../utils/input";
-import { TFormField } from "./FormField";
+import { useState } from 'react';
+import { IDataContext, TFormProps } from './types';
+import { CtxFormPanel } from '../contexts/forms';
+import { InputUtils } from '../utils/input';
+import { TFormField } from './FormField';
 
 export function TForm(p: TFormProps) {
   const [dataContext, updateDataContext] = useState<IDataContext>({
@@ -11,10 +11,10 @@ export function TForm(p: TFormProps) {
     isLoading: false,
     isValidated: p.isValidated ?? false,
     isValid: true,
+    submitRef: { callback: undefined, id: undefined },
   });
 
-  const newFrmContext =
-    p.context ?? InputUtils.newFormContext(dataContext, updateDataContext);
+  const newFrmContext = p.context ?? InputUtils.newFormContext(dataContext, updateDataContext);
 
   const formContext = {
     ...newFrmContext,
@@ -40,8 +40,7 @@ function ValidFields(p: { ctx: IDataContext }) {
       {Object.keys(p.ctx.data).map((key) => {
         return (
           <div>
-            {key}: {p.ctx.data[key].isValid ? "y" : "n"}{" "}
-            {JSON.stringify(p.ctx.data[key].value)}
+            {key}: {p.ctx.data[key].isValid ? 'y' : 'n'} {JSON.stringify(p.ctx.data[key].value)}
           </div>
         );
       })}

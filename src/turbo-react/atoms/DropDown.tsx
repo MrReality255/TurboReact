@@ -1,17 +1,18 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { TTextBox } from "./TextBox";
-import { TDropDownProps, TMenuItem } from "./types";
-import { TGlass } from "./Glass";
-import { TViewport } from "./Viewport";
-import { TWindow } from "./Window";
-import { TMenu } from "./Menu";
-import usePalette from "../hooks/usePalette";
-import { TPaletteProvider } from "../contexts/palette";
-import { useValue } from "../hooks/useValue";
-import { MathUtils } from "../utils/math";
-import { TPalette } from "../utils/types";
-import { TValueHook } from "../hooks/types";
-import { TClosingEffectProvider } from "./ClosingEffect";
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { TTextBox } from './TextBox';
+import { TDropDownProps, TMenuItem } from './types';
+import { TGlass } from './Glass';
+import { TViewport } from './Viewport';
+import { TWindow } from './Window';
+import { TMenu } from './Menu';
+import usePalette from '../hooks/usePalette';
+import { TPaletteProvider } from '../contexts/palette';
+import { useValue } from '../hooks/useValue';
+import { MathUtils } from '../utils/math';
+import { TPalette } from '../utils/types';
+import { TValueHook } from '../hooks/types';
+import { TClosingEffectProvider } from './ClosingEffect';
+import useAutoFocus from '../hooks/useAutoFocus';
 
 export function TDropDown(p: TDropDownProps) {
   const plt = usePalette(undefined, p);
@@ -20,8 +21,7 @@ export function TDropDown(p: TDropDownProps) {
   const [showOpen, setShowOpen] = useState(false);
   const v = useValue(p);
 
-  const windowPalette =
-    p.windowPalette ?? (plt.palette == "dialog" ? "blue" : plt.palette);
+  const windowPalette = p.windowPalette ?? (plt.palette == 'dialog' ? 'blue' : plt.palette);
   const menu = p.items.map((item) => ({
     ...item,
     selected: item.id == p.value,
@@ -46,6 +46,8 @@ export function TDropDown(p: TDropDownProps) {
 
     setWindowY(y - (diff > 0 ? diff : 0));
   }, [viewportRef.current, showOpen]);
+
+  useAutoFocus(p, tmpInputRef);
 
   return (
     <TPaletteProvider {...plt}>
@@ -87,7 +89,7 @@ export function TDropDown(p: TDropDownProps) {
         suffix="▼"
         suffixStyle={{ opacity: p.items.length == 0 ? 0.3 : undefined }}
         readOnly
-        inputStyle={{ cursor: p.items.length > 0 ? "pointer" : undefined }}
+        inputStyle={{ cursor: p.items.length > 0 ? 'pointer' : undefined }}
         onClick={() => setShowOpen(p.items.length > 0)}
         onFocus={() => handleFocus()}
       ></TTextBox>
@@ -122,13 +124,7 @@ function DropDownWindow(p: {
       onClose={() => p.onClose()}
       onRender={(onClose, props) => {
         return (
-          <TWindow
-            style={props}
-            caption={p.caption}
-            onClose={() => onClose()}
-            fill
-            palette={p.windowPalette}
-          >
+          <TWindow style={props} caption={p.caption} onClose={() => onClose()} fill palette={p.windowPalette}>
             <TMenu
               selectedRef={mySelRef}
               items={p.menu}

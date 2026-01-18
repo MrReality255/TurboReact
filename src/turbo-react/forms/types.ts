@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { CSSProperties } from 'react';
 import {
   TButtonProps,
   TCheckBoxProps,
@@ -7,9 +7,9 @@ import {
   TTextBoxProps,
   TViewportProps,
   TWindowProps,
-} from "../atoms/types";
-import { TFormContext } from "../contexts/forms";
-import { TPaletteProps } from "../utils/types";
+} from '../atoms/types';
+import { TFormContext } from '../contexts/forms';
+import { TPaletteProps } from '../utils/types';
 
 export type TDialogSubmitResult<T> = {
   result?: TDialogModalResult;
@@ -17,9 +17,7 @@ export type TDialogSubmitResult<T> = {
   error?: string;
 };
 
-export type TDialogSubmitFctResult<T> =
-  | TDialogSubmitResult<T>
-  | Promise<TDialogSubmitResult<T>>;
+export type TDialogSubmitFctResult<T> = TDialogSubmitResult<T> | Promise<TDialogSubmitResult<T>>;
 
 export type TDialogContext<T, C> = {
   frm: TFormContext;
@@ -28,7 +26,7 @@ export type TDialogContext<T, C> = {
   submit: (result: TDialogSubmitFctResult<T>) => void;
 };
 
-export type TDialogModalResult = "ok";
+export type TDialogModalResult = 'ok';
 
 export type TDialogResult<T> = {
   result: TDialogModalResult;
@@ -44,11 +42,7 @@ export type TDialogWrapperProps<T, C> = {
   style?: CSSProperties;
 
   onCancel: () => void;
-  onSubmit: (
-    result: TDialogModalResult,
-    data: T | undefined,
-    frm: TFormContext
-  ) => void;
+  onSubmit: (result: TDialogModalResult, data: T | undefined, frm: TFormContext) => void;
 };
 
 export type TDialogProps = TPaletteProps & {
@@ -64,13 +58,10 @@ export type TDialogProps = TPaletteProps & {
   onBeforeClose?: (modalResult: TDialogModalResult | null) => void;
 };
 
-export type TFormValueTypeList = { mode: "list"; items: IDataContext[] };
-export type TFormValueTypeDataCtx = IDataContext & { mode: "datacontext" };
+export type TFormValueTypeList = { mode: 'list'; items: IDataContext[] };
+export type TFormValueTypeDataCtx = IDataContext & { mode: 'datacontext' };
 
-export type TFormValueType =
-  | string
-  | TFormValueTypeDataCtx
-  | TFormValueTypeList;
+export type TFormValueType = string | TFormValueTypeDataCtx | TFormValueTypeList;
 
 export type TFormValue = {
   value: TFormValueType;
@@ -90,6 +81,10 @@ export interface IDataContext {
   isDisabled: boolean;
   isLoading: boolean;
   isValid: boolean | undefined;
+  submitRef: {
+    id?: string;
+    callback?: () => void;
+  };
 }
 
 export type TFormButtonProps = TButtonProps & {
@@ -112,18 +107,13 @@ export type TFormValidator = {
   onValidateList?: (content: TDataContent[]) => boolean;
 };
 
-export type TFormFieldType =
-  | "checkbox"
-  | "progress"
-  | "textbox"
-  | "dropdown"
-  | "form"
-  | "template";
+export type TFormFieldType = 'checkbox' | 'progress' | 'textbox' | 'dropdown' | 'form' | 'template';
 
 export type TFormFieldProps = TPaletteProps & {
   id: string;
   caption?: string;
   type: TFormFieldType;
+  autoFocus?: boolean;
   disabled?: boolean;
 
   defaultValue?: string;
@@ -134,16 +124,16 @@ export type TFormFieldProps = TPaletteProps & {
     src: React.ReactNode,
     value: TFormValue | undefined,
     props: TFormFieldProps,
-    onAction?: (id: string, customData: unknown) => void
+    onAction?: (id: string, customData: unknown) => void,
   ) => React.ReactNode;
 
   children?: React.ReactNode;
 
   checkBoxProps?: TCheckBoxProps;
   dropDownProps?: TDropDownProps;
-  formProps?: Omit<TFormProps, "context" | "children">;
+  formProps?: Omit<TFormProps, 'context' | 'children'>;
   progressBarProps?: TProgressBarProps;
-  templateProps?: Omit<TFormTemplateProps, "items" | "onUpdateItems">;
+  templateProps?: Omit<TFormTemplateProps, 'items' | 'onUpdateItems'>;
   textBoxProps?: TTextBoxProps;
 
   onAction?: (id: string, customData: unknown) => void;
@@ -151,14 +141,8 @@ export type TFormFieldProps = TPaletteProps & {
 
 export type TFormTemplateProps = TPaletteProps & {
   items: IDataContext[];
-  itemFct: (
-    ctx: IDataContext,
-    deleteFct: () => void
-  ) => React.ReactNode | TFormFieldProps[];
-  wrapperFct?: (
-    content: React.ReactNode,
-    addFct: () => void
-  ) => React.ReactNode;
+  itemFct: (ctx: IDataContext, deleteFct: () => void) => React.ReactNode | TFormFieldProps[];
+  wrapperFct?: (content: React.ReactNode, addFct: () => void) => React.ReactNode;
 
   onNewRow?: () => Record<string, TFormValue>;
   onUpdateItems?: (newItems: IDataContext[]) => void;

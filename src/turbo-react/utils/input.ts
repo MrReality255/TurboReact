@@ -1,12 +1,6 @@
-import {
-  IDataContext,
-  TDataContent,
-  TFormValue,
-  TFormValueType,
-  TFormValueTypeList,
-} from "..";
-import { TFormContext } from "../contexts/forms";
-import { TInputProps } from "./types";
+import { IDataContext, TDataContent, TFormValue, TFormValueType, TFormValueTypeList } from '..';
+import { TFormContext } from '../contexts/forms';
+import { TInputProps } from './types';
 
 export const InputUtils = {
   handleChange: function (newValue: string, p: TInputProps) {
@@ -21,6 +15,7 @@ export const InputUtils = {
       isDisabled: false,
       isLoading: false,
       isValid: true,
+      submitRef: { callback: undefined, id: undefined },
     };
   },
   newFormContext: function (
@@ -30,18 +25,30 @@ export const InputUtils = {
     return {
       ...dataContext,
       updateDataContext,
+      setDefaultSubmit: function (value: { id: string; cb: () => void } | null) {
+        updateDataContext(function (prev: IDataContext) {
+          return {
+            ...prev,
+            submitRef: {
+              callback: value ? value.cb : undefined,
+              id: value ? value.id : undefined,
+            },
+          };
+        });
+      },
 
-      initializeField: function (
-        id: string,
-        initValue: TFormValueType,
-        isValid: boolean,
-      ) {
+      initializeField: function (id: string, initValue: TFormValueType, isValid: boolean) {
         updateDataContext((prev) => {
           if (prev.data[id]) {
             return prev;
           }
           return {
             ...prev,
+            submitRef: {
+              callback: undefined,
+              id: undefined,
+            },
+
             isValid: prev.isValid && isValid,
             data: {
               ...prev.data,
@@ -55,7 +62,7 @@ export const InputUtils = {
         });
       },
       checked: function (id: string) {
-        return get(id) === "true";
+        return get(id) === 'true';
       },
       get,
       getContent: () => InputUtils.getDataContent(dataContext),
@@ -81,11 +88,7 @@ export const InputUtils = {
           };
         });
       },
-      update: function (
-        id: string,
-        newValue: TFormValueType,
-        isValid: boolean,
-      ) {
+      update: function (id: string, newValue: TFormValueType, isValid: boolean) {
         updateDataContext((ctx) => {
           const prevValue = ctx.data[id] as TFormValue | undefined;
 
@@ -98,11 +101,9 @@ export const InputUtils = {
                 ...ctx.data,
                 [id]: {
                   origValue:
-                    prevValue?.origValue === null ||
-                    typeof prevValue?.value === "object"
+                    prevValue?.origValue === null || typeof prevValue?.value === 'object'
                       ? null
-                      : (prevValue?.origValue ??
-                        ((prevValue?.value as string) || "")),
+                      : (prevValue?.origValue ?? ((prevValue?.value as string) || '')),
                   isValid,
                   value: newValue,
                 },
@@ -130,25 +131,23 @@ function getDataContent(ctx: IDataContext): TDataContent {
   const result: TDataContent = {};
   Object.keys(ctx.data).forEach((key) => {
     const value = ctx.data[key].value;
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       result[key] = value;
       return;
     }
 
     switch (value.mode) {
-      case "datacontext":
+      case 'datacontext':
         result[key] = getDataContent(value);
         return;
-      case "list":
+      case 'list':
         result[key] = value.items.map((item) => getDataContent(item));
     }
   });
   return result;
 }
 
-function getInitialState(
-  input: TDataContent | undefined,
-): IDataContext | undefined {
+function getInitialState(input: TDataContent | undefined): IDataContext | undefined {
   if (input === undefined) {
     return undefined;
   }
@@ -159,6 +158,7 @@ function getInitialState(
     isDisabled: false,
     isValid: false,
     data: getInitContextValues(input),
+    submitRef: { callback: undefined, id: undefined },
   };
 }
 
@@ -166,7 +166,7 @@ function getInitContextValues(input: TDataContent) {
   const result: Record<string, TFormValue> = {};
   Object.keys(input).forEach((key) => {
     const value = input[key];
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       result[key] = { isValid: undefined, value, origValue: value };
       return;
     }
@@ -176,7 +176,7 @@ function getInitContextValues(input: TDataContent) {
         isValid: undefined,
         origValue: null,
         value: {
-          mode: "list",
+          mode: 'list',
           items: value.map((item) => getInitialState(item)!),
         },
       };
@@ -188,7 +188,7 @@ function getInitContextValues(input: TDataContent) {
       origValue: null,
       value: {
         ...getInitialState(value)!,
-        mode: "datacontext",
+        mode: 'datacontext',
       },
     };
   });
@@ -199,21 +199,21 @@ function getValidatedContext(ctx: IDataContext): IDataContext {
   ctx = { ...ctx, isValidated: true, data: { ...ctx.data } };
   Object.keys(ctx.data).forEach((key) => {
     const value = ctx.data[key].value;
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       return;
     }
 
     switch (value.mode) {
-      case "datacontext":
+      case 'datacontext':
         ctx.data[key].value = {
           ...getValidatedContext(value),
-          mode: "datacontext",
+          mode: 'datacontext',
         };
         break;
-      case "list":
+      case 'list':
         const v = ctx.data[key].value as TFormValueTypeList;
         const newValue: TFormValueTypeList = {
-          mode: "list",
+          mode: 'list',
           items: v.items.map((subCtx) => getValidatedContext(subCtx)),
         };
         ctx.data[key].value = newValue;

@@ -1,15 +1,12 @@
-import { TWindowProps } from ".";
-import { TPaletteProvider, StrUtils } from "..";
-import usePalette from "../hooks/usePalette";
+import { useEffect } from 'react';
+import { TWindowProps } from '.';
+import { TPaletteProvider, StrUtils } from '..';
+import usePalette from '../hooks/usePalette';
 
-import styles from "./Window.module.css";
+import styles from './Window.module.css';
 
 export function TWindow(p: TWindowProps) {
-  return p.fill ? (
-    <WindowFill {...p}></WindowFill>
-  ) : (
-    <WindowAutoSize {...p}></WindowAutoSize>
-  );
+  return p.fill ? <WindowFill {...p}></WindowFill> : <WindowAutoSize {...p}></WindowAutoSize>;
 }
 
 function WindowAutoSize(p: TWindowProps) {
@@ -33,8 +30,8 @@ function WindowAutoSize(p: TWindowProps) {
             <div className={plt.styles({ [styles.padding]: !!p.outerPadding })}>
               <div
                 className={plt.styles(styles.frameStd, {
-                  [styles.single]: p.border == "single",
-                  [styles.borderless]: p.border == "none",
+                  [styles.single]: p.border == 'single',
+                  [styles.borderless]: p.border == 'none',
                 })}
               >
                 <WindowClose {...p}></WindowClose>
@@ -72,15 +69,10 @@ function WindowFill(p: TWindowProps) {
               })}
             >
               <div
-                className={plt.styles(
-                  styles.frame,
-                  styles.frameStd,
-                  styles.frameBck,
-                  {
-                    [styles.single]: p.border == "single",
-                    [styles.borderless]: p.border == "none",
-                  }
-                )}
+                className={plt.styles(styles.frame, styles.frameStd, styles.frameBck, {
+                  [styles.single]: p.border == 'single',
+                  [styles.borderless]: p.border == 'none',
+                })}
               >
                 <WindowClose {...p}></WindowClose>
                 {p.caption && <WindowTitle {...p} isFill={true}></WindowTitle>}
@@ -111,17 +103,34 @@ function WindowClose(p: TWindowProps) {
 
 function WindowContent(p: TWindowProps) {
   const plt = usePalette(styles, p);
+
+  function closeHandler(event: KeyboardEvent) {
+    if (event.key == 'Escape') {
+      p?.onClose?.();
+    }
+  }
+
+  useEffect(() => {
+    const canClose = !!p.onClose;
+    if (canClose) {
+      window.addEventListener('keydown', closeHandler);
+    }
+    return () => {
+      if (canClose) {
+        window.removeEventListener('keydown', closeHandler);
+      }
+    };
+  });
+
   return (
     <div
       className={plt.styles(styles.content, {
         [styles.contentWithTitle]: !!p.caption || !!p.onClose,
         [styles.contentPadding]: !p.innerPadding,
-        [styles.contentPaddingSpace]: p.innerPadding == "space",
+        [styles.contentPaddingSpace]: p.innerPadding == 'space',
       })}
     >
-      <div className={plt.styles(styles.contentInsideWrapper)}>
-        {p.children}
-      </div>
+      <div className={plt.styles(styles.contentInsideWrapper)}>{p.children}</div>
     </div>
   );
 }
@@ -130,6 +139,9 @@ function WindowTitle(p: TWindowProps & { isFill: boolean }) {
   return (
     <div className={StrUtils.classes(styles.titleWrapper)}>
       <div
+        onKeyDown={() => {
+          alert('ddD');
+        }}
         className={StrUtils.classes(styles.title, {
           [styles.frameBck]: !p.isFill,
         })}

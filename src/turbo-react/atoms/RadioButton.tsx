@@ -1,25 +1,21 @@
-import { useId } from "react";
+import { useId, useRef } from 'react';
 
-import styles from "./RadioButton.module.css";
-import usePalette from "../hooks/usePalette";
-import { TRadioButtonProps } from "./types";
+import styles from './RadioButton.module.css';
+import usePalette from '../hooks/usePalette';
+import { TRadioButtonProps } from './types';
+import useAutoFocus from '../hooks/useAutoFocus';
 
 export function TRadioButton(p: TRadioButtonProps) {
   const id = useId();
   const plt = usePalette(styles, p);
+  const ref = useRef<HTMLInputElement>(null);
+  useAutoFocus(p, ref);
+
   return (
     <>
-      <input
-        className={styles.rb}
-        id={id}
-        type="radio"
-        disabled={p.disabled}
-      ></input>
+      <input ref={ref} className={styles.rb} id={id} type="radio" disabled={p.disabled}></input>
       {p.caption && (
-        <label
-          className={plt.styles(styles.rb, { [styles.disabled]: !!p.disabled })}
-          htmlFor={id}
-        >
+        <label className={plt.styles(styles.rb, { [styles.disabled]: !!p.disabled })} htmlFor={id}>
           {p.caption}
         </label>
       )}
