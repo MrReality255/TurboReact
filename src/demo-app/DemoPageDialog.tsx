@@ -15,6 +15,7 @@ import { TNameValue } from '../turbo-react/atoms/NameValue';
 import { InputUtils } from '../turbo-react/utils/input';
 import { THorizLayout } from '../turbo-react/layout/HorizLayout';
 import { TRowLayout } from '../turbo-react/layout/RowLayout';
+import { useFormContext } from '../turbo-react/hooks/useFormContext';
 
 export function DemoPageDialogs() {
   const [data, setData] = useState<string | null>(null);
@@ -131,8 +132,48 @@ export function DemoPageDialogs() {
         </TWindow>
         {data && <TWindow caption="Dialog result">{data}</TWindow>}
         <DemoForm></DemoForm>
+        <DynFormPanel></DynFormPanel>
       </TRowLayout>
     </DemoAppLayout>
+  );
+}
+
+function DynFormHeader() {
+  return (
+    <div>
+      <TFormField id="rows" type="textbox" caption="Row count" textBoxProps={{ mode: 'number' }}></TFormField>
+    </div>
+  );
+}
+
+function DynFormContent() {
+  const ctx = useFormContext();
+  const rowCount = parseInt(ctx?.get('rows') || '0');
+
+  const tmpArray = [...new Array(rowCount)];
+  return (
+    <>
+      {tmpArray.map((item, idx) => (
+        <TFormField id={'row' + idx} caption={'Row #' + (idx + 1)} type="textbox"></TFormField>
+      ))}
+    </>
+  );
+}
+
+function DynFormFooter() {
+  const ctx = useFormContext();
+  return <>{JSON.stringify(ctx?.getContent())}</>;
+}
+
+function DynFormPanel() {
+  return (
+    <TWindow caption="Dyn form panel" palette="green">
+      <TForm>
+        <DynFormHeader></DynFormHeader>
+        <DynFormContent></DynFormContent>
+        <DynFormFooter></DynFormFooter>
+      </TForm>
+    </TWindow>
   );
 }
 
