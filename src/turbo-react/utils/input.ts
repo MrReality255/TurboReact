@@ -15,7 +15,7 @@ export const InputUtils = {
       isDisabled: false,
       isLoading: false,
       isValid: true,
-      submitRef: { callback: undefined, id: undefined },
+      submitRef: { ref: undefined, id: undefined },
     };
   },
   newFormContext: function (
@@ -25,12 +25,12 @@ export const InputUtils = {
     return {
       ...dataContext,
       updateDataContext,
-      setDefaultSubmit: function (value: { id: string; cb: () => void } | null) {
+      setDefaultSubmit: function (value: { id: string; ref: HTMLButtonElement } | null) {
         updateDataContext(function (prev: IDataContext) {
           return {
             ...prev,
             submitRef: {
-              callback: value ? value.cb : undefined,
+              ref: value ? value.ref : undefined,
               id: value ? value.id : undefined,
             },
           };
@@ -158,7 +158,7 @@ function getInitialState(input: TDataContent | undefined): IDataContext | undefi
     isDisabled: false,
     isValid: false,
     data: getInitContextValues(input),
-    submitRef: { callback: undefined, id: undefined },
+    submitRef: { ref: undefined, id: undefined },
   };
 }
 

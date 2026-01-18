@@ -27,46 +27,34 @@ export function DemoPageDialogs() {
         height: '75%',
         width: '55%',
       },
-      footer: (
-        <THorizLayout alignMode="right">
-          <TFormButton
-            w0
-            default
-            disabled={!ctx.frm.isValid}
-            onClick={() => {
-              ctx.frm.validate();
-              const isLoading = ctx.frm.checked('chkLoading');
-              const isErr = ctx.frm.checked('chkFails');
+      buttons: {
+        cancel: true,
+        onSubmit: () => {
+          const isLoading = ctx.frm.checked('chkLoading');
+          const isErr = ctx.frm.checked('chkFails');
 
-              if (isLoading) {
-                ctx.submit(
-                  new Promise((resolve) => {
-                    setTimeout(() => {
-                      resolve({
-                        result: !isErr ? 'ok' : undefined,
-                        data: 'response-data',
-                        error: isErr ? 'Request failed' : undefined,
-                      });
-                    }, 5000);
-                  }),
-                );
-                return;
-              }
+          if (isLoading) {
+            ctx.submit(
+              new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve({
+                    result: !isErr ? 'ok' : undefined,
+                    data: 'response-data',
+                    error: isErr ? 'Request failed' : undefined,
+                  });
+                }, 5000);
+              }),
+            );
+            return;
+          }
 
-              ctx.submit({
-                result: !isErr ? 'ok' : undefined,
-                data: 'response-data',
-                error: isErr ? 'Request failed' : undefined,
-              });
-            }}
-          >
-            OK
-          </TFormButton>
-          <TFormButton w0 cancel>
-            Cancel
-          </TFormButton>
-        </THorizLayout>
-      ),
+          ctx.submit({
+            result: !isErr ? 'ok' : undefined,
+            data: 'response-data',
+            error: isErr ? 'Request failed' : undefined,
+          });
+        },
+      },
       content: (
         <THorizLayout>
           <TRowLayout>
@@ -121,7 +109,16 @@ export function DemoPageDialogs() {
                 },
                 { ctxContent: 'a value passed to the show function' },
               );
-              setData(JSON.stringify(result, null, 2));
+              setData(
+                JSON.stringify(
+                  {
+                    data: result?.data,
+                    content: result ? InputUtils.getDataContent(result?.frm) : undefined,
+                  },
+                  null,
+                  2,
+                ),
+              );
               if (result) {
                 console.log(JSON.stringify(InputUtils.getDataContent(result.frm), null, 2));
               }

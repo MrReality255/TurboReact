@@ -11,7 +11,7 @@ export function TForm(p: TFormProps) {
     isLoading: false,
     isValidated: p.isValidated ?? false,
     isValid: true,
-    submitRef: { callback: undefined, id: undefined },
+    submitRef: { ref: undefined, id: undefined },
   });
 
   const newFrmContext = p.context ?? InputUtils.newFormContext(dataContext, updateDataContext);

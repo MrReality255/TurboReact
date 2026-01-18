@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef } from 'react';
+import { useId, useRef } from 'react';
 
 import usePalette from '../hooks/usePalette';
 import styles from './TextBox.module.css';
@@ -41,8 +41,8 @@ export function TTextBox(p: TTextBoxProps) {
           onClick={p.onClick ? () => p.onClick?.() : undefined}
           onFocus={() => p.onFocus?.()}
           onKeyDown={(event) => {
-            if (event.key == 'Enter' && ctx?.submitRef?.callback) {
-              ctx?.submitRef.callback();
+            if (event.key == 'Enter' && ctx?.submitRef?.ref) {
+              ctx.submitRef.ref.click();
             }
           }}
         ></input>

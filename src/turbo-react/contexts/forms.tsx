@@ -11,7 +11,7 @@ export type TFormContext = IDataContext & {
   update: (id: string, newValue: TFormValueType, isValid: boolean) => void;
   validate: () => boolean;
   initializeField: (id: string, initValue: TFormValueType, isValid: boolean) => void;
-  setDefaultSubmit: (value: { id: string; cb: () => void } | null) => void;
+  setDefaultSubmit: (value: { id: string; ref: HTMLButtonElement } | null) => void;
   setDisabled: (disabled: boolean) => void;
   setError: (error: string | undefined) => void;
   setLoading: (loading: boolean) => void;

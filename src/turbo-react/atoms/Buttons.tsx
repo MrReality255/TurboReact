@@ -3,31 +3,30 @@ import styles from './Buttons.module.css';
 import usePalette from '../hooks/usePalette';
 import { TButtonProps } from './types';
 import { useFormContext } from '../hooks/useFormContext';
-import { useEffect, useId } from 'react';
+import { useEffect, useId, useRef } from 'react';
 
 export function TButton(p: TButtonProps) {
   const ctx = useFormContext();
   const plt = usePalette(styles, p);
   const id = useId();
+  const ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (ctx && !ctx.submitRef.callback && p.default && !p.disabled) {
-      console.log('setting default submit');
+    if (ctx && !ctx.submitRef.ref && p.default && !p.disabled && ref.current) {
       ctx.setDefaultSubmit({
         id,
-        cb: () => {
-          p?.onClick?.();
-        },
+        ref: ref.current,
       });
     }
 
-    if (ctx && ctx.submitRef?.id == id && (!p.default || p.disabled)) {
+    if (ctx && ctx.submitRef?.id == id && (!p.default || p.disabled || !ref)) {
       ctx.setDefaultSubmit(null);
     }
-  }, [p.default, p.disabled]);
+  }, [p.default, p.disabled, ref]);
 
   return (
     <button
+      ref={ref}
       onClick={p.onClick}
       disabled={p.disabled}
       className={plt.styles({

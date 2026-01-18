@@ -1,23 +1,19 @@
-import { TForm } from ".";
-import {
-  TClosingEffectProvider,
-  TGlass,
-  TErrorPanel,
-  TLoadingBar,
-  TViewport,
-  TWindow,
-} from "../atoms";
-import { CtxDialogControl } from "../contexts/dialog_control";
-import { CtxLayerManager } from "../contexts/layer";
-import { useNewFormContext, useLayer } from "../hooks";
-import usePalette from "../hooks/usePalette";
-import { TVertLayout } from "../layout";
+import { TFormContext } from '@/contexts/forms';
+import { TForm, TFormButton } from '.';
+import { TClosingEffectProvider, TGlass, TErrorPanel, TLoadingBar, TViewport, TWindow } from '../atoms';
+import { CtxDialogControl } from '../contexts/dialog_control';
+import { CtxLayerManager } from '../contexts/layer';
+import { useNewFormContext, useLayer } from '../hooks';
+import { useFormContext } from '../hooks/useFormContext';
+import usePalette from '../hooks/usePalette';
+import { THorizLayout, TVertLayout } from '../layout';
 import {
   TDialogWrapperProps,
   TDialogModalResult,
   TDialogSubmitFctResult,
   TDialogSubmitResult,
-} from "./types";
+  TDialogButtonsProps,
+} from './types';
 
 export function TDialog<T, C>(props: TDialogWrapperProps<T, C>) {
   const frm = useNewFormContext(props.initialState);
@@ -36,7 +32,7 @@ export function TDialog<T, C>(props: TDialogWrapperProps<T, C>) {
   const p = props.fct(ctx);
   closer.beforeClose = p.onBeforeClose ?? closer.beforeClose;
 
-  const plt = usePalette(undefined, { palette: p.palette ?? "dialog" });
+  const plt = usePalette(undefined, { palette: p.palette ?? 'dialog' });
 
   return (
     <>
@@ -45,8 +41,7 @@ export function TDialog<T, C>(props: TDialogWrapperProps<T, C>) {
         <CtxDialogControl.Provider
           value={{
             cancel: () => closeDialog(),
-            submit: (result, data) =>
-              submitDialog(result, data as T | undefined),
+            submit: (result, data) => submitDialog(result, data as T | undefined),
           }}
         >
           <TViewport
@@ -56,17 +51,11 @@ export function TDialog<T, C>(props: TDialogWrapperProps<T, C>) {
               ...props.style,
             }}
           >
-            <TWindow
-              palette={plt.palette}
-              fill
-              caption={p.caption}
-              onClose={() => closeDialog()}
-              {...p.windowProps}
-            >
+            <TWindow palette={plt.palette} fill caption={p.caption} onClose={() => closeDialog()} {...p.windowProps}>
               <div
                 style={{
-                  height: "100%",
-                  position: "relative",
+                  height: '100%',
+                  position: 'relative',
                 }}
               >
                 <TVertLayout
@@ -77,27 +66,33 @@ export function TDialog<T, C>(props: TDialogWrapperProps<T, C>) {
                     </>
                   }
                   footer={
-                    <>{p.footer && <TForm context={frm}>{p.footer}</TForm>}</>
+                    <>
+                      {p.footer ? (
+                        <TForm context={frm}>{p.footer}</TForm>
+                      ) : p.buttons ? (
+                        <TDialogButtons {...p.buttons} ctx={frm}></TDialogButtons>
+                      ) : undefined}
+                    </>
                   }
                 >
                   {frm.isLoading && (
                     <div
                       style={{
-                        display: "flex",
-                        position: "absolute",
+                        display: 'flex',
+                        position: 'absolute',
                         left: 0,
                         top: 0,
-                        height: "100%",
-                        width: "100%",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        height: '100%',
+                        width: '100%',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                       }}
                     >
                       <div
                         style={{
-                          display: "block",
-                          width: "100%",
-                          height: "1.5em",
+                          display: 'block',
+                          width: '100%',
+                          height: '1.5em',
                         }}
                       >
                         <TLoadingBar></TLoadingBar>
@@ -107,7 +102,7 @@ export function TDialog<T, C>(props: TDialogWrapperProps<T, C>) {
                   <div
                     style={{
                       opacity: frm.isLoading ? 0.1 : 1,
-                      height: "100%",
+                      height: '100%',
                     }}
                   >
                     <TForm context={frm} items={p.items}>
@@ -188,5 +183,36 @@ export function TDialogWrapper<T, C>(p: TDialogWrapperProps<T, C>) {
         );
       }}
     ></TClosingEffectProvider>
+  );
+}
+
+function TDialogButtons(p: TDialogButtonsProps & { ctx: TFormContext }) {
+  if (!p.ctx) {
+    return undefined;
+  }
+
+  return (
+    <TForm context={p.ctx}>
+      <THorizLayout alignMode="right">
+        {(p.submit || p.onSubmit) && (
+          <TFormButton
+            w0
+            default
+            disabled={!p.ctx.isValid}
+            onClick={() => {
+              p.ctx.validate();
+              p.onSubmit?.();
+            }}
+          >
+            {typeof p.submit === 'string' ? p.submit : 'OK'}
+          </TFormButton>
+        )}
+        {(p.cancel || p.onCancel) && (
+          <TFormButton w0 cancel onClick={p.onCancel}>
+            {typeof p.cancel === 'string' ? p.cancel : 'Cancel'}
+          </TFormButton>
+        )}
+      </THorizLayout>
+    </TForm>
   );
 }

@@ -45,10 +45,18 @@ export type TDialogWrapperProps<T, C> = {
   onSubmit: (result: TDialogModalResult, data: T | undefined, frm: TFormContext) => void;
 };
 
+export type TDialogButtonsProps = {
+  cancel?: string | boolean;
+  submit?: string | boolean;
+  onSubmit?: () => void;
+  onCancel?: () => void;
+};
+
 export type TDialogProps = TPaletteProps & {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   content: React.ReactNode;
+  buttons?: TDialogButtonsProps;
   items?: TFormFieldProps[];
 
   caption?: string;
@@ -83,7 +91,7 @@ export interface IDataContext {
   isValid: boolean | undefined;
   submitRef: {
     id?: string;
-    callback?: () => void;
+    ref?: HTMLButtonElement;
   };
 }
 
