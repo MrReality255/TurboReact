@@ -9,32 +9,83 @@ import usePalette from '../hooks/usePalette';
 import { TPaletteProvider } from '../contexts/palette';
 import { useValue } from '../hooks/useValue';
 import { MathUtils } from '../utils/math';
-import { TPalette } from '../utils/types';
+import { TInputProps, TPalette } from '../utils/types';
 import { TValueHook } from '../hooks/types';
 import { TClosingEffectProvider } from './ClosingEffect';
 import useAutoFocus from '../hooks/useAutoFocus';
 
 export function TDropDown(p: TDropDownProps) {
-  const plt = usePalette(undefined, p);
-  const tmpRef = useRef<HTMLDivElement>(null);
-  const tmpInputRef = useRef<HTMLInputElement>(null);
-  const [showOpen, setShowOpen] = useState(false);
-  const v = useValue(p);
-
-  const windowPalette = p.windowPalette ?? (plt.palette == 'dialog' ? 'blue' : plt.palette);
   const menu = p.items.map((item) => ({
     ...item,
     selected: item.id == p.value,
   }));
+  const dl = useDropDown(p);
+
+  return (
+    <TPaletteProvider {...dl.palette}>
+      <TGlass visible={dl.showOpen} backdrop></TGlass>
+      <TGlass
+        visible={dl.showOpen}
+        onClick={() => {
+          dl.setShowOpen(false);
+        }}
+      >
+        <TViewport
+          divRef={dl.viewportRef}
+          rect={{
+            x: dl.rect?.x,
+            y: dl.windowY,
+          }}
+          width={dl.rect?.width}
+          height={`${dl.height}em`}
+        >
+          <DropDownWindow
+            caption={p.caption}
+            v={dl.v}
+            menu={menu}
+            onClose={() => {
+              dl.setShowOpen(false);
+              dl.flagDisableFocus.disabled = true;
+              dl.inputRef.current?.focus();
+              dl.flagDisableFocus.disabled = false;
+            }}
+            windowPalette={dl.windowPalette}
+          ></DropDownWindow>
+        </TViewport>
+      </TGlass>
+      <TTextBox
+        {...p}
+        inputRef={dl.inputRef}
+        value={p.items.find((a) => a.id == dl.v.value)?.label || ''}
+        wrapperRef={dl.wrapperRef}
+        suffix="▼"
+        suffixStyle={{ opacity: p.items.length == 0 ? 0.3 : undefined }}
+        readOnly
+        inputStyle={{ cursor: p.items.length > 0 ? 'pointer' : undefined }}
+        onClick={() => dl.setShowOpen(p.items.length > 0)}
+        onFocus={() => handleFocus()}
+      ></TTextBox>
+    </TPaletteProvider>
+  );
+
+  function handleFocus() {
+    if (!dl.flagDisableFocus.disabled) {
+      dl.setShowOpen(p.items.length > 0);
+    }
+  }
+}
+
+function useDropDown(p: TDropDownProps) {
+  const v = useValue(p);
+
+  const plt = usePalette(undefined, p);
+  const tmpRef = useRef<HTMLDivElement>(null);
+  const tmpInputRef = useRef<HTMLInputElement>(null);
+  const [showOpen, setShowOpen] = useState(false);
+  const windowPalette = p.windowPalette ?? (plt.palette == 'dialog' ? 'blue' : plt.palette);
+
   const height = MathUtils.clamp(p.items.length * 2.3 + 2.7, 3, 21);
-
-  const [windowY, setWindowY] = useState(0);
-
-  const wrapperRef = p.wrapperRef ?? tmpRef;
-  const inputRef = p.inputRef ?? tmpInputRef;
-  const rect = wrapperRef.current && wrapperRef.current.getBoundingClientRect();
   const viewportRef = useRef<HTMLDivElement>(null);
-  const flagDisableFocus = useMemo(() => ({ disabled: false }), []);
 
   useEffect(() => {
     if (!viewportRef.current || !rect) {
@@ -47,60 +98,31 @@ export function TDropDown(p: TDropDownProps) {
     setWindowY(y - (diff > 0 ? diff : 0));
   }, [viewportRef.current, showOpen]);
 
+  const [windowY, setWindowY] = useState(0);
+
+  const wrapperRef = p.wrapperRef ?? tmpRef;
+  const inputRef = p.inputRef ?? tmpInputRef;
+  const rect = wrapperRef.current && wrapperRef.current.getBoundingClientRect();
+  const flagDisableFocus = useMemo(() => ({ disabled: false }), []);
+
   useAutoFocus(p, tmpInputRef);
 
-  return (
-    <TPaletteProvider {...plt}>
-      <TGlass visible={showOpen} backdrop></TGlass>
-      <TGlass
-        visible={showOpen}
-        onClick={() => {
-          setShowOpen(false);
-        }}
-      >
-        <TViewport
-          divRef={viewportRef}
-          rect={{
-            x: rect?.x,
-            y: windowY,
-          }}
-          width={rect?.width}
-          height={`${height}em`}
-        >
-          <DropDownWindow
-            caption={p.caption}
-            v={v}
-            menu={menu}
-            onClose={() => {
-              setShowOpen(false);
-              flagDisableFocus.disabled = true;
-              inputRef.current?.focus();
-              flagDisableFocus.disabled = false;
-            }}
-            windowPalette={windowPalette}
-          ></DropDownWindow>
-        </TViewport>
-      </TGlass>
-      <TTextBox
-        {...p}
-        inputRef={inputRef}
-        value={v.value}
-        wrapperRef={p.wrapperRef ?? tmpRef}
-        suffix="▼"
-        suffixStyle={{ opacity: p.items.length == 0 ? 0.3 : undefined }}
-        readOnly
-        inputStyle={{ cursor: p.items.length > 0 ? 'pointer' : undefined }}
-        onClick={() => setShowOpen(p.items.length > 0)}
-        onFocus={() => handleFocus()}
-      ></TTextBox>
-    </TPaletteProvider>
-  );
+  return {
+    flagDisableFocus,
+    height,
+    palette: plt,
+    rect,
+    v,
+    windowPalette,
+    windowY,
 
-  function handleFocus() {
-    if (!flagDisableFocus.disabled) {
-      setShowOpen(p.items.length > 0);
-    }
-  }
+    showOpen,
+    setShowOpen,
+
+    inputRef,
+    viewportRef,
+    wrapperRef,
+  };
 }
 
 function DropDownWindow(p: {
@@ -111,6 +133,9 @@ function DropDownWindow(p: {
   onClose: () => void;
 }) {
   const mySelRef = useRef<HTMLAnchorElement>(null);
+
+  const [currentValue, setCurrentValue] = useState(p.v.value);
+  const displayMenu = p.menu.map((item) => ({ ...item, selected: item.id == currentValue }));
 
   useEffect(() => {
     if (mySelRef.current) {
@@ -127,12 +152,12 @@ function DropDownWindow(p: {
           <TWindow style={props} caption={p.caption} onClose={() => onClose()} fill palette={p.windowPalette}>
             <TMenu
               selectedRef={mySelRef}
-              items={p.menu}
+              items={displayMenu}
               onClick={(option) => {
                 p.v.set(option);
                 onClose();
               }}
-              onSelect={(option) => p.v.set(option)}
+              onSelect={(option) => setCurrentValue(option)}
             ></TMenu>
           </TWindow>
         );
