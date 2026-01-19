@@ -24,7 +24,15 @@ export type TViewProps = TPaletteProps & {
   children?: React.ReactNode;
 };
 
-export type TPalette = 'blue' | 'green' | 'cyan' | 'grey' | 'dark' | 'red' | 'dialog' | 'mono';
+export type TPalette =
+  | "blue"
+  | "green"
+  | "cyan"
+  | "grey"
+  | "dark"
+  | "red"
+  | "dialog"
+  | "mono";
 
 export type TRect = {
   x?: number | string;

@@ -1,10 +1,17 @@
-import { CSSProperties, RefObject } from 'react';
-import { TControlProps, TInputProps, TPalette, TPaletteProps, TRect, TViewProps } from '../utils/types';
+import { CSSProperties, KeyboardEvent, RefObject } from "react";
+import {
+  TControlProps,
+  TInputProps,
+  TPalette,
+  TPaletteProps,
+  TRect,
+  TViewProps,
+} from "../utils/types";
 
-export type TAlignType = 'left' | 'center' | 'right';
-export type TButtonVariant = 'standard' | 'plain' | 'link' | 'text';
-export type TTextBoxMode = 'text' | 'password' | 'number' | 'email';
-export type TWindowInnerPadding = 'none' | 'space';
+export type TAlignType = "left" | "center" | "right";
+export type TButtonVariant = "standard" | "plain" | "link" | "text";
+export type TTextBoxMode = "text" | "password" | "number" | "email";
+export type TWindowInnerPadding = "none" | "space";
 
 export type TButtonProps = TControlProps & {
   children?: React.ReactNode;
@@ -23,9 +30,12 @@ export type TCheckBoxProps = TInputProps & {
   caption?: string;
 };
 
-export type TDropDownProps = Omit<TTextBoxProps, 'mode'> & {
+export type TDropDownMode = "select" | "combo" | "search";
+
+export type TDropDownProps = Omit<TTextBoxProps, "mode"> & {
   items: TMenuItem[];
   inputRef?: RefObject<HTMLInputElement>;
+  mode?: TDropDownMode;
   wrapperRef?: RefObject<HTMLDivElement>;
   windowPalette?: TPalette;
 };
@@ -95,7 +105,7 @@ export type TNotificationProps = TViewProps & {
   timeout?: number;
 };
 
-export type TClosingEffect = 'resize' | 'opacity';
+export type TClosingEffect = "resize" | "opacity";
 
 export type TClosingEffectProps = {
   animationDuration?: number;
@@ -117,7 +127,10 @@ export type TRadioButtonProps = TInputProps & {
   caption?: string;
 };
 
-export type TTableValueProvider<T> = string | React.ReactNode | ((item: T) => string | React.ReactNode);
+export type TTableValueProvider<T> =
+  | string
+  | React.ReactNode
+  | ((item: T) => string | React.ReactNode);
 
 export type TTableColumnProps<T extends object> = {
   id: string;
@@ -125,7 +138,7 @@ export type TTableColumnProps<T extends object> = {
   caption?: string | React.ReactNode;
   data?: TTableValueProvider<T>;
   icon?: string;
-  sortIcon?: 'up' | 'down';
+  sortIcon?: "up" | "down";
   width?: string | number;
 };
 
@@ -144,7 +157,7 @@ export type TTextBoxProps = TInputProps & {
   prefixColor?: string;
   prefixStyle?: CSSProperties;
   readOnly?: boolean;
-  suffix?: string;
+  suffix?: React.ReactNode;
   suffixColor?: string;
   suffixStyle?: CSSProperties;
   inputStyle?: CSSProperties;
@@ -152,8 +165,10 @@ export type TTextBoxProps = TInputProps & {
   wrapperRef?: RefObject<HTMLDivElement | null>;
   inputRef?: RefObject<HTMLInputElement | null>;
 
+  onBlur?: () => void;
   onFocus?: () => void;
   onClick?: () => void;
+  onKeyDown?: (key: string, event: KeyboardEvent<HTMLInputElement>) => void;
 };
 
 export type TViewportProps = {
@@ -182,7 +197,7 @@ export type TWindowProps = TPaletteProps & {
 
   fill?: boolean;
   noShadow?: boolean;
-  border?: 'std' | 'single' | 'none';
+  border?: "std" | "single" | "none";
   outerPadding?: boolean;
   innerPadding?: TWindowInnerPadding;
   caption?: string;
