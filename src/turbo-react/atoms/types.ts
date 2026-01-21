@@ -1,4 +1,4 @@
-import { CSSProperties, KeyboardEvent, RefObject } from "react";
+import { CSSProperties, RefObject } from "react";
 import {
   TControlProps,
   TInputProps,
@@ -7,6 +7,10 @@ import {
   TRect,
   TViewProps,
 } from "../utils/types";
+
+export type TCompactKeyEvent = {
+  stopPropagation: () => void;
+};
 
 export type TAlignType = "left" | "center" | "right";
 export type TButtonVariant = "standard" | "plain" | "link" | "text";
@@ -168,7 +172,7 @@ export type TTextBoxProps = TInputProps & {
   onBlur?: () => void;
   onFocus?: () => void;
   onClick?: () => void;
-  onKeyDown?: (key: string, event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: (key: string, event: TCompactKeyEvent) => void;
 };
 
 export type TViewportProps = {
@@ -206,4 +210,5 @@ export type TWindowProps = TPaletteProps & {
 
   onClick?: () => void;
   onClose?: () => void;
+  onHotKey?: (hotkey: string, event: KeyboardEvent) => void;
 };

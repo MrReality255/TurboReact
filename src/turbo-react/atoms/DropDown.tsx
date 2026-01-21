@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { TTextBox } from "./TextBox";
-import { TDropDownProps, TMenuItem } from "./types";
+import { TCompactKeyEvent, TDropDownProps, TMenuItem } from "./types";
 import { TGlass } from "./Glass";
 import { TViewport } from "./Viewport";
 import { TWindow } from "./Window";
@@ -107,7 +107,7 @@ export function TDropDown(p: TDropDownProps) {
     }
   }
 
-  function handleKeyDown(k: string, e: KeyboardEvent<HTMLInputElement>): void {
+  function handleKeyDown(k: string, e: TCompactKeyEvent): void {
     if (k == "ArrowUp" || k == "ArrowDown" || k == "F3") {
       openPopup();
       e.stopPropagation();
@@ -233,6 +233,7 @@ function DropDownWindow(p: {
       onRender={(onClose, props) => {
         return (
           <TWindow
+            onHotKey={(k, e) => handleHotkey(k, e, onClose)}
             style={props}
             caption={p.caption}
             onClose={() => onClose()}
@@ -253,4 +254,18 @@ function DropDownWindow(p: {
       }}
     ></TClosingEffectProvider>
   );
+
+  function handleHotkey(
+    k: string,
+    e: TCompactKeyEvent,
+    onClose: () => void
+  ): void {
+    if (k >= "1" && k <= "9") {
+      const idx = parseInt(k) - 1;
+      if (idx < p.menu.length) {
+        p.v.set(p.menu[idx].id);
+        onClose();
+      }
+    }
+  }
 }
