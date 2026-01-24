@@ -1,11 +1,11 @@
-import { useId, useRef } from "react";
+import { useId, useRef } from 'react';
 
-import usePalette from "../hooks/usePalette";
-import styles from "./TextBox.module.css";
-import { TTextBoxProps } from "./types";
-import { useValue } from "../hooks/useValue";
-import useAutoFocus from "../hooks/useAutoFocus";
-import { useFormContext } from "../hooks/useFormContext";
+import usePalette from '../hooks/usePalette';
+import styles from './TextBox.module.css';
+import { TTextBoxProps } from './types';
+import { useValue } from '../hooks/useValue';
+import useAutoFocus from '../hooks/useAutoFocus';
+import { useFormContext } from '../hooks/useFormContext';
 
 export function TTextBox(p: TTextBoxProps) {
   const plt = usePalette(styles, p);
@@ -18,7 +18,7 @@ export function TTextBox(p: TTextBoxProps) {
   useAutoFocus(p, ref);
 
   return (
-    <>
+    <div>
       {p.caption && <label htmlFor={id}>{p.caption}</label>}
       <div ref={p.wrapperRef} className={plt.styles(styles.tb)}>
         <div
@@ -28,7 +28,8 @@ export function TTextBox(p: TTextBoxProps) {
           {p.prefix}
         </div>
         <input
-          type={p.mode || "text"}
+          autoComplete={p.autoComplete ? 'on' : 'off'}
+          type={p.mode || 'text'}
           ref={inputRef}
           readOnly={p.readOnly}
           id={id}
@@ -43,7 +44,7 @@ export function TTextBox(p: TTextBoxProps) {
           onFocus={() => p.onFocus?.()}
           onKeyDown={(event) => {
             p.onKeyDown?.(event.key, event);
-            if (event.key == "Enter" && ctx?.submitRef?.ref) {
+            if (event.key == 'Enter' && ctx?.submitRef?.ref) {
               ctx.submitRef.ref.click();
             }
           }}
@@ -56,6 +57,6 @@ export function TTextBox(p: TTextBoxProps) {
           {p.suffix}
         </div>
       </div>
-    </>
+    </div>
   );
 }

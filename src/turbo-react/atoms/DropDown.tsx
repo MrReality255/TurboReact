@@ -1,33 +1,32 @@
-import {
-  createContext,
-  KeyboardEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { TTextBox } from "./TextBox";
-import { TCompactKeyEvent, TDropDownProps, TMenuItem } from "./types";
-import { TGlass } from "./Glass";
-import { TViewport } from "./Viewport";
-import { TWindow } from "./Window";
-import { TMenu } from "./Menu";
-import usePalette from "../hooks/usePalette";
-import { TPaletteProvider } from "../contexts/palette";
-import { useValue } from "../hooks/useValue";
-import { MathUtils } from "../utils/math";
-import { TInputProps, TPalette } from "../utils/types";
-import { TValueHook } from "../hooks/types";
-import { TClosingEffectProvider } from "./ClosingEffect";
-import useAutoFocus from "../hooks/useAutoFocus";
-import { TButton } from ".";
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { TTextBox } from './TextBox';
+import { TCompactKeyEvent, TDropDownProps, TMenuItem } from './types';
+import { TGlass } from './Glass';
+import { TViewport } from './Viewport';
+import { TWindow } from './Window';
+import { TMenu } from './Menu';
+import usePalette from '../hooks/usePalette';
+import { TPaletteProvider } from '../contexts/palette';
+import { useValue } from '../hooks/useValue';
+import { MathUtils } from '../utils/math';
+import { TPalette } from '../utils/types';
+import { TValueHook } from '../hooks/types';
+import { TClosingEffectProvider } from './ClosingEffect';
+import useAutoFocus from '../hooks/useAutoFocus';
+import { TButton } from '.';
+
+type TDropDownLayoutProps = TDropDownProps & {
+  dl: ReturnType<typeof useDropDown>;
+  popup: React.ReactNode;
+  children?: React.ReactNode;
+};
 
 export function TDropDown(p: TDropDownProps) {
   const menu = p.items
     .map((item) => ({
       ...item,
       selected: item.id == p.value,
-      id: p.mode == "combo" ? item.label || "" : item.id,
+      id: p.mode == 'combo' ? item.label || '' : item.id,
     }))
     .filter((item) => item.id);
   const dl = useDropDown(p);
@@ -38,6 +37,7 @@ export function TDropDown(p: TDropDownProps) {
       dl={dl}
       popup={
         <DropDownWindow
+          autoFocus={true}
           caption={p.caption}
           v={dl.v}
           menu={menu}
@@ -58,17 +58,13 @@ export function TDropDown(p: TDropDownProps) {
         value={getValue()}
         wrapperRef={dl.wrapperRef}
         suffix={
-          <TButton
-            variant="link"
-            disabled={p.disabled}
-            onClick={() => openPopup()}
-          >
+          <TButton variant="link" disabled={p.disabled} onClick={() => openPopup()}>
             ▼
           </TButton>
         }
         suffixStyle={{ opacity: p.items.length == 0 ? 0.3 : undefined }}
-        readOnly={dl.mode == "select"}
-        inputStyle={{ cursor: p.items.length > 0 ? "pointer" : undefined }}
+        readOnly={dl.mode == 'select'}
+        inputStyle={{ cursor: p.items.length > 0 ? 'pointer' : undefined }}
         onClick={() => handleClick()}
         onFocus={() => handleFocus()}
         onChange={(newValue) => handleChange(newValue)}
@@ -79,36 +75,38 @@ export function TDropDown(p: TDropDownProps) {
 
   function getValue() {
     switch (dl.mode) {
-      case "select":
-        return p.items.find((a) => a.id == dl.v.value)?.label || "";
-      case "combo":
+      case 'select':
+        return p.items.find((a) => a.id == dl.v.value)?.label || '';
+      case 'combo':
         return p.value;
     }
   }
 
   function handleClick() {
-    if (dl.mode == "select") {
+    if (dl.mode == 'select') {
       openPopup();
     }
-    if (dl.mode == "combo" && !p.value) {
+    if (dl.mode == 'combo' && !p.value) {
       openPopup();
     }
   }
 
   function handleChange(newValue: string) {
-    if (dl.mode == "combo") {
-      dl.v.set(newValue);
+    switch (dl.mode) {
+      case 'combo':
+        dl.v.set(newValue);
+        break;
     }
   }
 
   function handleFocus() {
-    if (!dl.flagDisableFocus.disabled && dl.mode == "select") {
+    if (!dl.flagDisableFocus.disabled && dl.mode == 'select') {
       dl.setShowOpen(p.items.length > 0);
     }
   }
 
   function handleKeyDown(k: string, e: TCompactKeyEvent): void {
-    if (k == "ArrowUp" || k == "ArrowDown" || k == "F3") {
+    if (k == 'ArrowUp' || k == 'ArrowDown' || k == 'F3') {
       openPopup();
       e.stopPropagation();
     }
@@ -126,8 +124,7 @@ function useDropDown(p: TDropDownProps) {
   const tmpRef = useRef<HTMLDivElement>(null);
   const tmpInputRef = useRef<HTMLInputElement>(null);
   const [showOpen, setShowOpen] = useState(false);
-  const windowPalette =
-    p.windowPalette ?? (plt.palette == "dialog" ? "blue" : plt.palette);
+  const windowPalette = p.windowPalette ?? (plt.palette == 'dialog' ? 'blue' : plt.palette);
 
   const height = MathUtils.clamp(p.items.length * 2.3 + 2.7, 3, 21);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -155,7 +152,7 @@ function useDropDown(p: TDropDownProps) {
   return {
     flagDisableFocus,
     height,
-    mode: p.mode || "select",
+    mode: p.mode || 'select',
     palette: plt,
     rect,
     v,
@@ -171,17 +168,12 @@ function useDropDown(p: TDropDownProps) {
   };
 }
 
-function TDropDownLayout(
-  p: TDropDownProps & {
-    dl: ReturnType<typeof useDropDown>;
-    popup: React.ReactNode;
-    children?: React.ReactNode;
-  }
-) {
+function TDropDownLayout(p: TDropDownLayoutProps) {
   const dl = p.dl;
   return (
     <TPaletteProvider {...dl.palette}>
       <TGlass visible={dl.showOpen} backdrop></TGlass>
+
       <TGlass
         visible={dl.showOpen}
         onClick={() => {
@@ -210,6 +202,7 @@ function DropDownWindow(p: {
   windowPalette?: TPalette;
   v: TValueHook;
   menu: TMenuItem[];
+  autoFocus: boolean;
   onClose: () => void;
 }) {
   const mySelRef = useRef<HTMLAnchorElement>(null);
@@ -221,10 +214,10 @@ function DropDownWindow(p: {
   }));
 
   useEffect(() => {
-    if (mySelRef.current) {
+    if (mySelRef.current && p.autoFocus) {
       mySelRef.current.focus();
     }
-  }, [mySelRef.current]);
+  }, [mySelRef.current, p.autoFocus]);
 
   return (
     <TClosingEffectProvider
@@ -255,12 +248,8 @@ function DropDownWindow(p: {
     ></TClosingEffectProvider>
   );
 
-  function handleHotkey(
-    k: string,
-    e: TCompactKeyEvent,
-    onClose: () => void
-  ): void {
-    if (k >= "1" && k <= "9") {
+  function handleHotkey(k: string, _e: TCompactKeyEvent, onClose: () => void): void {
+    if (k >= '1' && k <= '9') {
       const idx = parseInt(k) - 1;
       if (idx < p.menu.length) {
         p.v.set(p.menu[idx].id);
