@@ -3,6 +3,7 @@ import { TWindow } from '../turbo-react/atoms/Window';
 import { TMenu } from '../turbo-react/atoms/Menu';
 import { useNavigate } from 'react-router-dom';
 import { useMobile } from '../turbo-react/hooks/useMobile';
+import { useWidth } from '../turbo-react/hooks/useWidth';
 import { THorizLayout } from '../turbo-react/layout/HorizLayout';
 import { TButton } from '../turbo-react/atoms/Buttons';
 import { useLayer } from '../turbo-react/hooks/useLayer';
@@ -34,6 +35,7 @@ const menuItems = [
 
 export function DemoAppLayout(p: TDemoAppProps) {
   const isMobile = useMobile();
+  const isLg = useWidth('lg');
   const n = useNavigate();
 
   return (
@@ -69,7 +71,7 @@ export function DemoAppLayout(p: TDemoAppProps) {
               </span>
             }
           >
-            mobile mode: {isMobile ? 'y' : 'n'}
+            mobile mode: {isMobile ? 'y' : 'n'} lg mode: {isLg ? 'y' : 'n'}
           </THorizLayout>
         </TWindow>
       }
