@@ -17,8 +17,8 @@ input.tb:disabled {
   color: #999;
 }
 
-input.tb[type="number"]::-webkit-inner-spin-button,
-input.tb[type="number"]::-webkit-outer-spin-button {
+input.tb[type='number']::-webkit-inner-spin-button,
+input.tb[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -45,6 +45,13 @@ div.tb > div.prefix.empty {
 }
 
 /* PALETTE */
+
+div.tbWrapper:focus-within > label {
+  color: #fff;
+}
+div.tbWrapper.green:focus-within > label {
+  color: #ff0;
+}
 
 div.tb.dialog {
   background-color: #006;

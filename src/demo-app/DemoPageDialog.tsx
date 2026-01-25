@@ -16,6 +16,8 @@ import { InputUtils } from '../turbo-react/utils/input';
 import { THorizLayout } from '../turbo-react/layout/HorizLayout';
 import { TRowLayout } from '../turbo-react/layout/RowLayout';
 import { useFormContext } from '../turbo-react/hooks/useFormContext';
+import { MathUtils } from '../turbo-react';
+import { PalettePanel } from './components/PalettePanel';
 
 export function DemoPageDialogs() {
   const [data, setData] = useState<string | null>(null);
@@ -129,7 +131,9 @@ export function DemoPageDialogs() {
         </TWindow>
         {data && <TWindow caption="Dialog result">{data}</TWindow>}
         <DemoForm></DemoForm>
-        <DynFormPanel></DynFormPanel>
+        <PalettePanel lineHeight={'10em'}>
+          <DynFormPanel></DynFormPanel>
+        </PalettePanel>
       </TRowLayout>
     </DemoAppLayout>
   );
@@ -145,7 +149,7 @@ function DynFormHeader() {
 
 function DynFormContent() {
   const ctx = useFormContext();
-  const rowCount = parseInt(ctx?.get('rows') || '0');
+  const rowCount = MathUtils.clamp(parseInt(ctx?.get('rows') || '0'), 0, 20);
 
   const tmpArray = [...new Array(rowCount)];
   return (
@@ -164,13 +168,11 @@ function DynFormFooter() {
 
 function DynFormPanel() {
   return (
-    <TWindow caption="Dyn form panel" palette="green">
-      <TForm>
-        <DynFormHeader></DynFormHeader>
-        <DynFormContent></DynFormContent>
-        <DynFormFooter></DynFormFooter>
-      </TForm>
-    </TWindow>
+    <TForm>
+      <DynFormHeader></DynFormHeader>
+      <DynFormContent></DynFormContent>
+      <DynFormFooter></DynFormFooter>
+    </TForm>
   );
 }
 

@@ -31,7 +31,7 @@ div.cursor {
 }
 
 div.cursor::before {
-  content: "▲";
+  content: '▲';
 }
 
 /* PALETTE-SPECIFIC */
@@ -73,5 +73,9 @@ div.pb.mono div.cursor {
 }
 
 div.pb.mono div.value {
+  color: #fff;
+}
+
+div.pb:focus-within > label {
   color: #fff;
 }

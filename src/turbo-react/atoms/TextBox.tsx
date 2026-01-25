@@ -18,7 +18,7 @@ export function TTextBox(p: TTextBoxProps) {
   useAutoFocus(p, ref);
 
   return (
-    <div>
+    <div className={plt.styles('tbWrapper')}>
       {p.caption && <label htmlFor={id}>{p.caption}</label>}
       <div ref={p.wrapperRef} className={plt.styles(styles.tb)}>
         <div
