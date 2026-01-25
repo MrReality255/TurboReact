@@ -1,6 +1,6 @@
 {
   "name": "@mrreality255/turbo-react",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Martin Mojzis",
   "type": "module",
   "main": "./dist/index.umd.js",
