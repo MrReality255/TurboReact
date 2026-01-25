@@ -4,6 +4,10 @@ import { IDataContext } from "..";
 
 const defaultInitialState = {
   data: {},
+  submitRef: {
+    id: undefined,
+    ref: undefined,
+  },
   isValidated: false,
   isDisabled: false,
   isValid: true,
@@ -12,7 +16,7 @@ const defaultInitialState = {
 
 export function useDataContext(initialState: IDataContext | undefined) {
   const [ctx, setCtx] = useState<IDataContext>(
-    initialState ?? defaultInitialState,
+    initialState ?? defaultInitialState
   );
 
   return { ctx, setCtx };

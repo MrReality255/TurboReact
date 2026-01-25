@@ -1,19 +1,24 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from "react";
 
-import { TTextBox } from '../atoms/TextBox';
-import { TFormFieldProps, TFormFieldType, TFormValue, TFormValueType } from './types';
-import { CtxFormPanel, TFormContext } from '../contexts/forms';
-import { TDropDown } from '../atoms/DropDown';
-import styles from './FormField.module.css';
-import usePalette from '../hooks/usePalette';
-import { TPaletteProvider } from '../contexts/palette';
-import { TForm } from './Form';
-import { InputUtils } from '../utils/input';
-import { TFormTemplate } from './FormTemplate';
-import { TCheckbox } from '../atoms/Checkbox';
-import { TProgressBar } from '../atoms/ProgressBar';
+import { TTextBox } from "../atoms/TextBox";
+import {
+  TFormFieldProps,
+  TFormFieldType,
+  TFormValue,
+  TFormValueType,
+} from "./types";
+import { CtxFormPanel, TFormContext } from "../contexts/forms";
+import { TDropDown } from "../atoms/DropDown";
+import styles from "./FormField.module.css";
+import usePalette from "../hooks/usePalette";
+import { TPaletteProvider } from "../contexts/palette";
+import { TForm } from "./Form";
+import { InputUtils } from "../utils/input";
+import { TFormTemplate } from "./FormTemplate";
+import { TCheckbox } from "../atoms/Checkbox";
+import { TProgressBar } from "../atoms/ProgressBar";
 
-const alwaysValid = new Set<TFormFieldType>(['checkbox', 'progress']);
+const alwaysValid = new Set<TFormFieldType>(["checkbox", "progress"]);
 
 export function TFormField(p: TFormFieldProps) {
   const ctx = useContext(CtxFormPanel);
@@ -25,14 +30,18 @@ export function TFormField(p: TFormFieldProps) {
 
   useEffect(() => {
     const initValue = createInitValue(p);
-    ctx?.initializeField(p.id, initValue, validateInitValue(p) ?? validate(p, initValue));
+    ctx?.initializeField(
+      p.id,
+      initValue,
+      validateInitValue(p) ?? validate(p, initValue)
+    );
   }, []);
 
   const defaultWrapperFct = (
     src: React.ReactNode,
     _value: TFormValue | undefined,
     _props: TFormFieldProps,
-    _onAction?: (id: string, data: unknown) => void,
+    _onAction?: (id: string, data: unknown) => void
   ) => {
     return src;
   };
@@ -58,11 +67,13 @@ export function TFormField(p: TFormFieldProps) {
                 ? (id, customData) => {
                     p.onAction?.(id, customData);
                   }
-                : undefined,
+                : undefined
             )}
           </div>
         </div>
-        {ctx?.isValidated && !item?.isValid && <div className={plt.styles(styles.err)}>x</div>}
+        {ctx?.isValidated && !item?.isValid && (
+          <div className={plt.styles(styles.err)}>x</div>
+        )}
       </div>
     </TPaletteProvider>
   );
@@ -73,22 +84,29 @@ function FormFieldControl(
     isValid: boolean;
     item: TFormValue | undefined;
     ctx: TFormContext | null;
-  },
+  }
 ) {
-  const strValue = (typeof p.item?.value === 'object' ? undefined : p.item?.value) || '';
-  const ctxValue = typeof p.item?.value === 'object' && p.item.value.mode == 'datacontext' ? p.item.value : undefined;
+  const strValue =
+    (typeof p.item?.value === "object" ? undefined : p.item?.value) || "";
+  const ctxValue =
+    typeof p.item?.value === "object" && p.item.value.mode == "datacontext"
+      ? p.item.value
+      : undefined;
 
-  const templateItemsValue = typeof p.item?.value === 'object' && p.item.value.mode == 'list' ? p.item.value.items : [];
+  const templateItemsValue =
+    typeof p.item?.value === "object" && p.item.value.mode == "list"
+      ? p.item.value.items
+      : [];
 
   const formContext = useMemo(() => {
-    if (p.type != 'form') {
+    if (p.type != "form") {
       return undefined;
     }
     const ctx = ctxValue ?? InputUtils.newDataContext();
 
     return InputUtils.newFormContext(ctx, (fct) => {
       const newCtx = fct(ctx);
-      update({ ...newCtx, mode: 'datacontext' });
+      update({ ...newCtx, mode: "datacontext" });
     });
   }, [p.item?.value, p.type]);
 
@@ -110,7 +128,7 @@ function FormFieldControl(
   }, [p.isOptional, p.disabled, p.validator?.signature]);
 
   switch (p.type) {
-    case 'checkbox':
+    case "checkbox":
       return (
         <TCheckbox
           autoFocus={p.autoFocus}
@@ -122,7 +140,7 @@ function FormFieldControl(
           {...p.checkBoxProps}
         ></TCheckbox>
       );
-    case 'dropdown':
+    case "dropdown":
       return (
         <TDropDown
           autoFocus={p.autoFocus}
@@ -135,7 +153,7 @@ function FormFieldControl(
           {...p.dropDownProps}
         ></TDropDown>
       );
-    case 'form':
+    case "form":
       return (
         <TForm
           {...p.formProps}
@@ -151,7 +169,7 @@ function FormFieldControl(
           {p.children}
         </TForm>
       );
-    case 'progress':
+    case "progress":
       return (
         <TProgressBar
           {...p.progressBarProps}
@@ -162,17 +180,19 @@ function FormFieldControl(
           onChange={(value) => update(value, true)}
         ></TProgressBar>
       );
-    case 'template':
+    case "template":
       return p.templateProps ? (
         <TFormTemplate
           {...p.templateProps}
           items={templateItemsValue}
-          onUpdateItems={(newItems) => update({ mode: 'list', items: newItems })}
+          onUpdateItems={(newItems) =>
+            update({ mode: "list", items: newItems })
+          }
         ></TFormTemplate>
       ) : (
         <div></div>
       );
-    case 'textbox':
+    case "textbox":
       return (
         <TTextBox
           autoFocus={p.autoFocus}
@@ -199,40 +219,48 @@ function InvalidControl() {
 
 function createEmptyValue(p: TFormFieldProps): TFormValueType {
   switch (p.type) {
-    case 'form':
+    case "form":
       return {
+        submitRef: {
+          id: undefined,
+          ref: undefined,
+        },
         data: {},
-        mode: 'datacontext',
+        mode: "datacontext",
         isDisabled: false,
         isLoading: false,
         isValid: true,
         isValidated: false,
       };
-    case 'template':
-      return { mode: 'list', items: [] };
+    case "template":
+      return { mode: "list", items: [] };
     default:
-      return '';
+      return "";
   }
 }
 
 function createInitValue(p: TFormFieldProps): TFormValueType {
   switch (p.type) {
-    case 'form':
+    case "form":
       return {
-        mode: 'datacontext',
+        mode: "datacontext",
+        submitRef: {
+          id: undefined,
+          ref: undefined,
+        },
         data: {},
         isLoading: false,
         isValidated: false,
         isDisabled: p.disabled || false,
         isValid: true,
       };
-    case 'template':
+    case "template":
       return {
-        mode: 'list',
+        mode: "list",
         items: [],
       };
     default:
-      return '';
+      return "";
   }
 }
 
@@ -244,7 +272,7 @@ function validate(p: TFormFieldProps, value: TFormValueType | undefined) {
     return !!p.isOptional;
   }
 
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     // checkbox and progress are always valid
     if (alwaysValid.has(p.type)) {
       return true;
@@ -261,9 +289,9 @@ function validate(p: TFormFieldProps, value: TFormValueType | undefined) {
   }
 
   switch (value.mode) {
-    case 'datacontext':
+    case "datacontext":
       return value.isValid ?? false;
-    case 'list':
+    case "list":
       return value.items.length > 0 && !value.items.find((x) => !x.isValid);
   }
 
@@ -271,7 +299,7 @@ function validate(p: TFormFieldProps, value: TFormValueType | undefined) {
 }
 
 function validateInitValue(p: TFormFieldProps): boolean | undefined {
-  if (p.type === 'progress') {
+  if (p.type === "progress") {
     return true;
   }
   return undefined;

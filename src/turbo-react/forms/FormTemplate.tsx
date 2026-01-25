@@ -31,7 +31,7 @@ export function TFormTemplate(props: TFormTemplateProps) {
                 context={InputUtils.newFormContext(item, (fct) => {
                   const newResult = fct(item);
                   const newItems = props.items.map((item, idx2) =>
-                    idx2 == idx ? newResult : item,
+                    idx2 == idx ? newResult : item
                   );
                   props.onUpdateItems?.(newItems);
                 })}
@@ -44,6 +44,10 @@ export function TFormTemplate(props: TFormTemplateProps) {
           props.onUpdateItems?.([
             ...props.items,
             {
+              submitRef: ctx?.submitRef || {
+                id: undefined,
+                ref: undefined,
+              },
               data: newData,
               isValidated: false,
               isLoading: ctx?.isLoading || false,
@@ -51,7 +55,7 @@ export function TFormTemplate(props: TFormTemplateProps) {
               isValid: undefined,
             },
           ]);
-        },
+        }
       )}
     </TPaletteProvider>
   );
@@ -59,7 +63,7 @@ export function TFormTemplate(props: TFormTemplateProps) {
 
 function createDeleteFct(
   props: TFormTemplateProps,
-  deleteIdx: number,
+  deleteIdx: number
 ): () => void {
   return () => {
     const newItems = props.items.filter((_item, idx) => idx != deleteIdx);
