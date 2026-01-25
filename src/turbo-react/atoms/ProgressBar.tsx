@@ -51,7 +51,7 @@ export function TProgressBar(p: TProgressBarProps) {
         onMouseUp={(e) => m.done(e)}
       ></TGlass>
       {p.caption && <label>{p.caption}</label>}
-      <div tabIndex={}} className={plt.styles(styles.wrapper, styles.editable)}>
+      <div tabIndex={0} className={plt.styles(styles.wrapper, styles.editable)}>
         <div
           style={{
             marginLeft: p.left !== undefined ? p.left + "%" : undefined,
