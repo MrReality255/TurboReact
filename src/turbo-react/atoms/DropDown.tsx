@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { TTextBox } from './TextBox';
-import { TCompactKeyEvent, TDropDownProps, TMenuItem } from './types';
+import { TCompactKeyEvent, TDropDownProps, TMenuEventHandlerRef, TMenuItem } from './types';
 import { TGlass } from './Glass';
 import { TViewport } from './Viewport';
 import { TWindow } from './Window';
@@ -37,7 +37,9 @@ export function TDropDown(p: TDropDownProps) {
       dl={dl}
       popup={
         <DropDownWindow
+          filterCaption={p.filterCaption ?? 'Filter'}
           autoFocus={true}
+          hasFilter={dl.hasFilter}
           caption={p.caption}
           v={dl.v}
           menu={menu}
@@ -46,6 +48,13 @@ export function TDropDown(p: TDropDownProps) {
             dl.flagDisableFocus.disabled = true;
             dl.inputRef.current?.focus();
             dl.flagDisableFocus.disabled = false;
+          }}
+          onMatchFilter={(item, filter) => {
+            if (p.onMatchFilter) {
+              return p.onMatchFilter(item, filter);
+            }
+            filter = filter.toLowerCase();
+            return (item.id + ',' + item.label).toLowerCase().includes(filter);
           }}
           windowPalette={dl.windowPalette}
         ></DropDownWindow>
@@ -125,8 +134,10 @@ function useDropDown(p: TDropDownProps) {
   const tmpInputRef = useRef<HTMLInputElement>(null);
   const [showOpen, setShowOpen] = useState(false);
   const windowPalette = p.windowPalette ?? (plt.palette == 'dialog' ? 'blue' : plt.palette);
+  const hasFilter = p.hasFilter === undefined ? p.items.length > 8 : p.hasFilter;
 
-  const height = MathUtils.clamp(p.items.length * 2.3 + 2.7, 3, 21);
+  const y = hasFilter ? 4 : 0;
+  const height = MathUtils.clamp(p.items.length * 2.3 + 2.7 + y, 3, 21);
   const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -151,6 +162,7 @@ function useDropDown(p: TDropDownProps) {
 
   return {
     flagDisableFocus,
+    hasFilter,
     height,
     mode: p.mode || 'select',
     palette: plt,
@@ -181,6 +193,9 @@ function TDropDownLayout(p: TDropDownLayoutProps) {
         }}
       >
         <TViewport
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
           divRef={dl.viewportRef}
           rect={{
             x: dl.rect?.x,
@@ -199,57 +214,90 @@ function TDropDownLayout(p: TDropDownLayoutProps) {
 
 function DropDownWindow(p: {
   caption?: string;
+  filterCaption: string;
+  hasFilter: boolean;
   windowPalette?: TPalette;
   v: TValueHook;
   menu: TMenuItem[];
   autoFocus: boolean;
   onClose: () => void;
+  onMatchFilter: (item: TMenuItem, filterValue: string) => boolean;
 }) {
+  const [filterValue, setFilterValue] = useState('');
   const mySelRef = useRef<HTMLAnchorElement>(null);
 
   const [currentValue, setCurrentValue] = useState(p.v.value);
-  const displayMenu = p.menu.map((item) => ({
-    ...item,
-    selected: item.id == currentValue,
-  }));
+  const displayMenu = p.menu
+    .filter((item) => p.onMatchFilter(item, filterValue))
+    .map((item) => ({
+      ...item,
+      selected: item.id == currentValue,
+    }));
 
   useEffect(() => {
-    if (mySelRef.current && p.autoFocus) {
+    if (mySelRef.current && p.autoFocus && !p.hasFilter) {
       mySelRef.current.focus();
     }
-  }, [mySelRef.current, p.autoFocus]);
+  }, [mySelRef.current, p.autoFocus, p.hasFilter]);
+  const [menuEventHandler] = useState<TMenuEventHandlerRef>({ current: null });
 
   return (
     <TClosingEffectProvider
       emptyMode
-      onClose={() => p.onClose()}
+      onClose={() => {
+        p.onClose();
+      }}
       onRender={(onClose, props) => {
         return (
           <TWindow
             onHotKey={(k, e) => handleHotkey(k, e, onClose)}
             style={props}
             caption={p.caption}
-            onClose={() => onClose()}
+            onClose={() => {
+              onClose();
+            }}
             fill
             palette={p.windowPalette}
           >
-            <TMenu
-              selectedRef={mySelRef}
-              items={displayMenu}
-              onClick={(option) => {
-                p.v.set(option);
-                onClose();
-              }}
-              onSelect={(option) => setCurrentValue(option)}
-            ></TMenu>
+            {p.hasFilter && (
+              <TViewport rect={{ y2: '4em', y: 0, x: 0, x2: 0 }} width={'100%'}>
+                <TTextBox
+                  autoFocus
+                  value={filterValue}
+                  onChange={(newFilter) => setFilterValue(newFilter)}
+                  caption={p.filterCaption}
+                  onKeyDown={(k, e) => handleFilterKey(k, e)}
+                ></TTextBox>
+              </TViewport>
+            )}
+            <TViewport rect={{ y: p.hasFilter ? '4.5em' : 0, y2: 0, x: 0, x2: 0 }} width={'100%'} scrollbar>
+              <TMenu
+                menuEventHandlerRef={menuEventHandler}
+                selectedRef={mySelRef}
+                items={displayMenu}
+                onClick={(option) => {
+                  p.v.set(option);
+                  onClose();
+                }}
+                onSelect={(option) => setCurrentValue(option)}
+              ></TMenu>
+            </TViewport>
           </TWindow>
         );
       }}
     ></TClosingEffectProvider>
   );
 
+  function handleFilterKey(k: string, e: TCompactKeyEvent): void {
+    if (menuEventHandler?.current) {
+      if (menuEventHandler.current(k)) {
+        e.stopPropagation();
+      }
+    }
+  }
+
   function handleHotkey(k: string, _e: TCompactKeyEvent, onClose: () => void): void {
-    if (k >= '1' && k <= '9') {
+    if (!p.hasFilter && k >= '1' && k <= '9') {
       const idx = parseInt(k) - 1;
       if (idx < p.menu.length) {
         p.v.set(p.menu[idx].id);

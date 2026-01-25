@@ -31,6 +31,7 @@ export function TViewport(p: TViewportProps) {
         paddingTop: p.padding?.top,
         paddingBottom: p.padding?.bottom,
       }}
+      onClick={(e)=>p?.onClick?.(e)}
     >
       {p.children}
     </div>

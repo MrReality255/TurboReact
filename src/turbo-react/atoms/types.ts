@@ -30,11 +30,15 @@ export type TCheckBoxProps = TInputProps & {
 export type TDropDownMode = 'select' | 'combo';
 
 export type TDropDownProps = Omit<TTextBoxProps, 'mode'> & {
+  hasFilter?: boolean;
+  filterCaption?: string;
   items: TMenuItem[];
   inputRef?: RefObject<HTMLInputElement>;
   mode?: TDropDownMode;
   wrapperRef?: RefObject<HTMLDivElement>;
   windowPalette?: TPalette;
+
+  onMatchFilter?: (item: TMenuItem, filter: string) => boolean;
 };
 
 export type TErrorPanelProps = TViewProps;
@@ -75,8 +79,13 @@ export type TMenuItem = {
   withSeparator?: boolean;
 };
 
+export type TMenuEventHandlerRef = {
+  current: null | ((keyCode: string) => boolean);
+};
+
 export type TMenuProps = TPaletteProps & {
   selectedRef?: RefObject<HTMLAnchorElement | null>;
+  menuEventHandlerRef?: TMenuEventHandlerRef;
 
   items: TMenuItem[];
   onClick?: (id: string) => void;
@@ -185,6 +194,7 @@ export type TViewportProps = {
     top?: string | number;
     bottom?: string | number;
   };
+  onClick?: (e: { stopPropagation: () => void }) => void;
 };
 
 export type TWindowProps = TPaletteProps & {

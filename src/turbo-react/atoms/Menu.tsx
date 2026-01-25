@@ -1,19 +1,27 @@
-import { TMenuProps } from "./types";
+import { TMenuProps } from './types';
 
-import styles from "./Menu.module.css";
-import usePalette from "../hooks/usePalette";
-import { KeyboardEvent, useRef } from "react";
-import { MathUtils } from "../utils/math";
+import styles from './Menu.module.css';
+import usePalette from '../hooks/usePalette';
+import { KeyboardEvent, useEffect, useRef } from 'react';
+import { MathUtils } from '../utils/math';
 
 export function TMenu(p: TMenuProps) {
   const plt = usePalette(styles, p);
   const mySelRef = useRef<HTMLAnchorElement>(null);
-  const firstSelected = MathUtils.clamp(
-    p.items.findIndex((item) => item.selected),
-    0,
-    p.items.length,
-  );
+  const selectedItem = p.items.findIndex((item) => item.selected);
+
+  const firstSelected = MathUtils.clamp(selectedItem, 0, p.items.length);
   const selRef = p.selectedRef ?? mySelRef;
+
+  if (p.menuEventHandlerRef) {
+    p.menuEventHandlerRef.current = handleMenuEvent;
+  }
+
+  useEffect(() => {
+    if (selRef.current) {
+      selRef.current.parentElement?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [p.items[selectedItem]?.id]);
 
   return (
     <div className={plt.styles(styles.menu)}>
@@ -42,17 +50,11 @@ export function TMenu(p: TMenuProps) {
                 p.onClick?.(item.id);
               }}
             >
-              <span
-                className={styles.prefix}
-                style={{ color: item.prefixColor, width: item.prefixWidth }}
-              >
+              <span className={styles.prefix} style={{ color: item.prefixColor, width: item.prefixWidth }}>
                 {item.prefix}
               </span>
               {item.label || item.id}
-              <span
-                className={styles.secondary}
-                style={{ color: item.secondaryColor }}
-              >
+              <span className={styles.secondary} style={{ color: item.secondaryColor }}>
                 {item.secondary}
               </span>
             </a>
@@ -62,40 +64,39 @@ export function TMenu(p: TMenuProps) {
     </div>
   );
 
-  function handleKey(k: KeyboardEvent<HTMLAnchorElement>): void {
-    switch (k.code) {
-      case "ArrowDown":
-        k.stopPropagation();
-        k.preventDefault();
+  function handleMenuEvent(keyCode: string): boolean {
+    switch (keyCode) {
+      case 'ArrowDown':
         p.onSelect?.(findNext(1, true));
-        break;
-      case "ArrowUp":
-        k.stopPropagation();
-        k.preventDefault();
-        p.onSelect?.(findNext(-1, true));
-        break;
-      case "Home":
-        k.stopPropagation();
-        k.preventDefault();
-        p.onSelect?.(findNext(0, false));
-        break;
-      case "End":
-        k.stopPropagation();
-        k.preventDefault();
+        return true;
+      case 'End':
         p.onSelect?.(findNext(-1, false));
-        break;
-      case "PageUp":
-        k.stopPropagation();
-        k.preventDefault();
-        p.onSelect?.(findNext(-10, true));
-        break;
-      case "PageDown":
-        k.stopPropagation();
-        k.preventDefault();
+        return true;
+      case 'Home':
+        p.onSelect?.(findNext(0, false));
+        return true;
+      case 'PageDown':
         p.onSelect?.(findNext(10, true));
-        break;
-      default:
-        console.log(k.code);
+        return true;
+      case 'PageUp':
+        p.onSelect?.(findNext(-10, true));
+        return true;
+      case 'ArrowUp':
+        p.onSelect?.(findNext(-1, true));
+        return true;
+      case 'Enter':
+        const selItem = p.items.find((a) => a.selected);
+        if (selItem) {
+          p.onClick?.(selItem.id);
+        }
+    }
+    return false;
+  }
+
+  function handleKey(k: KeyboardEvent<HTMLAnchorElement>): void {
+    if (handleMenuEvent(k.code)) {
+      k.stopPropagation();
+      k.preventDefault();
     }
   }
 
