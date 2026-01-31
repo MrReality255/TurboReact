@@ -11,11 +11,11 @@ button:disabled {
 }
 
 button.text::before {
-  content: "[ ";
+  content: '[ ';
 }
 
 button.text::after {
-  content: " ]";
+  content: ' ]';
 }
 
 button.fill {
@@ -145,13 +145,13 @@ button.link:active {
 
 .plain.green:hover {
   background-color: #005500;
-  color: #00ff88;
+  color: #33cc00;
   box-shadow: 0 0 6px #00ff88;
 }
 
 .plain.green.down {
-  background-color: #005500;
-  color: #00ff88;
+  background-color: #00aa00;
+  color: #ffff00;
   box-shadow: 0 0 6px #00ff88;
 }
 
@@ -161,8 +161,8 @@ button.link:active {
 
 /* BLUE */
 .plain.blue {
-  color: #000;
-  background-color: #099;
+  color: #0cc;
+  background-color: #077;
   border: 1px solid #099;
   /*box-shadow: 0 0 4px #00ffff;*/
 }
@@ -174,8 +174,8 @@ button.link:active {
 }
 
 .plain.blue.down {
-  background-color: #099;
-  color: #0ff;
+  background-color: #0cc;
+  color: #fff;
   box-shadow: 0 0 6px #00ff88;
 }
 
@@ -197,14 +197,14 @@ button.link:active {
 }
 
 .plain.cyan:hover {
-  background-color: #005555;
-  color: #00ffaa;
+  background-color: #009999;
+  color: #0ff;
   box-shadow: 0 0 6px #00ff88;
 }
 
 .plain.cyan.down {
-  background-color: #005555;
-  color: #00ffaa;
+  background-color: #00cccc;
+  color: #fff;
   box-shadow: 0 0 6px #00ff88;
 }
 
@@ -223,11 +223,22 @@ button.link:active {
 
 /* DARK */
 .plain.dark {
+  background-color: #770;
   color: #ff0;
+}
+
+.plain.dark:hover {
+  background-color: #990;
+  color: #330;
+  box-shadow: 0 0 6px #888800;
 }
 
 .plain.dark.default {
   color: #fff;
+}
+
+.plain.dark.down {
+  background-color: #ff0;
 }
 
 .link.dark {
@@ -292,13 +303,13 @@ button.btn.red:active:not(:disabled) {
 }
 
 .plain.red:hover {
-  background-color: #500;
+  background-color: #a00;
   color: #ff0;
   box-shadow: 0 0 6px #f00;
 }
 
 .plain.red.down {
-  background-color: #500;
+  background-color: #f00;
   color: #ff0;
   box-shadow: 0 0 6px #f00;
 }
