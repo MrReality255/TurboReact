@@ -17,6 +17,8 @@ import { InputUtils } from "../utils/input";
 import { TFormTemplate } from "./FormTemplate";
 import { TCheckbox } from "../atoms/Checkbox";
 import { TProgressBar } from "../atoms/ProgressBar";
+import { TButton } from "../atoms";
+import { TColLayout, THorizLayout } from "../layout";
 
 const alwaysValid = new Set<TFormFieldType>(["checkbox", "progress"]);
 
@@ -33,7 +35,7 @@ export function TFormField(p: TFormFieldProps) {
     ctx?.initializeField(
       p.id,
       initValue,
-      validateInitValue(p) ?? validate(p, initValue)
+      validateInitValue(p) ?? validate(p, initValue),
     );
   }, []);
 
@@ -41,7 +43,7 @@ export function TFormField(p: TFormFieldProps) {
     src: React.ReactNode,
     _value: TFormValue | undefined,
     _props: TFormFieldProps,
-    _onAction?: (id: string, data: unknown) => void
+    _onAction?: (id: string, data: unknown) => void,
   ) => {
     return src;
   };
@@ -67,7 +69,7 @@ export function TFormField(p: TFormFieldProps) {
                 ? (id, customData) => {
                     p.onAction?.(id, customData);
                   }
-                : undefined
+                : undefined,
             )}
           </div>
         </div>
@@ -84,7 +86,7 @@ function FormFieldControl(
     isValid: boolean;
     item: TFormValue | undefined;
     ctx: TFormContext | null;
-  }
+  },
 ) {
   const strValue =
     (typeof p.item?.value === "object" ? undefined : p.item?.value) || "";
@@ -127,7 +129,40 @@ function FormFieldControl(
     }
   }, [p.isOptional, p.disabled, p.validator?.signature]);
 
+  const state = !!(p.value ?? strValue);
+
   switch (p.type) {
+    case "toggle":
+      return (
+        <THorizLayout>
+          <TButton
+            autoFocus={p.autoFocus}
+            disabled={p.disabled}
+            variant="plain"
+            down={!!(p.value ?? strValue)}
+            onClick={() => {
+              if (p.readOnly) {
+                return;
+              }
+              update(state ? "" : "true");
+            }}
+            {...p.buttonProps}
+          >
+            {state
+              ? (p.buttonProps?.textOn ?? "ON")
+              : (p.buttonProps?.textOff ?? "OFF")}
+          </TButton>
+          <div
+            style={{
+              marginLeft: p.buttonProps?.gap ?? "1em",
+              display: "inline-block",
+            }}
+          >
+            {p.caption}
+          </div>
+        </THorizLayout>
+      );
+
     case "checkbox":
       return (
         <TCheckbox
@@ -174,7 +209,7 @@ function FormFieldControl(
         <TProgressBar
           {...p.progressBarProps}
           caption={p.caption}
-          value={p.value}
+          value={p.value ?? strValue}
           defaultValue={p.defaultValue}
           disabled={p.disabled}
           onChange={(value) => update(value, true)}
@@ -209,6 +244,9 @@ function FormFieldControl(
   return <InvalidControl></InvalidControl>;
 
   function update(newValue: TFormValueType, isValid?: boolean) {
+    if (p.readOnly) {
+      return;
+    }
     p.ctx?.update(p.id, newValue, isValid ?? validate(p, newValue) ?? false);
   }
 }

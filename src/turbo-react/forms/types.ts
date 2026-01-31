@@ -5,6 +5,7 @@ import {
   TDropDownProps,
   TProgressBarProps,
   TTextBoxProps,
+  TToggleButtonProps,
   TViewportProps,
   TWindowProps,
 } from "../atoms/types";
@@ -47,7 +48,7 @@ export type TDialogWrapperProps<T, C> = {
   onSubmit: (
     result: TDialogModalResult,
     data: T | undefined,
-    frm: TFormContext
+    frm: TFormContext,
   ) => void;
 };
 
@@ -126,6 +127,7 @@ export type TFormValidator = {
 
 export type TFormFieldType =
   | "checkbox"
+  | "toggle"
   | "progress"
   | "textbox"
   | "dropdown"
@@ -141,17 +143,19 @@ export type TFormFieldProps = TPaletteProps & {
 
   defaultValue?: string;
   isOptional?: boolean;
+  readOnly?: boolean;
   value?: string;
   validator?: TFormValidator;
   wrapperFct?: (
     src: React.ReactNode,
     value: TFormValue | undefined,
     props: TFormFieldProps,
-    onAction?: (id: string, customData: unknown) => void
+    onAction?: (id: string, customData: unknown) => void,
   ) => React.ReactNode;
 
   children?: React.ReactNode;
 
+  buttonProps?: TToggleButtonProps;
   checkBoxProps?: TCheckBoxProps;
   dropDownProps?: TDropDownProps;
   formProps?: Omit<TFormProps, "context" | "children">;
@@ -166,11 +170,11 @@ export type TFormTemplateProps = TPaletteProps & {
   items: IDataContext[];
   itemFct: (
     ctx: IDataContext,
-    deleteFct: () => void
+    deleteFct: () => void,
   ) => React.ReactNode | TFormFieldProps[];
   wrapperFct?: (
     content: React.ReactNode,
-    addFct: () => void
+    addFct: () => void,
   ) => React.ReactNode;
 
   onNewRow?: () => Record<string, TFormValue>;
