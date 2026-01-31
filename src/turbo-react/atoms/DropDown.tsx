@@ -14,6 +14,7 @@ import { TValueHook } from '../hooks/types';
 import { TClosingEffectProvider } from './ClosingEffect';
 import useAutoFocus from '../hooks/useAutoFocus';
 import { TButton } from '.';
+import { createPortal } from 'react-dom';
 
 type TDropDownLayoutProps = TDropDownProps & {
   dl: ReturnType<typeof useDropDown>;
@@ -180,10 +181,10 @@ function useDropDown(p: TDropDownProps) {
   };
 }
 
-function TDropDownLayout(p: TDropDownLayoutProps) {
+function TDropDownLayers(p: TDropDownLayoutProps) {
   const dl = p.dl;
-  return (
-    <TPaletteProvider {...dl.palette}>
+  return createPortal(
+    <>
       <TGlass visible={dl.showOpen} backdrop></TGlass>
 
       <TGlass
@@ -207,6 +208,16 @@ function TDropDownLayout(p: TDropDownLayoutProps) {
           {p.popup}
         </TViewport>
       </TGlass>
+    </>,
+    document.body,
+  );
+}
+
+function TDropDownLayout(p: TDropDownLayoutProps) {
+  const dl = p.dl;
+  return (
+    <TPaletteProvider {...dl.palette}>
+      <TDropDownLayers {...p}></TDropDownLayers>
       {p.children}
     </TPaletteProvider>
   );

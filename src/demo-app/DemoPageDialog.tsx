@@ -63,7 +63,6 @@ export function DemoPageDialogs() {
             <TNameValue name="Form is valid">{ctx.frm.isValid ? 'yes' : 'no'}</TNameValue>
             <TNameValue name="Outer context">{JSON.stringify(ctx.ctx)}</TNameValue>
             <TFormField type="textbox" caption="Name" id="name" autoFocus></TFormField>
-
             <TGroupBox caption={'A group box'} disabled={!!ctx.frm.checked('chk1')}>
               <TRowLayout>
                 <TFormField type="textbox" caption="Name 1" id="name1"></TFormField>
@@ -79,6 +78,17 @@ export function DemoPageDialogs() {
             </TGroupBox>
 
             <TFormField type="progress" id="setting1" caption="Setting #1"></TFormField>
+            <TFormField
+              type="dropdown"
+              caption="Gender"
+              id="gender"
+              dropDownProps={{
+                items: [
+                  { id: 'male', label: 'Male' },
+                  { id: 'female', label: 'Female' },
+                ],
+              }}
+            ></TFormField>
           </TRowLayout>
         </THorizLayout>
       ),
@@ -108,6 +118,7 @@ export function DemoPageDialogs() {
                   name1: 'name option 1',
                   name2: 'name option 2',
                   chk1: 'true',
+                  gender: 'male',
                 },
                 { ctxContent: 'a value passed to the show function' },
               );

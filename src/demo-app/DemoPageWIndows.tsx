@@ -1,45 +1,38 @@
-import { DemoAppLayout } from "./DemoAppLayout";
-import { TWindow } from "../turbo-react/atoms/Window";
-import { TViewport } from "../turbo-react/atoms/Viewport";
-import { useState } from "react";
-import { TClosingEffectProvider, TRowLayout } from "../turbo-react";
-import { LoremIpsum } from "./demo_data";
+import { DemoAppLayout } from './DemoAppLayout';
+import { TWindow } from '../turbo-react/atoms/Window';
+import { TViewport } from '../turbo-react/atoms/Viewport';
+import { useState } from 'react';
+import { TClosingEffectProvider, TErrorPanel, TRowLayout } from '../turbo-react';
+import { LoremIpsum } from './demo_data';
 
 export function DemoPageWindows() {
   const [isVisible, setVisible] = useState(true);
 
   return (
     <DemoAppLayout selected="windows">
-      <TViewport rect={{ x: "0em", x2: "0em", y: "0" }} height="10em">
+      <TViewport rect={{ x: '0em', x2: '0em', y: '0' }} height="10em">
         <TWindow caption="Window fills the viewport" fill>
           Standard window with some text. It fills the viewport completely.
         </TWindow>
       </TViewport>
-      <TViewport rect={{ x: "0em", x2: "0em", y: "10.5em" }} height={"15em"}>
+      <TViewport rect={{ x: '0em', x2: '0em', y: '10.5em' }} height={'15em'}>
         <TWindow palette="blue" fill>
-          <TViewport
-            rect={{ x: 0, y: 0, x2: 0, y2: 0 }}
-            scrollbar
-            padding={{ right: "3em", top: '3.5em' }}
-          >
+          <TViewport rect={{ x: 0, y: 0, x2: 0, y2: 0 }} scrollbar padding={{ right: '3em', top: '3.5em' }}>
             <TViewport rect={{ x: 0, y: 0, x2: 0, y2: 0 }} height="3em">
-              <TWindow border="none" innerPadding="none" fill>Viewport inside the viewport</TWindow>
+              <TWindow border="none" innerPadding="none" fill>
+                Viewport inside the viewport
+              </TWindow>
             </TViewport>
             {LoremIpsum}
           </TViewport>
         </TWindow>
       </TViewport>
-      <TViewport rect={{ x: "0em", y: "26em", x2: "0em", y2: "0em" }} scrollbar>
-        <TRowLayout gap={"1em"}>
+      <TViewport rect={{ x: '0em', y: '26em', x2: '0em', y2: '0em' }} scrollbar>
+        <TRowLayout gap={'1em'}>
           <TWindow caption="Window with auto size" palette="dark">
             It has some content. Its height is automatic.
           </TWindow>
-          <TWindow
-            caption="Error message"
-            palette="red"
-            innerPadding="space"
-            border="single"
-          >
+          <TWindow caption="Error message" palette="red" innerPadding="space" border="single">
             Some error occurred.
           </TWindow>
           <TWindow palette="cyan" border="none">
@@ -50,11 +43,7 @@ export function DemoPageWindows() {
               onClose={() => handleClose()}
               onRender={(closeFct) => {
                 return (
-                  <TWindow
-                    caption="Some other windows"
-                    palette="green"
-                    onClose={() => closeFct()}
-                  >
+                  <TWindow caption="Some other windows" palette="green" onClose={() => closeFct()}>
                     Put more text inside. This window can close.
                   </TWindow>
                 );
