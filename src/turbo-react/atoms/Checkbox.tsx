@@ -15,7 +15,7 @@ export function TCheckbox(p: TCheckBoxProps) {
   useAutoFocus(p, ref);
 
   return (
-    <>
+    <div className={plt.styles(styles.cbWrapper)}>
       <input
         ref={ref}
         checked={v.value == 'true'}
@@ -32,6 +32,6 @@ export function TCheckbox(p: TCheckBoxProps) {
           {p.caption}
         </label>
       )}
-    </>
+    </div>
   );
 }

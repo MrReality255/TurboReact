@@ -27,7 +27,7 @@ export function TDropDown(p: TDropDownProps) {
     .map((item) => ({
       ...item,
       selected: item.id == p.value,
-      id: p.mode == 'combo' ? item.label || '' : item.id,
+      id: p.mode == 'combo' ? item.caption || '' : item.id,
     }))
     .filter((item) => item.id);
   const dl = useDropDown(p);
@@ -55,7 +55,7 @@ export function TDropDown(p: TDropDownProps) {
               return p.onMatchFilter(item, filter);
             }
             filter = filter.toLowerCase();
-            return (item.id + ',' + item.label).toLowerCase().includes(filter);
+            return (item.id + ',' + item.caption).toLowerCase().includes(filter);
           }}
           windowPalette={dl.windowPalette}
         ></DropDownWindow>
@@ -86,7 +86,7 @@ export function TDropDown(p: TDropDownProps) {
   function getValue() {
     switch (dl.mode) {
       case 'select':
-        return p.items.find((a) => a.id == dl.v.value)?.label || '';
+        return p.items.find((a) => a.id == dl.v.value)?.caption || '';
       case 'combo':
         return p.value;
     }

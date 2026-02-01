@@ -17,20 +17,20 @@ export type TDemoAppProps = {
 };
 
 const menuItems = [
-  { id: 'windows', label: 'Windows' },
+  { id: 'windows', caption: 'Windows' },
   {
     id: 'dialogs',
-    label: 'Dialogs',
+    caption: 'Dialogs',
     withSeparator: true,
   },
-  { id: 'buttons', label: 'Buttons' },
-  { id: 'textboxes', label: 'Textboxes' },
-  { id: 'selects', label: 'Select' },
-  { id: 'inputs', label: 'Other inputs' },
-  { id: 'no-option', label: '3D Graphics', disabled: true },
-  { id: 'menus', label: 'Menus' },
-  { id: 'tables', label: 'Tables', withSeparator: true },
-  { id: 'misc', label: 'Misc' },
+  { id: 'buttons', caption: 'Buttons' },
+  { id: 'textboxes', caption: 'Textboxes' },
+  { id: 'selects', caption: 'Select' },
+  { id: 'inputs', caption: 'Other inputs' },
+  { id: 'no-option', caption: '3D Graphics', disabled: true },
+  { id: 'menus', caption: 'Menus' },
+  { id: 'tables', caption: 'Tables', withSeparator: true },
+  { id: 'misc', caption: 'Misc' },
 ];
 
 export function DemoAppLayout(p: TDemoAppProps) {

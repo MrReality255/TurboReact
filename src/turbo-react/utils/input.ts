@@ -1,4 +1,4 @@
-import { IDataContext, TDataContent, TFormValue, TFormValueType, TFormValueTypeList } from '..';
+import { IDataContext, TDataContent, TDataContextChange, TFormValue, TFormValueType, TFormValueTypeList } from '..';
 import { TFormContext } from '../contexts/forms';
 import { TInputProps } from './types';
 
@@ -21,6 +21,7 @@ export const InputUtils = {
   newFormContext: function (
     dataContext: IDataContext,
     updateDataContext: (fct: (prev: IDataContext) => IDataContext) => void,
+    updateCallback?: (chgInfo: TDataContextChange) => void,
   ): TFormContext {
     return {
       ...dataContext,
@@ -112,6 +113,9 @@ export const InputUtils = {
             isValid,
           );
         });
+        if (updateCallback) {
+          updateCallback({ id: id, newValue: newValue });
+        }
       },
       validate: function () {
         updateDataContext((ctx) => getValidatedContext(ctx));

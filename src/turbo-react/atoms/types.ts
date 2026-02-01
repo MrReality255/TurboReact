@@ -75,7 +75,7 @@ export type THeadingProps = TViewProps;
 export type TMenuItem = {
   id: string;
   disabled?: boolean;
-  label?: string;
+  caption?: string;
   prefix?: string;
   prefixColor?: string;
   prefixWidth?: string | number;
@@ -125,6 +125,15 @@ export type TClosingEffectProps = {
   emptyMode?: boolean;
   onClose?: () => void;
   onRender: (closeFct: () => void, props: CSSProperties) => React.ReactNode;
+};
+
+export type TRadioGroupItem = {
+  id: string;
+  caption: string;
+};
+
+export type TRadioGroupProps = {
+  items: TRadioGroupItem[];
 };
 
 export type TProgressBarProps = TInputProps & {

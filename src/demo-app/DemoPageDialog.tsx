@@ -7,7 +7,6 @@ import { TFormField } from '../turbo-react/forms/FormField';
 import { useNewFormContext } from '../turbo-react/hooks/useNewFormContext';
 import { TGroupBox } from '../turbo-react/atoms/GroupBox';
 import { TColLayout } from '../turbo-react/layout/ColLayout';
-import { TFormButton } from '../turbo-react/forms/FormButton';
 import { useDialog } from '../turbo-react/hooks/useDialog';
 import { TDialogModalResult } from '../turbo-react/forms/types';
 import { useState } from 'react';
@@ -84,8 +83,8 @@ export function DemoPageDialogs() {
               id="gender"
               dropDownProps={{
                 items: [
-                  { id: 'male', label: 'Male' },
-                  { id: 'female', label: 'Female' },
+                  { id: 'male', caption: 'Male' },
+                  { id: 'female', caption: 'Female' },
                 ],
               }}
             ></TFormField>
@@ -188,14 +187,26 @@ function DynFormPanel() {
 }
 
 function DemoForm() {
-  const frm = useNewFormContext(InputUtils.getInitialState({ lastname: 'Your name', progress1: '25' }));
+  const frm = useNewFormContext(
+    InputUtils.getInitialState({ lastname: 'Your name', progress1: '25', firstname: 'first' }),
+  );
   return (
     <TWindow palette="dialog" caption="Form panel">
       <TNameValue name="Form is valid:" labelWidth={110}>
         {frm.isValid ? 'yes' : 'no'}
       </TNameValue>
       <TForm context={frm}>
-        <TFormField type="textbox" id="firstname" caption="First name"></TFormField>
+        <TFormField
+          type="textbox"
+          id="firstname"
+          caption="First name"
+          onChanging={(v) => {
+            if (v == 'test') {
+              return 'some value';
+            }
+            return v;
+          }}
+        ></TFormField>
         <TFormField type="textbox" id="lastname" caption="Last name" readOnly></TFormField>
         <TFormField
           type="dropdown"
@@ -203,11 +214,31 @@ function DemoForm() {
           caption="Special option"
           dropDownProps={{
             items: [
-              { id: 'option1', label: 'Special option 1' },
-              { id: 'option2', label: 'Special option 2' },
+              { id: 'option1', caption: 'Special option 1' },
+              { id: 'option2', caption: 'Special option 2' },
             ],
           }}
         ></TFormField>
+        <TColLayout cols={2} gap="2em">
+          <TFormField
+            type="radiogroup"
+            id="choice"
+            caption="Choose only one option"
+            radioGroupProps={{
+              items: [
+                { id: 'opt1', caption: 'Option 1' },
+                { id: 'opt2', caption: 'Option 2' },
+                { id: 'opt3', caption: 'Option 3' },
+                { id: 'opt4', caption: 'Option 4' },
+              ],
+            }}
+          ></TFormField>
+          <TGroupBox caption="Some check boxes">
+            <TFormField id="chkA1" caption="CheckBox A1" type="checkbox"></TFormField>
+            <TFormField id="chkA2" caption="CheckBox A1" type="checkbox"></TFormField>
+            <TFormField id="chkA3" caption="CheckBox A1" type="checkbox"></TFormField>
+          </TGroupBox>
+        </TColLayout>
         <THeading>Subform</THeading>
         <TFormField
           type="form"
@@ -228,13 +259,15 @@ function DemoForm() {
           value="25"
         ></TFormField>
         <THeading>Toggle Button</THeading>
-        <TFormField type="toggle" id="btn1" caption="Button" buttonProps={{ w1: true, palette: 'red' }}></TFormField>
-        <TFormField
-          type="toggle"
-          id="btn2"
-          caption="Button 2"
-          buttonProps={{ w1: true, palette: 'green' }}
-        ></TFormField>
+        <TRowLayout gap="5px">
+          <TFormField type="toggle" id="btn1" caption="Button" buttonProps={{ w1: true, palette: 'red' }}></TFormField>
+          <TFormField
+            type="toggle"
+            id="btn2"
+            caption="Button 2"
+            buttonProps={{ w1: true, palette: 'green' }}
+          ></TFormField>
+        </TRowLayout>
         <THeading>Template</THeading>
         <TFormField
           type="template"
@@ -269,6 +302,7 @@ function DemoForm() {
             },
           }}
         ></TFormField>
+        <TFormField id="chk1" caption="Check Box Option" type="checkbox"></TFormField>
       </TForm>
       <THorizLayout>
         <TButton

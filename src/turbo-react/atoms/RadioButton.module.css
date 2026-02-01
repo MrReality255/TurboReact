@@ -1,13 +1,20 @@
+div.rbWrapper:focus-within > label {
+  color: #fff;
+}
+div.rbWrapper:focus-within > input {
+  color: #fff;
+}
+
 label.rb {
   cursor: pointer;
 }
 
 input.rb::before {
-  content: "( )";
+  content: '( )';
 }
 
 input.rb:checked::before {
-  content: "(•)";
+  content: '(•)';
 }
 
 input.rb {
@@ -51,7 +58,11 @@ label.rb.dialog.disabled {
   color: #999;
 }
 
-input.rb.green + label.rb:hover {
+div.rbWrapper > label.rb.green:hover {
+  color: #ff0;
+}
+
+div.rbWrapper.green > input:hover {
   color: #ff0;
 }
 
@@ -68,9 +79,16 @@ input.rb.dialog:hover {
 }
 
 label.rb.dialog {
-  color: #fff;
+  color: #000;
 }
 
 input.rb.dialog {
-  color: #fff;
+  color: #000;
+}
+
+div.rbWrapper.green:focus-within > label {
+  color: #ff0;
+}
+div.rbWrapper.green:focus-within > input {
+  color: #ff0;
 }

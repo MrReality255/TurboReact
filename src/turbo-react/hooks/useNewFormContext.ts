@@ -1,9 +1,14 @@
-import { IDataContext } from "..";
+import { IDataContext } from '..';
 
-import { InputUtils } from "../utils/input";
-import { useDataContext } from "./useDataContext";
+import { InputUtils } from '../utils/input';
+import { useDataContext } from './useDataContext';
 
-export function useNewFormContext(initialState: IDataContext | undefined) {
+export function useNewFormContext(
+  initialState: IDataContext | undefined,
+  onCtxChange?: (prev: IDataContext) => IDataContext,
+) {
   const p = useDataContext(initialState);
-  return InputUtils.newFormContext(p.ctx, p.setCtx);
+  onCtxChange = onCtxChange ?? ((x) => x);
+
+  return InputUtils.newFormContext(p.ctx, (fctUpdate) => p.setCtx((ctx) => onCtxChange(fctUpdate(ctx))));
 }

@@ -53,7 +53,7 @@ export function TMenu(p: TMenuProps) {
               <span className={styles.prefix} style={{ color: item.prefixColor, width: item.prefixWidth }}>
                 {item.prefix}
               </span>
-              {item.label || item.id}
+              {item.caption || item.id}
               <span className={styles.secondary} style={{ color: item.secondaryColor }}>
                 {item.secondary}
               </span>

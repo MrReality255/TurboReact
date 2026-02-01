@@ -1,13 +1,20 @@
+div.cbWrapper:focus-within > label {
+  color: #fff;
+}
+div.cbWrapper:focus-within > input {
+  color: #fff;
+}
+
 label.cb {
   cursor: pointer;
 }
 
 input.cb::before {
-  content: "[ ]";
+  content: '[ ]';
 }
 
 input.cb:checked::before {
-  content: "[x]";
+  content: '[x]';
 }
 
 input.cb {
@@ -60,11 +67,11 @@ input.cb.green:hover {
 }
 
 input.cb.dialog + label.cb:hover {
-  color: #ff0;
+  color: #fff;
 }
 
 input.cb.dialog:hover {
-  color: #ff0;
+  color: #fff;
 }
 
 label.cb.dialog {

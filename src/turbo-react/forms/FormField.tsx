@@ -12,10 +12,10 @@ import { InputUtils } from '../utils/input';
 import { TFormTemplate } from './FormTemplate';
 import { TCheckbox } from '../atoms/Checkbox';
 import { TProgressBar } from '../atoms/ProgressBar';
-import { TButton } from '../atoms';
-import { THorizLayout } from '../layout';
+import { TButton, TGroupBox, TRadioButton } from '../atoms';
+import { THorizLayout, TRowLayout } from '../layout';
 
-const alwaysValid = new Set<TFormFieldType>(['checkbox', 'progress']);
+const alwaysValid = new Set<TFormFieldType>(['checkbox', 'progress', 'toggle']);
 
 export function TFormField(p: TFormFieldProps) {
   const ctx = useContext(CtxFormPanel);
@@ -90,7 +90,7 @@ function FormFieldControl(
 
     return InputUtils.newFormContext(ctx, (fct) => {
       const newCtx = fct(ctx);
-      update({ ...newCtx, mode: 'datacontext' });
+      update({ ...newCtx, mode: 'datacontext' }, false, undefined);
     });
   }, [p.item?.value, p.type]);
 
@@ -98,7 +98,7 @@ function FormFieldControl(
     if (p.item === undefined) {
       const newValue = createEmptyValue(p);
       const isNewValid = validate(p, newValue);
-      update(newValue, isNewValid);
+      update(newValue, false, isNewValid);
     }
   }, [p.item]);
 
@@ -106,14 +106,36 @@ function FormFieldControl(
     if (p.item) {
       const newValid = validate(p, p.item.value);
       if (newValid !== p.item.isValid) {
-        update(p.item.value, newValid);
+        update(p.item.value, false, newValid);
       }
     }
   }, [p.isOptional, p.disabled, p.validator?.signature]);
 
   const state = !!(p.value ?? strValue);
 
+  const value = p.value ?? strValue;
+
   switch (p.type) {
+    case 'radiogroup':
+      return (
+        <TGroupBox caption={p.caption}>
+          <TRowLayout gap="0.5em">
+            {p.radioGroupProps?.items.map((item) => {
+              return (
+                <div key={item.id}>
+                  <TRadioButton
+                    caption={item.caption}
+                    value={value == item.id ? 'true' : ''}
+                    onChange={(newValue) => {
+                      update(item.id, true, true);
+                    }}
+                  ></TRadioButton>
+                </div>
+              );
+            })}
+          </TRowLayout>
+        </TGroupBox>
+      );
     case 'toggle':
       return (
         <THorizLayout>
@@ -121,12 +143,9 @@ function FormFieldControl(
             autoFocus={p.autoFocus}
             disabled={p.disabled}
             variant="plain"
-            down={!!(p.value ?? strValue)}
+            down={!!value}
             onClick={() => {
-              if (p.readOnly) {
-                return;
-              }
-              update(state ? '' : 'true');
+              update(state ? '' : 'true', true, true);
             }}
             {...p.buttonProps}
           >
@@ -148,9 +167,9 @@ function FormFieldControl(
         <TCheckbox
           autoFocus={p.autoFocus}
           caption={p.caption}
-          value={p.value ?? strValue}
+          value={value}
           defaultValue={p.defaultValue}
-          onChange={(value: string) => update(value)}
+          onChange={(value: string) => update(value, true, true)}
           disabled={p.disabled}
           {...p.checkBoxProps}
         ></TCheckbox>
@@ -161,10 +180,10 @@ function FormFieldControl(
           autoFocus={p.autoFocus}
           items={p.dropDownProps?.items || []}
           caption={p.caption}
-          value={p.value ?? strValue}
+          value={value}
           defaultValue={p.defaultValue}
           disabled={p.disabled}
-          onChange={(value) => update(value)}
+          onChange={(value) => update(value, true, undefined)}
           {...p.dropDownProps}
         ></TDropDown>
       );
@@ -189,10 +208,10 @@ function FormFieldControl(
         <TProgressBar
           {...p.progressBarProps}
           caption={p.caption}
-          value={p.value ?? strValue}
+          value={value}
           defaultValue={p.defaultValue}
           disabled={p.disabled}
-          onChange={(value) => update(value, true)}
+          onChange={(value) => update(value, true, true)}
         ></TProgressBar>
       );
     case 'template':
@@ -200,7 +219,7 @@ function FormFieldControl(
         <TFormTemplate
           {...p.templateProps}
           items={templateItemsValue}
-          onUpdateItems={(newItems) => update({ mode: 'list', items: newItems })}
+          onUpdateItems={(newItems) => update({ mode: 'list', items: newItems }, true, undefined)}
         ></TFormTemplate>
       ) : (
         <div></div>
@@ -210,9 +229,9 @@ function FormFieldControl(
         <TTextBox
           autoFocus={p.autoFocus}
           caption={p.caption}
-          value={p.value ?? strValue}
+          value={value}
           defaultValue={p.defaultValue}
-          onChange={(value: string) => update(value)}
+          onChange={(value: string) => update(value, true, undefined)}
           disabled={p.disabled}
           {...p.textBoxProps}
         ></TTextBox>
@@ -221,11 +240,19 @@ function FormFieldControl(
 
   return <InvalidControl></InvalidControl>;
 
-  function update(newValue: TFormValueType, isValid?: boolean) {
-    if (p.readOnly) {
+  function update(newValue: TFormValueType, isUserAction: boolean, isValid: boolean | undefined) {
+    if (p.readOnly && isUserAction) {
       return;
     }
+
+    if (p.onChanging && typeof newValue === 'string') {
+      newValue = p.onChanging(newValue, p.id);
+    }
+
     p.ctx?.update(p.id, newValue, isValid ?? validate(p, newValue) ?? false);
+    if (p.onChange && typeof newValue === 'string') {
+      p.onChange(newValue, p.id);
+    }
   }
 }
 
@@ -281,7 +308,7 @@ function createInitValue(p: TFormFieldProps): TFormValueType {
 }
 
 function validate(p: TFormFieldProps, value: TFormValueType | undefined) {
-  if (p.disabled) {
+  if (p.disabled || p.readOnly) {
     return true;
   }
   if (value === undefined) {
@@ -315,7 +342,7 @@ function validate(p: TFormFieldProps, value: TFormValueType | undefined) {
 }
 
 function validateInitValue(p: TFormFieldProps): boolean | undefined {
-  if (p.type === 'progress') {
+  if (p.type === 'progress' || p.readOnly) {
     return true;
   }
   return undefined;
