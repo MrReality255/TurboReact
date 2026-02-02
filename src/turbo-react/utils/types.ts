@@ -1,42 +1,42 @@
 export type TControlProps = TPaletteProps & {
-  autoFocus?: boolean;
-  disabled?: boolean;
-};
+    autoFocus?: boolean
+    disabled?: boolean
+}
 
 export type TInputProps = TControlProps & {
-  defaultValue?: string;
-  value?: string;
-  onChange?: (newValue: string) => void;
-  onChanging?: (newValue: string) => string;
-};
+    defaultValue?: string
+    value?: string
+    onChange?: (newValue: string) => void
+    onChanging?: (newValue: string) => string
+}
 
 export type TMouseState = {
-  x: number;
-  y: number;
-  buttons: number;
-};
+    x: number
+    y: number
+    buttons: number
+}
 
 export type TPaletteProps = {
-  palette?: TPalette;
-};
+    palette?: TPalette
+}
 
 export type TViewProps = TPaletteProps & {
-  children?: React.ReactNode;
-};
+    children?: React.ReactNode
+}
 
 export type TPalette =
-  | "blue"
-  | "green"
-  | "cyan"
-  | "grey"
-  | "dark"
-  | "red"
-  | "dialog"
-  | "mono";
+    | 'blue'
+    | 'green'
+    | 'cyan'
+    | 'grey'
+    | 'dark'
+    | 'red'
+    | 'dialog'
+    | 'mono'
 
 export type TRect = {
-  x?: number | string;
-  y?: number | string;
-  x2?: number | string;
-  y2?: number | string;
-};
+    x?: number | string
+    y?: number | string
+    x2?: number | string
+    y2?: number | string
+}

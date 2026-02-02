@@ -1,13 +1,15 @@
-import { createContext } from "react";
-import { TPalette } from "../utils/types";
+import { createContext } from 'react'
+import { TPalette } from '../utils/types'
 
-export const CtxPalette = createContext<TPalette>("blue");
+export const CtxPalette = createContext<TPalette>('blue')
 
 export function TPaletteProvider(p: {
-  palette: TPalette;
-  children?: React.ReactNode;
+    palette: TPalette
+    children?: React.ReactNode
 }) {
-  return (
-    <CtxPalette.Provider value={p.palette}>{p.children}</CtxPalette.Provider>
-  );
+    return (
+        <CtxPalette.Provider value={p.palette}>
+            {p.children}
+        </CtxPalette.Provider>
+    )
 }

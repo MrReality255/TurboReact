@@ -1,7 +1,7 @@
-export * from "./types";
+export * from './types'
 
-export * from "./input";
-export * from "./math";
-export * from "./misc";
-export * from "./strings";
-export * from "./view";
+export * from './input'
+export * from './math'
+export * from './misc'
+export * from './strings'
+export * from './view'

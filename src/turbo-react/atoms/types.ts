@@ -1,230 +1,240 @@
-import { CSSProperties, RefObject } from 'react';
-import { TControlProps, TInputProps, TPalette, TPaletteProps, TRect, TViewProps } from '../utils/types';
+import { CSSProperties, RefObject } from 'react'
+import {
+    TControlProps,
+    TInputProps,
+    TPalette,
+    TPaletteProps,
+    TRect,
+    TViewProps,
+} from '../utils/types'
 
 export type TCompactKeyEvent = {
-  stopPropagation: () => void;
-};
+    stopPropagation: () => void
+}
 
-export type TAlignType = 'left' | 'center' | 'right';
-export type TButtonVariant = 'standard' | 'plain' | 'link' | 'text';
-export type TTextBoxMode = 'text' | 'password' | 'number' | 'email';
-export type TWindowInnerPadding = 'none' | 'space';
+export type TAlignType = 'left' | 'center' | 'right'
+export type TButtonVariant = 'standard' | 'plain' | 'link' | 'text'
+export type TTextBoxMode = 'text' | 'password' | 'number' | 'email'
+export type TWindowInnerPadding = 'none' | 'space'
 
 export type TButtonProps = TControlProps & {
-  children?: React.ReactNode;
+    children?: React.ReactNode
 
-  default?: boolean;
-  down?: boolean;
-  fill?: boolean;
-  variant?: TButtonVariant;
-  width?: string | number;
-  w0?: boolean;
-  w1?: boolean;
-  onClick?: () => void;
-};
+    default?: boolean
+    down?: boolean
+    fill?: boolean
+    variant?: TButtonVariant
+    width?: string | number
+    w0?: boolean
+    w1?: boolean
+    onClick?: () => void
+}
 
 export type TToggleButtonProps = TButtonProps & {
-  textOn?: string;
-  textOff?: string;
-  gap?: string | number;
-};
+    textOn?: string
+    textOff?: string
+    gap?: string | number
+}
 
 export type TCheckBoxProps = TInputProps & {
-  caption?: string;
-};
+    caption?: string
+}
 
-export type TDropDownMode = 'select' | 'combo';
+export type TDropDownMode = 'select' | 'combo'
 
 export type TDropDownProps = Omit<TTextBoxProps, 'mode'> & {
-  hasFilter?: boolean;
-  filterCaption?: string;
-  items: TMenuItem[];
-  inputRef?: RefObject<HTMLInputElement>;
-  mode?: TDropDownMode;
-  wrapperRef?: RefObject<HTMLDivElement>;
-  windowPalette?: TPalette;
+    hasFilter?: boolean
+    filterCaption?: string
+    items: TMenuItem[]
+    inputRef?: RefObject<HTMLInputElement>
+    mode?: TDropDownMode
+    wrapperRef?: RefObject<HTMLDivElement>
+    windowPalette?: TPalette
 
-  onMatchFilter?: (item: TMenuItem, filter: string) => boolean;
-};
+    onMatchFilter?: (item: TMenuItem, filter: string) => boolean
+}
 
-export type TErrorPanelProps = TViewProps;
+export type TErrorPanelProps = TViewProps
 
 export type TGlassEvent = {
-  clientX: number;
-  clientY: number;
-  buttons: number;
-};
+    clientX: number
+    clientY: number
+    buttons: number
+}
 
 export type TGlassProps = {
-  backdrop?: boolean;
-  children?: React.ReactNode;
-  visible: boolean;
-  onClick?: () => void;
-  onMouseMove?: (e: TGlassEvent) => void;
-  onMouseUp?: (e: TGlassEvent) => void;
-};
+    backdrop?: boolean
+    children?: React.ReactNode
+    visible: boolean
+    onClick?: () => void
+    onMouseMove?: (e: TGlassEvent) => void
+    onMouseUp?: (e: TGlassEvent) => void
+}
 
 export type TGroupBoxProps = TViewProps & {
-  caption?: string;
-  disabled?: boolean;
-  height?: string | number;
-  width?: string | number;
-};
-export type THeadingProps = TViewProps;
+    caption?: string
+    disabled?: boolean
+    height?: string | number
+    width?: string | number
+}
+export type THeadingProps = TViewProps
 
 export type TMenuItem = {
-  id: string;
-  disabled?: boolean;
-  caption?: string;
-  prefix?: string;
-  prefixColor?: string;
-  prefixWidth?: string | number;
-  secondary?: string;
-  secondaryColor?: string;
-  selected?: boolean;
-  withSeparator?: boolean;
-};
+    id: string
+    disabled?: boolean
+    caption?: string
+    prefix?: string
+    prefixColor?: string
+    prefixWidth?: string | number
+    secondary?: string
+    secondaryColor?: string
+    selected?: boolean
+    withSeparator?: boolean
+}
 
 export type TMenuEventHandlerRef = {
-  current: null | ((keyCode: string) => boolean);
-};
+    current: null | ((keyCode: string) => boolean)
+}
 
 export type TMenuProps = TPaletteProps & {
-  selectedRef?: RefObject<HTMLAnchorElement | null>;
-  menuEventHandlerRef?: TMenuEventHandlerRef;
+    selectedRef?: RefObject<HTMLAnchorElement | null>
+    menuEventHandlerRef?: TMenuEventHandlerRef
 
-  items: TMenuItem[];
-  onClick?: (id: string) => void;
-  onSelect?: (id: string) => void;
-};
+    items: TMenuItem[]
+    onClick?: (id: string) => void
+    onSelect?: (id: string) => void
+}
 
 export type TNameValueItem = {
-  name: string | React.ReactNode;
-  value: string | React.ReactNode;
-  action?: string | React.ReactNode;
-};
+    name: string | React.ReactNode
+    value: string | React.ReactNode
+    action?: string | React.ReactNode
+}
 
 export type TNameValueProps = TViewProps & {
-  name?: string | React.ReactNode;
-  action?: string | React.ReactNode;
-  actionWidth?: string | number;
-  labelWidth?: string | number;
-  items?: TNameValueItem[];
-};
+    name?: string | React.ReactNode
+    action?: string | React.ReactNode
+    actionWidth?: string | number
+    labelWidth?: string | number
+    items?: TNameValueItem[]
+}
 
 export type TNotificationProps = TViewProps & {
-  style?: CSSProperties;
-  timeout?: number;
-};
+    style?: CSSProperties
+    timeout?: number
+}
 
-export type TClosingEffect = 'resize' | 'opacity';
+export type TClosingEffect = 'resize' | 'opacity'
 
 export type TClosingEffectProps = {
-  animationDuration?: number;
-  effect?: TClosingEffect;
-  emptyMode?: boolean;
-  onClose?: () => void;
-  onRender: (closeFct: () => void, props: CSSProperties) => React.ReactNode;
-};
+    animationDuration?: number
+    effect?: TClosingEffect
+    emptyMode?: boolean
+    onClose?: () => void
+    onRender: (closeFct: () => void, props: CSSProperties) => React.ReactNode
+}
 
 export type TRadioGroupItem = {
-  id: string;
-  caption: string;
-};
+    id: string
+    caption: string
+}
 
 export type TRadioGroupProps = {
-  items: TRadioGroupItem[];
-};
+    items: TRadioGroupItem[]
+}
 
 export type TProgressBarProps = TInputProps & {
-  blockWidth?: number;
-  caption?: string;
-  left?: number;
-  readOnly?: boolean;
-  showValue?: boolean;
-};
+    blockWidth?: number
+    caption?: string
+    left?: number
+    readOnly?: boolean
+    showValue?: boolean
+}
 
 export type TRadioButtonProps = TInputProps & {
-  caption?: string;
-};
+    caption?: string
+}
 
-export type TTableValueProvider<T> = string | React.ReactNode | ((item: T) => string | React.ReactNode);
+export type TTableValueProvider<T> =
+    | string
+    | React.ReactNode
+    | ((item: T) => string | React.ReactNode)
 
 export type TTableColumnProps<T extends object> = {
-  id: string;
-  align?: TAlignType;
-  caption?: string | React.ReactNode;
-  data?: TTableValueProvider<T>;
-  icon?: string;
-  sortIcon?: 'up' | 'down';
-  width?: string | number;
-};
+    id: string
+    align?: TAlignType
+    caption?: string | React.ReactNode
+    data?: TTableValueProvider<T>
+    icon?: string
+    sortIcon?: 'up' | 'down'
+    width?: string | number
+}
 
 export type TTableProps<T extends object> = TPaletteProps & {
-  data: T[];
-  columns: TTableColumnProps<T>[];
-  onHeaderClick?: (col: TTableColumnProps<T>, idx: number) => void;
-  onRowClick?: (value: T, idx: number) => void;
-};
+    data: T[]
+    columns: TTableColumnProps<T>[]
+    onHeaderClick?: (col: TTableColumnProps<T>, idx: number) => void
+    onRowClick?: (value: T, idx: number) => void
+}
 
 export type TTextBoxProps = TInputProps & {
-  align?: TAlignType;
-  autoComplete?: boolean;
-  caption?: string;
-  mode?: TTextBoxMode;
-  prefix?: string;
-  prefixColor?: string;
-  prefixStyle?: CSSProperties;
-  readOnly?: boolean;
-  suffix?: React.ReactNode;
-  suffixColor?: string;
-  suffixStyle?: CSSProperties;
-  inputStyle?: CSSProperties;
+    align?: TAlignType
+    autoComplete?: boolean
+    caption?: string
+    mode?: TTextBoxMode
+    prefix?: string
+    prefixColor?: string
+    prefixStyle?: CSSProperties
+    readOnly?: boolean
+    suffix?: React.ReactNode
+    suffixColor?: string
+    suffixStyle?: CSSProperties
+    inputStyle?: CSSProperties
 
-  wrapperRef?: RefObject<HTMLDivElement | null>;
-  inputRef?: RefObject<HTMLInputElement | null>;
+    wrapperRef?: RefObject<HTMLDivElement | null>
+    inputRef?: RefObject<HTMLInputElement | null>
 
-  onBlur?: () => void;
-  onFocus?: () => void;
-  onClick?: () => void;
-  onKeyDown?: (key: string, event: TCompactKeyEvent) => void;
-};
+    onBlur?: () => void
+    onFocus?: () => void
+    onClick?: () => void
+    onKeyDown?: (key: string, event: TCompactKeyEvent) => void
+}
 
 export type TViewportProps = {
-  center?: boolean;
-  centerV?: boolean;
-  centerH?: boolean;
-  fill?: boolean;
-  children?: React.ReactNode;
-  width?: string | number;
-  height?: string | number;
-  rect?: TRect;
-  bgColor?: string;
-  scrollbar?: boolean;
-  divRef?: RefObject<HTMLDivElement | null>;
-  style?: CSSProperties;
-  padding?: {
-    left?: string | number;
-    right?: string | number;
-    top?: string | number;
-    bottom?: string | number;
-  };
-  onClick?: (e: { stopPropagation: () => void }) => void;
-};
+    center?: boolean
+    centerV?: boolean
+    centerH?: boolean
+    fill?: boolean
+    children?: React.ReactNode
+    width?: string | number
+    height?: string | number
+    rect?: TRect
+    bgColor?: string
+    scrollbar?: boolean
+    divRef?: RefObject<HTMLDivElement | null>
+    style?: CSSProperties
+    padding?: {
+        left?: string | number
+        right?: string | number
+        top?: string | number
+        bottom?: string | number
+    }
+    onClick?: (e: { stopPropagation: () => void }) => void
+}
 
 export type TWindowProps = TPaletteProps & {
-  children?: React.ReactNode;
+    children?: React.ReactNode
 
-  fill?: boolean;
-  noShadow?: boolean;
-  border?: 'std' | 'single' | 'none';
-  outerPadding?: boolean;
-  innerPadding?: TWindowInnerPadding;
-  caption?: string;
-  space?: boolean;
-  style?: CSSProperties;
+    fill?: boolean
+    noShadow?: boolean
+    border?: 'std' | 'single' | 'none'
+    outerPadding?: boolean
+    innerPadding?: TWindowInnerPadding
+    caption?: string
+    space?: boolean
+    style?: CSSProperties
 
-  onClick?: () => void;
-  onClose?: () => void;
-  onHotKey?: (hotkey: string, event: KeyboardEvent) => void;
-};
+    onClick?: () => void
+    onClose?: () => void
+    onHotKey?: (hotkey: string, event: KeyboardEvent) => void
+}

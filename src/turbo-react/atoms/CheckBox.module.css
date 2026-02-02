@@ -1,83 +1,83 @@
 div.cbWrapper:focus-within > label {
-  color: #fff;
+    color: #fff;
 }
 div.cbWrapper:focus-within > input {
-  color: #fff;
+    color: #fff;
 }
 
 label.cb {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 input.cb::before {
-  content: '[ ]';
+    content: '[ ]';
 }
 
 input.cb:checked::before {
-  content: '[x]';
+    content: '[x]';
 }
 
 input.cb {
-  cursor: pointer;
-  font-family: monospace;
-  color: inherit;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+    cursor: pointer;
+    font-family: monospace;
+    color: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 input.cb:disabled {
-  color: #999 !important;
+    color: #999 !important;
 }
 
 label.cb.disabled {
-  color: #999 !important;
+    color: #999 !important;
 }
 
 input.cb + label.cb:hover {
-  color: #fff;
+    color: #fff;
 }
 
 input.cb:hover {
-  color: #fff;
+    color: #fff;
 }
 
 input.cb.mono:disabled {
-  color: #444 !important;
+    color: #444 !important;
 }
 
 label.cb.mono.disabled {
-  color: #444 !important;
+    color: #444 !important;
 }
 
 input.cb.dialog:disabled {
-  color: #999;
+    color: #999;
 }
 
 label.cb.dialog.disabled {
-  color: #999;
+    color: #999;
 }
 
 input.cb.green + label.cb:hover {
-  color: #ff0;
+    color: #ff0;
 }
 
 input.cb.green:hover {
-  color: #ff0;
+    color: #ff0;
 }
 
 input.cb.dialog + label.cb:hover {
-  color: #fff;
+    color: #fff;
 }
 
 input.cb.dialog:hover {
-  color: #fff;
+    color: #fff;
 }
 
 label.cb.dialog {
-  color: #000;
+    color: #000;
 }
 
 input.cb.dialog {
-  color: #000;
+    color: #000;
 }
