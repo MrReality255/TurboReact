@@ -1,8 +1,6 @@
-import { TAppContainer } from '@mrreality255/turbo-react-forms';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import { DemoPageWindows } from './DemoPageWindows';
 
-/*
+import { DemoPageWindows } from './DemoPageWIndows';
 import { DemoPageButtons } from './DemoPageButtons';
 import { DemoPageOtherControls, DemoPageTextBoxes } from './DemoAppInputs';
 import { DemoPageSelects } from './DemoPageSelects';
@@ -11,7 +9,6 @@ import { DemoPageTables } from './DemoPageTables';
 import { TAppContainer } from '../turbo-react/app/AppContainer';
 import { DemoPageMisc } from './DemoPageMisc';
 import { DemoPageDialogs } from './DemoPageDialog';
-*/
 
 export default function DemoApp() {
   return (
@@ -26,8 +23,7 @@ function AppRouter() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Main></Main>}></Route>
-        <Route path="/windows" element={<DemoPageWindows />}></Route>
-        {/*}<Route path="/buttons" element={<DemoPageButtons />}></Route>
+        <Route path="/buttons" element={<DemoPageButtons />}></Route>
         <Route path="/dialogs" element={<DemoPageDialogs />}></Route>
         <Route path="/inputs" element={<DemoPageOtherControls />}></Route>
         <Route path="/menus" element={<DemoPageMenus />}></Route>
@@ -35,7 +31,7 @@ function AppRouter() {
         <Route path="/selects" element={<DemoPageSelects />}></Route>
         <Route path="/tables" element={<DemoPageTables />}></Route>
         <Route path="/textboxes" element={<DemoPageTextBoxes />}></Route>
-        {*/}
+        <Route path="/windows" element={<DemoPageWindows />}></Route>
       </Routes>
     </HashRouter>
   );

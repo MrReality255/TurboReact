@@ -1,6 +1,5 @@
-// export * from "./types";
+export * from "./types";
 
-/*
 export * from "./Buttons";
 export * from "./Checkbox";
 export * from "./ClosingEffect";
@@ -17,6 +16,5 @@ export * from "./ProgressBar";
 export * from "./RadioButton";
 export * from "./Table";
 export * from "./TextBox";
-*/
 export * from "./Viewport";
 export * from "./Window";
