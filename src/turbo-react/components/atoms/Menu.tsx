@@ -1,10 +1,8 @@
-
-
-import usePalette from '../../hooks/usePalette';
-import styles from './Menu.module.css';
-import { KeyboardEvent, useEffect, useRef } from 'react';
-import { MathUtils } from '@mrreality255/turbo-react-forms';
-import { TMenuProps } from '.';
+import usePalette from "../../hooks/usePalette";
+import styles from "./Menu.module.css";
+import { KeyboardEvent, useEffect, useRef } from "react";
+import { MathUtils } from "@mrreality255/turbo-react-forms";
+import { TMenuProps } from ".";
 
 export function TMenu(p: TMenuProps) {
   const plt = usePalette(styles, p);
@@ -20,7 +18,7 @@ export function TMenu(p: TMenuProps) {
 
   useEffect(() => {
     if (selRef.current) {
-      selRef.current.parentElement?.scrollIntoView({ behavior: 'smooth' });
+      selRef.current.parentElement?.scrollIntoView({ behavior: "smooth" });
     }
   }, [p.items[selectedItem]?.id]);
 
@@ -51,11 +49,17 @@ export function TMenu(p: TMenuProps) {
                 p.onClick?.(item.id);
               }}
             >
-              <span className={styles.prefix} style={{ color: item.prefixColor, width: item.prefixWidth }}>
+              <span
+                className={styles.prefix}
+                style={{ color: item.prefixColor, width: item.prefixWidth }}
+              >
                 {item.prefix}
               </span>
-              {item.caption || item.id}
-              <span className={styles.secondary} style={{ color: item.secondaryColor }}>
+              {item.label || item.id}
+              <span
+                className={styles.secondary}
+                style={{ color: item.secondaryColor }}
+              >
                 {item.secondary}
               </span>
             </a>
@@ -67,25 +71,25 @@ export function TMenu(p: TMenuProps) {
 
   function handleMenuEvent(keyCode: string): boolean {
     switch (keyCode) {
-      case 'ArrowDown':
+      case "ArrowDown":
         p.onSelect?.(findNext(1, true));
         return true;
-      case 'End':
+      case "End":
         p.onSelect?.(findNext(-1, false));
         return true;
-      case 'Home':
+      case "Home":
         p.onSelect?.(findNext(0, false));
         return true;
-      case 'PageDown':
+      case "PageDown":
         p.onSelect?.(findNext(10, true));
         return true;
-      case 'PageUp':
+      case "PageUp":
         p.onSelect?.(findNext(-10, true));
         return true;
-      case 'ArrowUp':
+      case "ArrowUp":
         p.onSelect?.(findNext(-1, true));
         return true;
-      case 'Enter':
+      case "Enter":
         const selItem = p.items.find((a) => a.selected);
         if (selItem) {
           p.onClick?.(selItem.id);

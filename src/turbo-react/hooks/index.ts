@@ -1,7 +1,6 @@
 /*
 export * from "./types";
 
-export * from "./useAutoFocus";
 export * from "./useClosingEffect";
 export * from "./useDataContext";
 export * from "./useDialog";
@@ -15,6 +14,7 @@ export * from "./useValue";
 export * from "./useWidth";
 */
 
+export * from "./useAutoFocus";
 export * from "./useMobile";
 export * from "./usePalette";
 export * from "./useWidth";

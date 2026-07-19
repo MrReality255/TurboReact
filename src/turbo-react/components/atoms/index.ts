@@ -16,11 +16,11 @@ export * from "./Notification";
 export * from "./ProgressBar";
 export * from "./RadioButton";
 export * from "./Table";
-export * from "./TextBox";
 */
 export * from "./Buttons";
 export * from "./Glass";
 export * from "./Heading";
 export * from "./Menu";
+export * from "./TextBox";
 export * from "./Viewport";
 export * from "./Window";

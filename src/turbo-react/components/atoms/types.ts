@@ -1,9 +1,14 @@
 import { CSSProperties, RefObject } from "react";
 import { TControlProps, TPaletteProps, TRect, TViewProps } from "../types";
 
+export interface ICompactKeyEvent {
+  stopPropagation: () => void;
+}
 export type TButtonVariant = "standard" | "plain" | "link" | "text";
+export type TTextBoxMode = "text" | "password" | "number" | "email";
 export type TWindowInnerPadding = "none" | "space";
 
+export type TAlignType = "left" | "center" | "right";
 export type TButtonProps = TControlProps & {
   children?: React.ReactNode;
 
@@ -34,10 +39,17 @@ export type TGlassProps = {
 
 export type THeadingProps = TViewProps;
 
+export type TInputProps = TControlProps & {
+  defaultValue?: string;
+  readOnly?: boolean;
+  value?: string;
+  onChange?: (newValue: string) => void;
+};
+
 export type TMenuItemProps = {
   id: string;
   disabled?: boolean;
-  caption?: string;
+  label?: string;
   prefix?: string;
   prefixColor?: string;
   prefixWidth?: string | number;
@@ -46,6 +58,8 @@ export type TMenuItemProps = {
   selected?: boolean;
   withSeparator?: boolean;
 };
+
+export type TMenuItem = TMenuItemProps;
 
 export type TMenuEventHandlerRef = {
   current: null | ((keyCode: string) => boolean);
@@ -58,6 +72,29 @@ export type TMenuProps = TPaletteProps & {
   items: TMenuItemProps[];
   onClick?: (id: string) => void;
   onSelect?: (id: string) => void;
+};
+
+export type TTextBoxProps = TInputProps & {
+  align?: TAlignType;
+  autoComplete?: boolean;
+  label?: string;
+  mode?: TTextBoxMode;
+  prefix?: string;
+  prefixColor?: string;
+  prefixStyle?: CSSProperties;
+  suffix?: React.ReactNode;
+  suffixColor?: string;
+  suffixStyle?: CSSProperties;
+  inputStyle?: CSSProperties;
+
+  wrapperRef?: RefObject<HTMLDivElement | null>;
+  inputRef?: RefObject<HTMLInputElement | null>;
+
+  onBlur?: () => void;
+  onFocus?: () => void;
+  onClick?: () => void;
+  onKeyDown?: (key: string, event: ICompactKeyEvent) => void;
+  onEnter?: () => void;
 };
 
 export type TViewportProps = {

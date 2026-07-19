@@ -34,17 +34,17 @@ const menuItems = [
   { id: "windows", caption: "Windows" },
   {
     id: "dialogs",
-    caption: "Dialogs",
+    label: "Dialogs",
     withSeparator: true,
   },
-  { id: "buttons", caption: "Buttons" },
-  { id: "textboxes", caption: "Textboxes" },
-  { id: "selects", caption: "Select" },
-  { id: "inputs", caption: "Other inputs" },
-  { id: "no-option", caption: "3D Graphics", disabled: true },
-  { id: "menus", caption: "Menus" },
-  { id: "tables", caption: "Tables", withSeparator: true },
-  { id: "misc", caption: "Misc" },
+  { id: "buttons", label: "Buttons" },
+  { id: "textboxes", label: "Textboxes" },
+  { id: "selects", label: "Select" },
+  { id: "inputs", label: "Other inputs" },
+  { id: "no-option", label: "3D Graphics", disabled: true },
+  { id: "menus", label: "Menus" },
+  { id: "tables", label: "Tables", withSeparator: true },
+  { id: "misc", label: "Misc" },
 ];
 
 export function DemoAppLayout(p: TDemoAppProps) {

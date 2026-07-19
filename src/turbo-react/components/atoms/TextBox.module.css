@@ -1,0 +1,98 @@
+input.tb {
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+  border-style: solid;
+  border-width: 0;
+  font-family: monospace;
+  text-decoration: none;
+  outline: none;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  background-color: inherit;
+  color: inherit;
+}
+
+input.tb:disabled {
+  color: #999;
+}
+
+input.tb[type="number"]::-webkit-inner-spin-button,
+input.tb[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+div.inputWrapper {
+  background-color: #000;
+  color: #ff0;
+  width: 100%;
+  display: flex;
+}
+
+div.inputWrapper:focus-within {
+  background-color: #222;
+}
+
+div.inputWrapper > div.prefix {
+  min-width: 1em;
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+}
+
+div.inputWrapper > div.prefix.empty {
+  min-width: 0.25em;
+}
+
+/* PALETTE */
+
+div.tbWrapper:focus-within > label {
+  color: #fff;
+}
+div.tbWrapper.green:focus-within > label {
+  color: #ff0;
+}
+
+div.inputWrapper.dialog {
+  background-color: #006;
+  color: #fff;
+}
+
+div.inputWrapper.dialog:focus-within {
+  background-color: #008;
+}
+
+div.inputWrapper.blue {
+  background-color: #000;
+}
+
+div.inputWrapper.blue:focus-within {
+  background-color: #222;
+}
+
+div.inputWrapper.grey {
+  color: #fff;
+}
+
+div.inputWrapper.mono {
+  background-color: #333;
+  color: #fff;
+}
+
+div.inputWrapper.red {
+  background-color: #600;
+  color: #ff0;
+}
+
+div.inputWrapper.red:focus-within {
+  background-color: #000;
+  color: #ff0;
+}
+
+div.inputWrapper.green {
+  background-color: #020;
+}
+
+div.inputWrapper.green:focus-within {
+  background-color: #000;
+}
