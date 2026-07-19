@@ -16,3 +16,7 @@ export type TRect = {
   x2?: number | string;
   y2?: number | string;
 };
+
+export type TViewProps = TPaletteProps & {
+  children?: React.ReactNode;
+};

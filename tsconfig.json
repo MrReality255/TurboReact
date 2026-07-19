@@ -18,11 +18,7 @@
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": false,
-    "outDir": "./dist",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/turbo-react/*"]
-    }
+    "outDir": "./dist"
   },
   "include": ["src/turbo-react"],
   "references": [{ "path": "./tsconfig.node.json" }]

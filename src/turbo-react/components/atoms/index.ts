@@ -20,6 +20,7 @@ export * from "./TextBox";
 */
 export * from "./Buttons";
 export * from "./Glass";
+export * from "./Heading";
 export * from "./Menu";
 export * from "./Viewport";
 export * from "./Window";

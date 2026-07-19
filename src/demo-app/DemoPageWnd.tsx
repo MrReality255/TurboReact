@@ -3,9 +3,11 @@ import { useState } from "react";
 import { LoremIpsum } from "./demo_data";
 
 import { TRowLayout, TViewport, TWindow } from "../turbo-react";
+import { useClosingEffect } from "@mrreality255/turbo-react-forms";
 
 export function DemoPageWindows() {
   const [isVisible, setVisible] = useState(true);
+  const ce = useClosingEffect({ mode: "opacity" });
 
   return (
     <DemoAppLayout selected="windows">
@@ -48,9 +50,10 @@ export function DemoPageWindows() {
           </TWindow>
           {isVisible && (
             <TWindow
+              style={{ ...ce.get() }}
               caption="Some other windows"
               palette="green"
-              onClose={() => setVisible(false)}
+              onClose={() => handleClose()}
             >
               Put more text inside. This window can close.
             </TWindow>
@@ -67,9 +70,11 @@ export function DemoPageWindows() {
   );
 
   function handleClose() {
-    setVisible(false);
+    // setVisible(false);
+    ce.hide(() => setVisible(false));
     setTimeout(() => {
       setVisible(true);
+      ce.show();
     }, 3000);
   }
 }

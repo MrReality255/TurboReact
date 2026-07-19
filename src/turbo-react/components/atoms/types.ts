@@ -1,5 +1,5 @@
 import { CSSProperties, RefObject } from "react";
-import { TControlProps, TPaletteProps, TRect } from "../types";
+import { TControlProps, TPaletteProps, TRect, TViewProps } from "../types";
 
 export type TButtonVariant = "standard" | "plain" | "link" | "text";
 export type TWindowInnerPadding = "none" | "space";
@@ -16,6 +16,23 @@ export type TButtonProps = TControlProps & {
   w1?: boolean;
   onClick?: () => void;
 };
+
+export type TGlassEvent = {
+  clientX: number;
+  clientY: number;
+  buttons: number;
+};
+
+export type TGlassProps = {
+  backdrop?: boolean;
+  children?: React.ReactNode;
+  visible: boolean;
+  onClick?: () => void;
+  onMouseMove?: (e: TGlassEvent) => void;
+  onMouseUp?: (e: TGlassEvent) => void;
+};
+
+export type THeadingProps = TViewProps;
 
 export type TMenuItemProps = {
   id: string;
