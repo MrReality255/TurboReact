@@ -3,6 +3,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 
 import { DemoPageButtons } from "./DemoPageButtons";
 import { DemoPageMenus } from "./DemoPageMenus";
+import { DemoPageTables } from "./DemoPageTables";
 import { DemoPageTextBoxes } from "./DemoAppTextBoxes";
 import { DemoPageWindows } from "./DemoPageWnd";
 
@@ -34,12 +35,12 @@ function AppRouter() {
         <Route path="/buttons" element={<DemoPageButtons />}></Route>
         <Route path="/textboxes" element={<DemoPageTextBoxes />}></Route>
         <Route path="/menus" element={<DemoPageMenus />}></Route>
+        <Route path="/tables" element={<DemoPageTables />}></Route>
         {/*}
         <Route path="/dialogs" element={<DemoPageDialogs />}></Route>
         <Route path="/inputs" element={<DemoPageOtherControls />}></Route>
         <Route path="/misc" element={<DemoPageMisc />}></Route>
         <Route path="/selects" element={<DemoPageSelects />}></Route>
-        <Route path="/tables" element={<DemoPageTables />}></Route>
         {*/}
       </Routes>
     </HashRouter>

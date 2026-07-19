@@ -21,6 +21,8 @@ export * from "./Buttons";
 export * from "./Glass";
 export * from "./Heading";
 export * from "./Menu";
+export * from "./NameValue";
+export * from "./Table";
 export * from "./TextBox";
 export * from "./Viewport";
 export * from "./Window";

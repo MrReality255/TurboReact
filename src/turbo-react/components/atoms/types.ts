@@ -74,6 +74,44 @@ export type TMenuProps = TPaletteProps & {
   onSelect?: (id: string) => void;
 };
 
+export type TNameValueProps = TViewProps & {
+  name?: string | React.ReactNode;
+  action?: string | React.ReactNode;
+  actionWidth?: string | number;
+  labelWidth?: string | number;
+  items?: TNameValueItemProps[];
+};
+
+export type TNameValueItemProps = {
+  name: string | React.ReactNode;
+  value: string | React.ReactNode;
+  action?: string | React.ReactNode;
+};
+
+export type TTableColumnProps<T extends object> = {
+  id: string;
+  align?: TAlignType;
+  caption?: string | React.ReactNode;
+  data?: TTableValueProvider<T>;
+  onFormat?: (value: unknown) => string | React.ReactNode;
+  icon?: string;
+  sortIcon?: "up" | "down";
+  width?: string | number;
+};
+
+export type TTableProps<T extends object> = TPaletteProps & {
+  data: T[];
+  columns: TTableColumnProps<T>[];
+  rowKey?: (row: T, idx: number) => string | number;
+  onHeaderClick?: (col: TTableColumnProps<T>, idx: number) => void;
+  onRowClick?: (value: T, idx: number) => void;
+};
+
+export type TTableValueProvider<T extends object> =
+  | (keyof T & string)
+  | React.ReactNode
+  | ((item: T) => string | React.ReactNode);
+
 export type TTextBoxProps = TInputProps & {
   align?: TAlignType;
   autoComplete?: boolean;
