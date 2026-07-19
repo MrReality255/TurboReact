@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { TWindowProps } from '.';
-import { TPaletteProvider, StrUtils } from '..';
+import { TPaletteProvider } from '..';
 import usePalette from '../hooks/usePalette';
 
 import styles from './Window.module.css';
+import { DataUtils } from '@mrreality255/turbo-react-forms';
 
 export function TWindow(p: TWindowProps) {
   return p.fill ? <WindowFill {...p}></WindowFill> : <WindowAutoSize {...p}></WindowAutoSize>;
