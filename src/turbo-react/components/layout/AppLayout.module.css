@@ -1,0 +1,11 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #033;
+  font-family: monospace;
+  font-size: 14px;
+  color: #fff;
+}
+
+div.appLayout {
+}

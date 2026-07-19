@@ -7,4 +7,7 @@ export * from "./layout";
 export * from "./utils";
 */
 
-export * from "./atoms";
+export * from "./components/atoms";
+export * from "./components/layout";
+export * from "./components/providers";
+export * from "./hooks";
