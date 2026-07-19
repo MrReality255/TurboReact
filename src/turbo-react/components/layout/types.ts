@@ -1,5 +1,7 @@
 import { CSSProperties } from "react";
-import { TPaletteProps } from "../types";
+import { TPalette, TPaletteProps } from "../types";
+
+export type TScrollbarPalette = TPalette;
 
 export type THorizAlignMode = "right";
 
@@ -29,6 +31,7 @@ export type TAppLayoutProps = TPaletteProps & {
   sizes?: TAppLayoutSizes;
   sizeUnit?: string;
   mobile?: TAppLayoutMobileProps;
+  scrollbarPalette?: TScrollbarPalette;
 };
 
 export type TColLayoutProps = {

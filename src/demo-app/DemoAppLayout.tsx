@@ -105,6 +105,7 @@ export function DemoAppLayout(p: TDemoAppProps) {
           <MainMenu {...p} onNavigate={n} />
         </TWindow>
       }
+      scrollbarPalette="mono"
     >
       {p.children}
     </TAppLayout>
