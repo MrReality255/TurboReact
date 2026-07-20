@@ -99,6 +99,11 @@ export type TNameValueItemProps = {
   action?: string | React.ReactNode;
 };
 
+export type TNotificationProps = TViewProps & {
+  style?: CSSProperties;
+  timeout?: number;
+};
+
 export type TProgressBarProps = TInputProps & {
   blockWidth?: number;
   label?: string;

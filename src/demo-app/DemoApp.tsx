@@ -7,6 +7,7 @@ import { DemoPageTables } from "./DemoPageTables";
 import { DemoPageTextBoxes } from "./DemoAppTextBoxes";
 import { DemoPageWindows } from "./DemoPageWnd";
 import { DemoPageOtherControls } from "./DemoAppInputs";
+import { DemoPageMisc } from "./DemoPageMisc";
 
 /*
 import { DemoPageButtons } from './DemoPageButtons';
@@ -38,9 +39,9 @@ function AppRouter() {
         <Route path="/menus" element={<DemoPageMenus />}></Route>
         <Route path="/tables" element={<DemoPageTables />}></Route>
         <Route path="/inputs" element={<DemoPageOtherControls />}></Route>
+        <Route path="/misc" element={<DemoPageMisc />}></Route>
         {/*}
         <Route path="/dialogs" element={<DemoPageDialogs />}></Route>
-        <Route path="/misc" element={<DemoPageMisc />}></Route>
         <Route path="/selects" element={<DemoPageSelects />}></Route>
         {*/}
       </Routes>
