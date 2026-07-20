@@ -31,7 +31,7 @@ export type TDemoAppProps = {
 };
 
 const menuItems = [
-  { id: "windows", caption: "Windows" },
+  { id: "windows", label: "Windows" },
   {
     id: "dialogs",
     label: "Dialogs",

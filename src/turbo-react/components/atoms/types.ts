@@ -22,6 +22,10 @@ export type TButtonProps = TControlProps & {
   onClick?: () => void;
 };
 
+export type TLabelInputProps = TInputProps & {
+  label?: string;
+};
+
 export type TGlassEvent = {
   clientX: number;
   clientY: number;
@@ -35,6 +39,13 @@ export type TGlassProps = {
   onClick?: () => void;
   onMouseMove?: (e: TGlassEvent) => void;
   onMouseUp?: (e: TGlassEvent) => void;
+};
+
+export type TGroupBoxProps = TViewProps & {
+  label?: string;
+  disabled?: boolean;
+  height?: string | number;
+  width?: string | number;
 };
 
 export type THeadingProps = TViewProps;
@@ -86,6 +97,14 @@ export type TNameValueItemProps = {
   name: string | React.ReactNode;
   value: string | React.ReactNode;
   action?: string | React.ReactNode;
+};
+
+export type TProgressBarProps = TInputProps & {
+  blockWidth?: number;
+  label?: string;
+  left?: number;
+  readOnly?: boolean;
+  showValue?: boolean;
 };
 
 export type TTableColumnProps<T extends object> = {
