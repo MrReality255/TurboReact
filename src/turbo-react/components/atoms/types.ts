@@ -95,6 +95,7 @@ export type TTableColumnProps<T extends object> = {
   data?: TTableValueProvider<T>;
   onFormat?: (value: unknown) => string | React.ReactNode;
   icon?: string;
+  resize?: boolean;
   sortIcon?: "up" | "down";
   width?: string | number;
 };
@@ -102,7 +103,9 @@ export type TTableColumnProps<T extends object> = {
 export type TTableProps<T extends object> = TPaletteProps & {
   data: T[];
   columns: TTableColumnProps<T>[];
+  columnWidths?: Record<string, number>;
   rowKey?: (row: T, idx: number) => string | number;
+  onColumnWidth?: (columnId: string, width: number) => void;
   onHeaderClick?: (col: TTableColumnProps<T>, idx: number) => void;
   onRowClick?: (value: T, idx: number) => void;
 };

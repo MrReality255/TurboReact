@@ -8,6 +8,10 @@ table.tb {
   overflow: auto;
 }
 
+table.tb.resizing {
+  user-select: none;
+}
+
 tr.hdr {
   background-color: #000;
 }
@@ -16,7 +20,6 @@ table.tb > thead > tr > th {
   font-weight: normal;
   color: #fff;
   padding: 3px;
-
   position: sticky;
   top: 0;
   z-index: 2;
@@ -47,6 +50,21 @@ th > span.icon {
 th > span.iconR {
   left: 0;
   right: unset;
+}
+
+th .resizeHandle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: col-resize;
+  user-select: none;
+}
+
+th .resizeHandle:hover,
+th .resizeHandleActive {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 /* PALETTE */

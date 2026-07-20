@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import styles from "./Table.module.css";
 import { DateTime } from "luxon";
@@ -14,30 +14,89 @@ import { TPalette } from "../types";
 
 export function TTable<T extends object>(props: TTableProps<T>) {
   const plt = usePalette(styles, props);
+  const [internalWidths, setInternalWidths] = useState<Record<string, number>>(
+    {},
+  );
+  const [resizingCol, setResizingCol] = useState<string | null>(null);
+  const resizeState = useRef<{
+    columnId: string;
+    startX: number;
+    startWidth: number;
+  } | null>(null);
+
+  const isColResizeControlled = !!props.onColumnWidth;
+  const columnWidths = isColResizeControlled
+    ? (props.columnWidths ?? {})
+    : internalWidths;
+
+  const handleResizeStart = useCallback(
+    function handleResizeStart(
+      columnId: string,
+      startX: number,
+      startWidth: number,
+    ) {
+      resizeState.current = { columnId, startX, startWidth };
+      setResizingCol(columnId);
+
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
+
+      function onMouseMove(e: MouseEvent) {
+        if (!resizeState.current) return;
+        const diff = e.clientX - resizeState.current.startX;
+        const newWidth = Math.max(30, resizeState.current.startWidth + diff);
+
+        if (isColResizeControlled) {
+          props.onColumnWidth?.(resizeState.current.columnId, newWidth);
+        } else {
+          setInternalWidths((prev) => ({
+            ...prev,
+            [resizeState.current!.columnId]: newWidth,
+          }));
+        }
+      }
+
+      function onMouseUp() {
+        resizeState.current = null;
+        setResizingCol(null);
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+      }
+    },
+    [isColResizeControlled, props.onColumnWidth],
+  );
 
   return (
     <TPaletteProvider palette={plt.palette}>
-      <table className={plt.styles(styles.tb)}>
+      <table
+        className={plt.styles(styles.tb, {
+          [styles.resizing]: !!resizingCol,
+        })}
+      >
         <thead>
           <tr className={styles.hdr}>
-            {props.columns.map((p, idx) => {
+            {props.columns.map(function (p, idx) {
+              const w = columnWidths[p.id];
               return (
                 <CellHeader
                   key={idx}
                   {...p}
+                  width={w ?? p.width}
                   palette={plt.palette}
+                  resizingCol={resizingCol}
+                  onResizeStart={handleResizeStart}
                   onClick={
                     props.onHeaderClick
                       ? () => props.onHeaderClick?.(p, idx)
                       : undefined
                   }
-                ></CellHeader>
+                />
               );
             })}
           </tr>
         </thead>
         <tbody>
-          {props.data.map((row, idx) => {
+          {props.data.map(function (row, idx) {
             const key = props.rowKey ? props.rowKey(row, idx) : idx;
             return (
               <tr
@@ -48,14 +107,14 @@ export function TTable<T extends object>(props: TTableProps<T>) {
                   [styles.ptr]: !!props.onRowClick,
                 })}
               >
-                {props.columns.map((p, c) => {
+                {props.columns.map(function (p, c) {
+                  const w = columnWidths[p.id];
                   return (
-                    <td key={c} style={{ textAlign: p.align }}>
-                      <CellValue
-                        d={p.data}
-                        row={row}
-                        onFormat={p.onFormat}
-                      ></CellValue>
+                    <td
+                      key={c}
+                      style={{ textAlign: p.align, width: w ?? undefined }}
+                    >
+                      <CellValue d={p.data} row={row} onFormat={p.onFormat} />
                     </td>
                   );
                 })}
@@ -69,11 +128,22 @@ export function TTable<T extends object>(props: TTableProps<T>) {
 }
 
 function CellHeader<T extends object>(
-  p: TTableColumnProps<T> & { palette: TPalette; onClick?: () => void },
+  p: TTableColumnProps<T> & {
+    palette: TPalette;
+    resizingCol: string | null;
+    onClick?: () => void;
+    onResizeStart: (
+      columnId: string,
+      startX: number,
+      startWidth: number,
+    ) => void;
+  },
 ) {
   const [showIcon, setShowIcon] = useState(false);
   const isMobile = useMobile();
   const plt = usePalette(styles, p);
+  const thRef = useRef<HTMLTableCellElement>(null);
+
   let caption = p.caption ?? p.id;
   if (!caption) {
     caption = <>&nbsp;</>;
@@ -82,8 +152,18 @@ function CellHeader<T extends object>(
   const icon = p.icon ?? getSortIcon(p);
   const iconVisible = isMobile ? !!icon : showIcon;
 
+  function handleResizeMouseDown(e: React.MouseEvent) {
+    e.stopPropagation();
+    e.preventDefault();
+    const thEl = thRef.current;
+    if (!thEl) return;
+    const startWidth = thEl.getBoundingClientRect().width;
+    p.onResizeStart(p.id, e.clientX, startWidth);
+  }
+
   return (
     <th
+      ref={thRef}
       style={{
         textAlign: p.align || "left",
         width: p.width,
@@ -104,6 +184,14 @@ function CellHeader<T extends object>(
         </span>
       )}
       {caption}
+      {p.resize && (
+        <span
+          className={plt.styles(styles.resizeHandle, {
+            [styles.resizeHandleActive]: p.resizingCol === p.id,
+          })}
+          onMouseDown={handleResizeMouseDown}
+        />
+      )}
     </th>
   );
 }

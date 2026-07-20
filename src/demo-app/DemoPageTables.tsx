@@ -16,6 +16,7 @@ export function DemoPageTables() {
   const [selectedRow, setSelectedRow] = useState("");
   const [selectedCol, setSelectedCol] = useState("");
   const [data, setData] = useState(SampleTableData);
+  const [widths, setWidths] = useState<Record<string, number>>({});
 
   function onSetData(nr: number) {
     setData(SampleTableData.filter((_, x) => x < nr));
@@ -48,21 +49,39 @@ export function DemoPageTables() {
             <TTable
               data={data}
               columns={[
-                { id: "Name", caption: "Name", data: "name", sortIcon: "down" },
+                {
+                  id: "Name",
+                  caption: "Name",
+                  data: "name",
+                  sortIcon: "down",
+                  resize: true,
+                },
                 {
                   id: "Some value",
                   data: "value1",
                   align: "center",
                   sortIcon: "up",
+                  resize: true,
                 },
                 {
                   id: "Custom value",
                   data: "customValue2",
                   align: "right",
                   icon: "up",
+                  resize: true,
                 },
-                { id: "Date", data: "date", align: "center", icon: "down" },
+                {
+                  id: "Date",
+                  data: "date",
+                  align: "center",
+                  icon: "down",
+                  resize: true,
+                },
               ]}
+              columnWidths={widths}
+              onColumnWidth={(id, w) =>
+                setWidths((prev) => ({ ...prev, [id]: w }))
+              }
               onRowClick={(item) => setSelectedRow(JSON.stringify(item))}
               onHeaderClick={(hdr) => setSelectedCol(hdr.id)}
             ></TTable>
