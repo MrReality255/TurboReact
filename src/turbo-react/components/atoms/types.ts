@@ -1,5 +1,11 @@
 import { CSSProperties, RefObject } from "react";
-import { TControlProps, TPaletteProps, TRect, TViewProps } from "../types";
+import {
+  TControlProps,
+  TPalette,
+  TPaletteProps,
+  TRect,
+  TViewProps,
+} from "../types";
 
 export interface ICompactKeyEvent {
   stopPropagation: () => void;
@@ -22,8 +28,15 @@ export type TButtonProps = TControlProps & {
   onClick?: () => void;
 };
 
-export type TLabelInputProps = TInputProps & {
-  label?: string;
+export type TDropDownProps = Omit<TTextBoxProps, "mode"> & {
+  hasFilter?: boolean;
+  filterCaption?: string;
+  items: TMenuItem[];
+  inputRef?: RefObject<HTMLInputElement>;
+  wrapperRef?: RefObject<HTMLDivElement>;
+  windowPalette?: TPalette;
+
+  onMatchFilter?: (item: TMenuItem, filter: string) => boolean;
 };
 
 export type TGlassEvent = {
@@ -55,6 +68,10 @@ export type TInputProps = TControlProps & {
   readOnly?: boolean;
   value?: string;
   onChange?: (newValue: string) => void;
+};
+
+export type TLabelInputProps = TInputProps & {
+  label?: string;
 };
 
 export type TMenuItemProps = {

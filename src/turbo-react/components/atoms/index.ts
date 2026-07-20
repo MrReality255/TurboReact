@@ -19,6 +19,7 @@ export * from "./Table";
 */
 export * from "./Buttons";
 export * from "./Checkbox";
+export * from "./DropDown";
 export * from "./Glass";
 export * from "./GroupBox";
 export * from "./Heading";
