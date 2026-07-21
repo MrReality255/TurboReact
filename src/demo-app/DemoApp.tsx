@@ -9,6 +9,7 @@ import { DemoPageWindows } from "./DemoPageWnd";
 import { DemoPageOtherControls } from "./DemoAppInputs";
 import { DemoPageMisc } from "./DemoPageMisc";
 import { DemoPageSelects } from "./DemoPageSelects";
+import { DemoPageDialogs } from "./DemoPageDialogs";
 
 export default function DemoApp() {
   return (
@@ -31,9 +32,7 @@ function AppRouter() {
         <Route path="/inputs" element={<DemoPageOtherControls />}></Route>
         <Route path="/misc" element={<DemoPageMisc />}></Route>
         <Route path="/selects" element={<DemoPageSelects />}></Route>
-        {/*}
         <Route path="/dialogs" element={<DemoPageDialogs />}></Route>
-        {*/}
       </Routes>
     </HashRouter>
   );
