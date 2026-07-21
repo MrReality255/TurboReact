@@ -24,14 +24,14 @@ input.tb[type="number"]::-webkit-outer-spin-button {
 }
 
 div.inputWrapper {
-  background-color: #000;
-  color: #ff0;
+  background-color: var(--plt-input-bg, #000);
+  color: var(--plt-input-fg, #ff0);
   width: 100%;
   display: flex;
 }
 
 div.inputWrapper:focus-within {
-  background-color: #222;
+  background-color: var(--plt-input-bg-focus, #222);
 }
 
 div.inputWrapper > div.prefix {
@@ -44,55 +44,7 @@ div.inputWrapper > div.prefix.empty {
   min-width: 0.25em;
 }
 
-/* PALETTE */
-
+/* Label focus */
 div.tbWrapper:focus-within > label {
-  color: #fff;
-}
-div.tbWrapper.green:focus-within > label {
-  color: #ff0;
-}
-
-div.inputWrapper.dialog {
-  background-color: #006;
-  color: #fff;
-}
-
-div.inputWrapper.dialog:focus-within {
-  background-color: #008;
-}
-
-div.inputWrapper.blue {
-  background-color: #000;
-}
-
-div.inputWrapper.blue:focus-within {
-  background-color: #222;
-}
-
-div.inputWrapper.grey {
-  color: #fff;
-}
-
-div.inputWrapper.mono {
-  background-color: #333;
-  color: #fff;
-}
-
-div.inputWrapper.red {
-  background-color: #600;
-  color: #ff0;
-}
-
-div.inputWrapper.red:focus-within {
-  background-color: #000;
-  color: #ff0;
-}
-
-div.inputWrapper.green {
-  background-color: #020;
-}
-
-div.inputWrapper.green:focus-within {
-  background-color: #000;
+  color: var(--plt-fg-hover, #fff);
 }

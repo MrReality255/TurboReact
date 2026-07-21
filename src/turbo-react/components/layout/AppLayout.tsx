@@ -5,118 +5,104 @@ import usePalette from "../../hooks/usePalette";
 import { TViewport } from "../atoms/Viewport";
 import { TPaletteProvider } from "../providers/palette";
 import { useMobile } from "../../hooks/useMobile";
-import { TPalette } from "../types";
 
-const scrollbarPalettes: Record<
-  TPalette,
-  {
-    track: string;
-    trackBorder: string;
-    thumb: string;
-    thumbBorder: string;
-    thumbHover: string;
-    thumbActive: string;
-    button: string;
-    buttonBorder: string;
-    buttonHover: string;
-    corner: string;
-  }
-> = {
+// Scrollbar color values per palette (only used when scrollbarPalette differs from main palette)
+const scrollbarPalettes: Record<string, Record<string, string>> = {
   blue: {
-    track: "#003",
-    trackBorder: "#006",
-    thumb: "#0aa",
-    thumbBorder: "#0cc",
-    thumbHover: "#0ff",
-    thumbActive: "#fff",
-    button: "#006",
-    buttonBorder: "#099",
-    buttonHover: "#099",
-    corner: "#003",
+    "--sb-track": "#003",
+    "--sb-track-border": "#006",
+    "--sb-thumb": "#0aa",
+    "--sb-thumb-border": "#0cc",
+    "--sb-thumb-hover": "#0ff",
+    "--sb-thumb-active": "#fff",
+    "--sb-button": "#006",
+    "--sb-button-border": "#099",
+    "--sb-button-hover": "#099",
+    "--sb-corner": "#003",
   },
   cyan: {
-    track: "#033",
-    trackBorder: "#066",
-    thumb: "#0cc",
-    thumbBorder: "#099",
-    thumbHover: "#0ff",
-    thumbActive: "#fff",
-    button: "#066",
-    buttonBorder: "#099",
-    buttonHover: "#099",
-    corner: "#033",
+    "--sb-track": "#033",
+    "--sb-track-border": "#066",
+    "--sb-thumb": "#0cc",
+    "--sb-thumb-border": "#099",
+    "--sb-thumb-hover": "#0ff",
+    "--sb-thumb-active": "#fff",
+    "--sb-button": "#066",
+    "--sb-button-border": "#099",
+    "--sb-button-hover": "#099",
+    "--sb-corner": "#033",
   },
   green: {
-    track: "#010",
-    trackBorder: "#030",
-    thumb: "#0a0",
-    thumbBorder: "#0c0",
-    thumbHover: "#0f0",
-    thumbActive: "#fff",
-    button: "#030",
-    buttonBorder: "#060",
-    buttonHover: "#060",
-    corner: "#010",
+    "--sb-track": "#010",
+    "--sb-track-border": "#030",
+    "--sb-thumb": "#0a0",
+    "--sb-thumb-border": "#0c0",
+    "--sb-thumb-hover": "#0f0",
+    "--sb-thumb-active": "#fff",
+    "--sb-button": "#030",
+    "--sb-button-border": "#060",
+    "--sb-button-hover": "#060",
+    "--sb-corner": "#010",
   },
   red: {
-    track: "#200",
-    trackBorder: "#600",
-    thumb: "#c00",
-    thumbBorder: "#f00",
-    thumbHover: "#f44",
-    thumbActive: "#fff",
-    button: "#600",
-    buttonBorder: "#900",
-    buttonHover: "#900",
-    corner: "#200",
+    "--sb-track": "#200",
+    "--sb-track-border": "#600",
+    "--sb-thumb": "#c00",
+    "--sb-thumb-border": "#f00",
+    "--sb-thumb-hover": "#f44",
+    "--sb-thumb-active": "#fff",
+    "--sb-button": "#600",
+    "--sb-button-border": "#900",
+    "--sb-button-hover": "#900",
+    "--sb-corner": "#200",
   },
   dark: {
-    track: "#111",
-    trackBorder: "#333",
-    thumb: "#990",
-    thumbBorder: "#bb0",
-    thumbHover: "#ff0",
-    thumbActive: "#fff",
-    button: "#333",
-    buttonBorder: "#550",
-    buttonHover: "#550",
-    corner: "#111",
+    "--sb-track": "#111",
+    "--sb-track-border": "#333",
+    "--sb-thumb": "#990",
+    "--sb-thumb-border": "#bb0",
+    "--sb-thumb-hover": "#ff0",
+    "--sb-thumb-active": "#fff",
+    "--sb-button": "#333",
+    "--sb-button-border": "#550",
+    "--sb-button-hover": "#550",
+    "--sb-corner": "#111",
   },
   grey: {
-    track: "#444",
-    trackBorder: "#666",
-    thumb: "#aaa",
-    thumbBorder: "#ccc",
-    thumbHover: "#ddd",
-    thumbActive: "#fff",
-    button: "#666",
-    buttonBorder: "#888",
-    buttonHover: "#888",
-    corner: "#444",
+    "--sb-track": "#444",
+    "--sb-track-border": "#666",
+    "--sb-thumb": "#aaa",
+    "--sb-thumb-border": "#ccc",
+    "--sb-thumb-hover": "#ddd",
+    "--sb-thumb-active": "#fff",
+    "--sb-button": "#666",
+    "--sb-button-border": "#888",
+    "--sb-button-hover": "#888",
+    "--sb-corner": "#444",
   },
   dialog: {
-    track: "#333",
-    trackBorder: "#555",
-    thumb: "#999",
-    thumbBorder: "#bbb",
-    thumbHover: "#ccc",
-    thumbActive: "#fff",
-    button: "#555",
-    buttonBorder: "#777",
-    buttonHover: "#777",
-    corner: "#333",
+    "--sb-track": "#333",
+    "--sb-track-border": "#555",
+    "--sb-thumb": "#999",
+    "--sb-thumb-border": "#bbb",
+    "--sb-thumb-hover": "#ccc",
+    "--sb-thumb-active": "#fff",
+    "--sb-button": "#555",
+    "--sb-button-border": "#777",
+    "--sb-button-hover": "#777",
+    "--sb-corner": "#333",
   },
   mono: {
-    track: "#111",
-    trackBorder: "#333",
-    thumb: "#777",
-    thumbBorder: "#999",
-    thumbHover: "#aaa",
-    thumbActive: "#fff",
-    button: "#333",
-    buttonBorder: "#555",
-    buttonHover: "#555",
-    corner: "#111",
+    "--sb-track": "#111",
+    "--sb-track-border": "#333",
+    "--sb-thumb": "#777",
+    "--sb-thumb-border": "#999",
+    "--sb-thumb-hover": "#aaa",
+    "--sb-thumb-active": "#fff",
+    "--sb-button": "#333",
+    "--sb-button-border": "#555",
+    "--sb-button-hover": "#555",
+    "--sb-corner": "#111",
   },
 };
 
@@ -124,19 +110,11 @@ export function TAppLayout(p: TAppLayoutProps) {
   const plt = usePalette(styles, p);
   const isMobile = useMobile();
 
-  const sbPalette = scrollbarPalettes[p.scrollbarPalette ?? "cyan"];
-  const scrollbarVars = {
-    "--sb-track": sbPalette.track,
-    "--sb-track-border": sbPalette.trackBorder,
-    "--sb-thumb": sbPalette.thumb,
-    "--sb-thumb-border": sbPalette.thumbBorder,
-    "--sb-thumb-hover": sbPalette.thumbHover,
-    "--sb-thumb-active": sbPalette.thumbActive,
-    "--sb-button": sbPalette.button,
-    "--sb-button-border": sbPalette.buttonBorder,
-    "--sb-button-hover": sbPalette.buttonHover,
-    "--sb-corner": sbPalette.corner,
-  } as React.CSSProperties;
+  // Only use inline style override when scrollbarPalette differs from main palette
+  const sbOverride =
+    p.scrollbarPalette && p.scrollbarPalette !== plt.palette
+      ? (scrollbarPalettes[p.scrollbarPalette] as React.CSSProperties)
+      : undefined;
 
   const layout = {
     ...p,
@@ -162,8 +140,10 @@ export function TAppLayout(p: TAppLayoutProps) {
     right: has.right ? size(layout.sizes?.right, layout.sizes?.rightSpace) : 0,
   };
 
+  const className = plt.styles(styles.appLayout);
+
   return (
-    <div className={plt.styles(styles.appLayout)} style={scrollbarVars}>
+    <div className={className} style={sbOverride}>
       <TPaletteProvider palette={plt.palette}>
         <TViewport rect={{ x: 0, y: 0, x2: 0, y2: 0 }}>
           {has.header && (

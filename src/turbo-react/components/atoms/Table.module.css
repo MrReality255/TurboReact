@@ -13,12 +13,12 @@ table.tb.resizing {
 }
 
 tr.hdr {
-  background-color: #000;
+  background-color: var(--plt-hdr-bg, #000);
 }
 
 table.tb > thead > tr > th {
   font-weight: normal;
-  color: #fff;
+  color: var(--plt-hdr-fg, #fff);
   padding: 3px;
   position: sticky;
   top: 0;
@@ -65,25 +65,4 @@ th .resizeHandle {
 th .resizeHandle:hover,
 th .resizeHandleActive {
   background-color: rgba(255, 255, 255, 0.3);
-}
-
-/* PALETTE */
-
-table.tb.blue > thead > tr > th {
-  color: #0ff;
-}
-
-table.tb.red > thead > tr > th {
-  color: #fff;
-  background-color: #500;
-}
-
-table.tb.green > thead > tr > th {
-  color: #ff0;
-  background-color: #050;
-}
-
-table.tb.dialog > thead > tr > th {
-  color: #ff0;
-  background-color: #055;
 }

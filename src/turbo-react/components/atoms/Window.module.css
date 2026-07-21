@@ -38,6 +38,8 @@ div.contentWithTitle {
 
 div.close {
   position: absolute;
+  background-color: var(--plt-wnd-bg, #006);
+  color: var(--plt-wnd-fg, #fff);
 }
 
 div.titleWrapper {
@@ -52,13 +54,14 @@ div.titleWrapper {
 div.title {
   display: inline-block;
   width: auto;
-  background-color: inherit;
   padding: 0em 0.5em;
+  background-color: var(--plt-wnd-bg, inherit);
+  color: var(--plt-wnd-fg, #fff);
 }
 
 div.close button.btn {
   background-color: inherit;
-  color: inherit;
+  color: var(--plt-wnd-close, inherit);
   margin: 0;
   padding: 0;
   border-style: none;
@@ -113,14 +116,9 @@ div.outerBox > div.fullSize > div.wrapper.padding {
 }
 
 div.outerBox div.content {
-  height: calc(100% - 1em);
-  overflow: auto;
-  position: relative;
-}
-
-div.outerBox div.content {
   height: 100%;
   overflow: auto;
+  position: relative;
 }
 
 div.outerBox div.content.contentPadding {
@@ -175,11 +173,6 @@ div.autoSize div.padding div.close {
   top: 0.5em;
 }
 
-div.autoSize div.title {
-  top: 0;
-  left: 3.5em;
-}
-
 div.autoSize div.padding div.title {
   top: 0.5em;
   left: 4.5em;
@@ -197,278 +190,13 @@ div.contentPaddingSpace {
   margin: 1.5em;
 }
 
-/* PALETTE */
+/* PALETTE — using CSS custom properties */
 
-/* FRAME */
-div.main.blue > div.frameBck,
-div.main.blue
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div
-  > div.title,
-div.main.blue > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
-div.main.blue > div.outerBox > div.frameBck,
-div.main.blue
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div.close,
-div.main.blue
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div
-  > div.title {
-  background-color: #006;
-  color: #fff;
+div.frameBck {
+  background-color: var(--plt-wnd-bg, #006);
+  color: var(--plt-wnd-fg, #fff);
 }
 
-div.main.cyan > div.frameBck,
-div.main.cyan
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div
-  > div.title,
-div.main.cyan > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
-div.main.cyan > div.outerBox > div.frameBck,
-div.main.cyan
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div.close,
-div.main.cyan
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div
-  > div.title {
-  background-color: #066;
-  color: #fff;
-}
-
-div.main.dark > div.frameBck,
-div.main.dark
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div
-  > div.title,
-div.main.dark > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
-div.main.dark > div.outerBox > div.frameBck,
-div.main.dark
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div.close,
-div.main.dark
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div
-  > div.title {
-  background-color: #222;
-  color: #ff0;
-}
-
-div.main.green > div.frameBck,
-div.main.green
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div
-  > div.title,
-div.main.green
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div.close,
-div.main.green > div.outerBox > div.frameBck,
-div.main.green
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div.close,
-div.main.green
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div
-  > div.title {
-  background-color: #030;
-  color: #0f0;
-}
-
-div.main.grey > div.frameBck,
-div.main.grey
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div
-  > div.title,
-div.main.grey > div.outerBox > div.frameBck,
-div.main.grey
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div.close,
-div.main.grey
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div
-  > div.title {
-  background-color: #999;
-  color: #000;
-}
-
-div.main.grey
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div.close {
-  background-color: #999;
-  color: #000;
-}
-
-div.main.grey
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div.close
-  > button {
-  color: #090;
-}
-
-div.main.dialog > div.frameBck,
-div.main.dialog
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div
-  > div.title,
-div.main.dialog
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div.close,
-div.main.dialog > div.outerBox > div.frameBck,
-div.main.dialog
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div.close,
-div.main.dialog
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div
-  > div.title {
-  background-color: #666;
-  color: #fff;
-}
-
-div.main.dialog
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div.close
-  > button {
-  color: #0f0;
-}
-
-div.main.mono > div.frameBck,
-div.main.mono
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div
-  > div.title,
-div.main.mono > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
-div.main.mono > div.outerBox > div.frameBck,
-div.main.mono
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div.close,
-div.main.mono
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div
-  > div.title {
-  background-color: #000;
-  color: #999;
-}
-
-div.main.red > div.frameBck,
-div.main.red
-  > div.frameBck
-  > div.outerMargin
-  > div
-  > div.frameStd
-  > div
-  > div.title,
-div.main.red > div.frameBck > div.outerMargin > div > div.frameStd > div.close,
-div.main.red > div.outerBox > div.frameBck,
-div.main.red
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div.close,
-div.main.red
-  > div.outerBox
-  > div.fullSize
-  > div.wrapper
-  > div.frame
-  > div
-  > div.title {
-  background-color: #900;
-  color: #ff0;
-}
-
-/* CONTENT */
-div.main.blue div.content {
-  color: #ff0;
-}
-
-div.main.cyan div.content {
-  color: #ff0;
-}
-
-/* CLOSE BUTTON */
-div.main.blue button.btn {
-  color: #0f0;
-}
-
-div.contentInsideWrapper.dialog {
-  color: #000;
+div.content {
+  color: var(--plt-wnd-content, inherit);
 }

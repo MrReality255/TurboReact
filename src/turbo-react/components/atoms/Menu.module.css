@@ -20,21 +20,24 @@ div.menu ul li a {
 }
 
 div.menu ul li:hover {
-  background-color: #090;
+  background-color: var(--plt-highlight, #090);
+  color: var(--plt-highlight-fg, #fff);
 }
 
 div.menu ul li.selected {
-  background-color: #090;
+  background-color: var(--plt-highlight, #090);
+  color: var(--plt-highlight-fg, #fff);
 }
 
 div.menu ul li.disabled {
-  color: #999 !important;
+  color: var(--plt-disabled, #999) !important;
   pointer-events: none;
 }
 
 li.separator {
   border-style: solid;
   border-width: 0 0 2px 0;
+  border-color: var(--plt-separator, #fff);
 }
 
 li a span.secondary {
@@ -44,86 +47,4 @@ li a span.secondary {
 li a span.prefix {
   width: 1em;
   display: inline-block;
-}
-
-/* PALETTE */
-
-div.menu.cyan ul li:hover {
-  background-color: #000;
-  color: #ff0;
-}
-
-div.menu.cyan ul li.selected {
-  background-color: #000;
-  color: #ff0;
-}
-
-div.menu.grey ul li.disabled {
-  color: #333 !important;
-  pointer-events: none;
-}
-
-div.menu.mono ul li.disabled {
-  color: #444;
-  pointer-events: none;
-}
-
-div.menu.dark ul li:hover {
-  background-color: #cc0;
-  color: #000;
-}
-
-div.menu.dark ul li.selected {
-  background-color: #cc0;
-  color: #000;
-}
-
-div.menu.green ul li:hover {
-  background-color: #0d0;
-  color: #000;
-}
-
-div.menu.green ul li.selected {
-  background-color: #0d0;
-  color: #000;
-}
-
-div.menu.mono ul li:hover {
-  background-color: #999;
-  color: #000;
-}
-
-div.menu.mono ul li.selected {
-  background-color: #999;
-  color: #000;
-}
-
-div.menu.red ul li:hover {
-  background-color: #dd0;
-  color: #000;
-}
-
-div.menu.red ul li.selected {
-  background-color: #ff0;
-  color: #600;
-}
-
-div.menu.blue ul li.separator {
-  border-color: #fff;
-}
-
-div.menu.dark ul li.separator {
-  border-color: #ff0;
-}
-
-div.menu.green ul li.separator {
-  border-color: #0f0;
-}
-
-div.menu.cyan ul li.separator {
-  border-color: #fff;
-}
-
-div.menu.red ul li.separator {
-  color: #dd0;
 }

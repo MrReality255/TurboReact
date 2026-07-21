@@ -2,6 +2,7 @@ import { useContext } from "react";
 
 import { TPalette } from "../components/types";
 import { CtxPalette } from "..";
+import paletteStyles from "../components/palette.module.css";
 
 export default function usePalette<T extends Record<string, string>>(
   styles?: T,
@@ -15,9 +16,17 @@ export default function usePalette<T extends Record<string, string>>(
       if (!styles) {
         return list.map((a) => a as string).join(" ");
       }
-      const p = styles[palette];
-      if (p) {
-        list = [...list, p];
+
+      // Add the shared palette class (defines CSS custom properties)
+      const paletteClass = paletteStyles[palette];
+      if (paletteClass) {
+        list = [...list, paletteClass];
+      }
+
+      // Also add component-local palette class if it exists (for any remaining overrides)
+      const localPaletteClass = styles[palette];
+      if (localPaletteClass) {
+        list = [...list, localPaletteClass];
       }
 
       return list

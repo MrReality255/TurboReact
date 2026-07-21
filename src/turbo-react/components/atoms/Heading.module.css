@@ -9,8 +9,5 @@
   padding-bottom: 0.5em;
   margin-bottom: 0.5em;
   font-weight: normal;
-}
-
-.blue.heading {
-  color: #0ff;
+  color: var(--plt-heading, inherit);
 }

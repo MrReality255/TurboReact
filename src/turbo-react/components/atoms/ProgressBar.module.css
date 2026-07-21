@@ -3,19 +3,20 @@ div.editable {
 }
 
 div.pb div.wrapper {
-  background-color: #660;
+  background-color: var(--plt-bar-bg, #660);
   width: 100%;
   height: 1.5em;
 }
 
 div.pb div.wrapper div {
-  background-color: #ff0;
+  background-color: var(--plt-bar-fg, #ff0);
   height: 1.5em;
 }
 
 div.value {
   width: 100%;
   text-align: center;
+  color: var(--plt-bar-value, inherit);
 }
 
 div.editSpace {
@@ -28,58 +29,13 @@ div.editSpace {
 div.cursor {
   position: absolute;
   height: 0.5em;
+  color: var(--plt-bar-cursor, inherit);
 }
 
 div.cursor::before {
   content: "▲";
 }
 
-/* PALETTE-SPECIFIC */
-
-div.pb.dialog div.value {
-  color: #ff0;
-}
-
-div.pb.dialog div.cursor {
-  color: #ff0;
-}
-
-div.pb.green div.wrapper {
-  background-color: #060;
-}
-
-div.pb.green div.wrapper div {
-  background-color: #0f0;
-}
-
-div.pb.grey div.value {
-  color: #ff0;
-}
-
-div.pb.grey div.cursor {
-  color: #ff0;
-}
-
-div.pb.mono div.wrapper {
-  background-color: #666;
-}
-
-div.pb.mono div.wrapper div {
-  background-color: #fff;
-}
-
-div.pb.mono div.cursor {
-  color: #fff;
-}
-
-div.pb.mono div.value {
-  color: #fff;
-}
-
 div.pb:focus-within > label {
-  color: #fff;
-}
-
-div.pb.green:focus-within > label {
-  color: #ff0;
+  color: var(--plt-fg-hover, #fff);
 }
