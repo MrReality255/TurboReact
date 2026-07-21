@@ -1,4 +1,7 @@
-import { useClosingEffect } from "@mrreality255/turbo-react-forms";
+import {
+  useClosingEffect,
+  useFormContext,
+} from "@mrreality255/turbo-react-forms";
 import { TGlass, TViewport, TWindow } from "../atoms";
 import { TFormWindowProps } from "./types";
 
@@ -9,12 +12,24 @@ export function TFormWindow(p: TFormWindowProps) {
     initialState: false,
     initialTargetState: true,
   });
+  const frm = useFormContext();
+
   return (
     <>
       <TGlass visible backdrop></TGlass>
       <TGlass visible>
         <TViewport rect={{ x: "1em", y: "1em", x2: "1em", y2: "1em" }}>
-          <TWindow fill style={ce.get()} caption={p.title} palette={"dialog"}>
+          <TWindow
+            onClose={() => {
+              ce.hide(() => {
+                frm.close();
+              });
+            }}
+            fill
+            style={ce.get()}
+            caption={p.title}
+            palette={"dialog"}
+          >
             <TViewport rect={{ x: "0em", y: "1em", x2: "0em", y2: "1em" }}>
               {p.children}
             </TViewport>
