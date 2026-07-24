@@ -2,8 +2,9 @@ import {
   useClosingEffect,
   useFormContext,
 } from "@mrreality255/turbo-react-forms";
-import { TGlass, TViewport, TWindow } from "../atoms";
+import { TButton, TGlass, TViewport, TWindow } from "../atoms";
 import { TFormWindowProps } from "./types";
+import { THorizLayout } from "../layout";
 
 export function TFormWindow(p: TFormWindowProps) {
   const ce = useClosingEffect({
@@ -42,8 +43,20 @@ export function TFormWindow(p: TFormWindowProps) {
                 {p.children}
               </div>
             </TViewport>
-            <TViewport rect={{ x: "0em", y2: "1em" }} height="1em">
-              Button bar
+            <TViewport rect={{ x: "0em", y2: "1em", x2: "0em" }} height="2em">
+              <THorizLayout
+                left={
+                  <>
+                    <TButton w0>What?</TButton>
+                  </>
+                }
+                alignMode="right"
+              >
+                <TButton default w0>
+                  OK
+                </TButton>
+                <TButton w0>Cancel</TButton>
+              </THorizLayout>
             </TViewport>
           </TWindow>
         </TViewport>
