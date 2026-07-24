@@ -2,9 +2,14 @@ import {
   createFormHook,
   TFormControlBaseProps,
 } from "@mrreality255/turbo-react-forms";
-import { TFormWindowProps, TTextBoxField as TTextBoxFieldProps } from "./types";
+import {
+  TControlRenderProps,
+  TFormWindowProps,
+  TTextBoxField as TTextBoxFieldProps,
+} from "./types";
 import { TTextBox } from "../atoms";
 import { TFormWindow } from "./FormWindow";
+import { ControlWrapper } from "./ControlWrapper";
 
 const lib = createFormHook({
   controls: {
@@ -24,6 +29,25 @@ const lib = createFormHook({
         );
       },
     },
+  },
+
+  onRenderControl: (
+    content,
+    visible,
+    ctrlProps,
+    renderProps: TControlRenderProps | undefined,
+    hintTr,
+  ) => {
+    return (
+      <ControlWrapper
+        visible={visible}
+        ctrlProps={ctrlProps}
+        renderProps={renderProps}
+        onHint={hintTr}
+      >
+        {content}
+      </ControlWrapper>
+    );
   },
 
   onRenderMainWrapper: (content: React.ReactNode, props: TFormWindowProps) => {
