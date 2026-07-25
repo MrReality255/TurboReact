@@ -1,15 +1,24 @@
 import {
   createFormHook,
   TFormControlBaseProps,
+  ViewUtils,
 } from "@mrreality255/turbo-react-forms";
 import {
   TControlRenderProps,
   TFormWindowProps,
-  TTextBoxField as TTextBoxFieldProps,
+  TSubformProps,
+  TTextBoxFieldProps,
 } from "./types";
-import { TTextBox } from "../atoms";
+import {
+  TCheckbox,
+  TGroupBox,
+  TGroupBoxProps,
+  TLabelInputProps,
+  TTextBox,
+} from "../atoms";
 import { TFormWindow } from "./FormWindow";
 import { ControlWrapper } from "./ControlWrapper";
+import { TControlContainer } from "./ControlContainer";
 
 const lib = createFormHook({
   controls: {
@@ -26,6 +35,20 @@ const lib = createFormHook({
             value={baseProps.value}
             onChange={(v) => baseProps.onValueChange(v)}
           ></TTextBox>
+        );
+      },
+    },
+
+    checkBox: {
+      onRender: (baseProps: TFormControlBaseProps, props: TLabelInputProps) => {
+        return (
+          <TCheckbox
+            {...props}
+            disabled={baseProps.disabled}
+            readOnly={baseProps.readOnly}
+            value={baseProps.value}
+            onChange={(v) => baseProps.onValueChange(v)}
+          ></TCheckbox>
         );
       },
     },
@@ -53,8 +76,15 @@ const lib = createFormHook({
   onRenderMainWrapper: (content: React.ReactNode, props: TFormWindowProps) => {
     return <TFormWindow {...props}>{content}</TFormWindow>;
   },
-  onRenderSubform: (content, data, props) => {
-    return content;
+  onRenderSubform: (content, data, props: TSubformProps) => {
+    const c = ViewUtils.wrap(
+      <TControlContainer {...(props.container ?? {})}>
+        {content}
+      </TControlContainer>,
+      props.groupBox ? (c) => wrapInGroupBox(c, props.groupBox!) : undefined,
+    );
+
+    return <div>{c}</div>;
   },
   onRenderSubformControl: (content, data, idx) => {
     return content;
@@ -69,6 +99,13 @@ const lib = createFormHook({
     return content;
   },
 });
+
+function wrapInGroupBox(
+  content: React.ReactNode,
+  groupBox: TGroupBoxProps,
+): React.ReactNode {
+  return <TGroupBox {...groupBox}>{content}</TGroupBox>;
+}
 
 export type TDemoLibControls = ReturnType<typeof lib.newEmptyList>;
 export const useForm = lib.useForm;

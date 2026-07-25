@@ -36,29 +36,76 @@ function useTestDlg() {
       columns: "1fr 1fr",
       gap: "1em",
     },
-    controls: [
-      {
-        id: "firstname",
-        class: undefined,
-        type: "textBox",
-        prop: { label: "First Name", autoFocus: true },
-      },
-      {
-        id: "lastname",
-        class: undefined,
-        type: "textBox",
-        prop: { label: "Last Name" },
-      },
-      {
-        id: "longtext",
-        class: undefined,
-        type: "textBox",
-        renderProps: {
-          column: "1 / 3",
+    controls: (state) => {
+      const isGroupDisabled = state.data.getValue("chk1") !== "true";
+      return [
+        {
+          id: "firstname",
+          class: undefined,
+          type: "textBox",
+          prop: { label: "First Name", autoFocus: true },
         },
-        prop: { label: "Long text" },
-      },
-    ],
+        {
+          id: "lastname",
+          class: undefined,
+          type: "textBox",
+          prop: { label: "Last Name" },
+        },
+        {
+          id: "longtext",
+          class: undefined,
+          type: "textBox",
+          renderProps: {
+            column: "1 / 3",
+          },
+          prop: { label: "Long text", prefix: "$", palette: "dark" },
+        },
+        {
+          id: "sftmp1",
+          class: "subform",
+          renderProps: { column: "1 / 3" },
+          subform: {
+            groupBox: {},
+            controls: [
+              {
+                id: "chk1",
+                class: undefined,
+                type: "checkBox",
+                prop: { label: "Activate" },
+              },
+            ],
+          },
+        },
+        {
+          id: "grp1",
+          class: "subform",
+          hidden: isGroupDisabled,
+          renderProps: { column: "1 / 3" },
+          subform: {
+            container: {
+              columns: "1fr 1fr",
+              gap: "1em",
+            },
+            groupBox: {
+              label: "this is my group box",
+            },
+            controls: [
+              {
+                id: "opt1",
+                type: "textBox",
+                prop: { label: "Option 1" },
+                defaultValue: "default option 1",
+              },
+              {
+                id: "opt2",
+                type: "textBox",
+                prop: { label: "Option 2" },
+              },
+            ],
+          },
+        },
+      ];
+    },
   });
   return frm;
 }

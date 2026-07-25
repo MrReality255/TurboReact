@@ -5,6 +5,7 @@ import {
 import { TButton, TGlass, TViewport, TWindow } from "../atoms";
 import { TFormWindowProps } from "./types";
 import { THorizLayout } from "../layout";
+import { TControlContainer } from "./ControlContainer";
 
 export function TFormWindow(p: TFormWindowProps) {
   const ce = useClosingEffect({
@@ -17,6 +18,7 @@ export function TFormWindow(p: TFormWindowProps) {
   frm.hideMethodRef.current = (orig: () => void) => {
     ce.hide(orig);
   };
+  const { title, children, ...containerProps } = p;
 
   return (
     <>
@@ -29,19 +31,13 @@ export function TFormWindow(p: TFormWindowProps) {
             }}
             fill
             style={ce.get()}
-            caption={p.title}
+            caption={title}
             palette={"dialog"}
           >
             <TViewport rect={{ x: "0em", y: "1em", x2: "0em", y2: "1em" }}>
-              <div
-                style={{
-                  gridTemplateColumns: p.columns,
-                  display: p.columns ? "grid" : undefined,
-                  gap: p.gap,
-                }}
-              >
-                {p.children}
-              </div>
+              <TControlContainer {...containerProps}>
+                {children}
+              </TControlContainer>
             </TViewport>
             <TViewport rect={{ x: "0em", y2: "1em", x2: "0em" }} height="2em">
               <THorizLayout
