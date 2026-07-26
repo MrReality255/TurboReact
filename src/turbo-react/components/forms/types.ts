@@ -1,10 +1,18 @@
 import { TFormControlWrapperProps } from "@mrreality255/turbo-react-forms";
-import { TGroupBoxProps, TTextBoxProps } from "../atoms";
+import { TButtonProps, TGroupBoxProps, TTextBoxProps } from "../atoms";
 
 type TRemoveInputProps<R> = Omit<
   R,
   "value" | "onChange" | "disabled" | "readOnly"
 >;
+
+export type TFormButtonAction = "submit" | "cancel";
+
+export type TFormButtonProps = TButtonProps & {
+  action?: TFormButtonAction;
+  id?: string;
+  label?: string;
+};
 
 export type TControlWrapperProps = {
   ctrlProps: TFormControlWrapperProps;
@@ -24,6 +32,8 @@ export type TControlContainerProps = {
 export type TFormWindowProps = TControlContainerProps & {
   title?: string;
   children?: React.ReactNode;
+  buttonsLeft?: TFormButtonProps[];
+  buttonsRight?: TFormButtonProps[];
 };
 
 export type TSubformProps = {

@@ -3,7 +3,7 @@ import {
   useFormContext,
 } from "@mrreality255/turbo-react-forms";
 import { TButton, TGlass, TViewport, TWindow } from "../atoms";
-import { TFormWindowProps } from "./types";
+import { TFormButtonProps, TFormWindowProps } from "./types";
 import { THorizLayout } from "../layout";
 import { TControlContainer } from "./ControlContainer";
 
@@ -48,10 +48,16 @@ export function TFormWindow(p: TFormWindowProps) {
                 }
                 alignMode="right"
               >
-                <TButton default w0>
-                  OK
-                </TButton>
-                <TButton w0>Cancel</TButton>
+                {(p.buttonsRight ?? []).map((btn, idx) => (
+                  <TButton
+                    {...btn}
+                    key={btn.id ?? idx}
+                    onClick={btn.onClick ?? (() => handleButton(btn))}
+                  >
+                    {btn.label}
+                    {btn.children}
+                  </TButton>
+                ))}
               </THorizLayout>
             </TViewport>
           </TWindow>
@@ -59,4 +65,8 @@ export function TFormWindow(p: TFormWindowProps) {
       </TGlass>
     </>
   );
+
+  function handleButton(btn: TFormButtonProps) {
+    throw new Error("Function not implemented.");
+  }
 }

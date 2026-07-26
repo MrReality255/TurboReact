@@ -35,6 +35,11 @@ function useTestDlg() {
       title: "My title",
       columns: "1fr 1fr",
       gap: "1em",
+      buttonsRight: [
+        { action: "submit", label: "OK", default: true },
+        { action: "cancel", label: "Stornieren", w1: true },
+      ],
+      buttonsLeft: [{ label: "Set defaults", w1: true }],
     },
     controls: (state) => {
       const isGroupDisabled = state.data.getValue("chk1") !== "true";
@@ -87,7 +92,7 @@ function useTestDlg() {
               gap: "1em",
             },
             groupBox: {
-              label: "this is my group box",
+              label: "A group box with two options",
             },
             controls: [
               {
