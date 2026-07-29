@@ -42,8 +42,15 @@ function useTestDlg() {
       buttonsLeft: [{ label: "Set defaults", w1: true }],
     },
     onSubmit: async (ctx) => {
-      debugger;
-      return "data";
+      return {
+        close: true,
+        id: 12,
+        submitData: 3333,
+        rawData: ctx.rawData,
+      };
+    },
+    onUpdate: () => {
+      return {};
     },
     controls: (state) => {
       const isGroupDisabled = state.data.getValue("chk1") !== "true";
@@ -95,8 +102,8 @@ function useTestDlg() {
         },
         {
           id: "grp1",
+          hidden: isGroupDisabled,
           class: "subform",
-          removed: isGroupDisabled,
           renderProps: { column: "1 / 3" },
           subform: {
             container: {
@@ -111,7 +118,6 @@ function useTestDlg() {
                 id: "opt1",
                 type: "textBox",
                 prop: { label: "Option 1" },
-                defaultValue: "default option 1",
               },
               {
                 id: "opt2",
