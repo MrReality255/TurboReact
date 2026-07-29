@@ -40,6 +40,7 @@ const lib = createFormHook({
     },
 
     checkBox: {
+      forcedDefaultValue: "false",
       onRender: (baseProps: TFormControlBaseProps, props: TLabelInputProps) => {
         return (
           <TCheckbox
@@ -47,7 +48,7 @@ const lib = createFormHook({
             disabled={baseProps.disabled}
             readOnly={baseProps.readOnly}
             value={baseProps.value}
-            onChange={(v) => baseProps.onValueChange(v)}
+            onChange={(v) => baseProps.onValueChange(v ? "true" : "false")}
           ></TCheckbox>
         );
       },

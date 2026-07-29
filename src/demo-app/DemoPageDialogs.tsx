@@ -41,9 +41,21 @@ function useTestDlg() {
       ],
       buttonsLeft: [{ label: "Set defaults", w1: true }],
     },
+    onSubmit: async (ctx) => {
+      debugger;
+      return "data";
+    },
     controls: (state) => {
       const isGroupDisabled = state.data.getValue("chk1") !== "true";
       return [
+        {
+          class: "plain",
+          renderProps: { column: "1 / 3" },
+          onRender: () => {
+            console.log(JSON.stringify(state.data.getRef(), null, 2));
+            return <div>is valid? {state.data.isValid() ? "y" : "n"}</div>;
+          },
+        },
         {
           id: "firstname",
           class: undefined,
@@ -84,7 +96,7 @@ function useTestDlg() {
         {
           id: "grp1",
           class: "subform",
-          hidden: isGroupDisabled,
+          removed: isGroupDisabled,
           renderProps: { column: "1 / 3" },
           subform: {
             container: {

@@ -1,6 +1,7 @@
 import {
   TFormCommandRec,
   TFormControlWrapperProps,
+  TKey,
 } from "@mrreality255/turbo-react-forms";
 import { TButtonProps, TGroupBoxProps, TTextBoxProps } from "../atoms";
 
@@ -10,10 +11,13 @@ type TRemoveInputProps<R> = Omit<
 >;
 
 export type TFormButtonAction =
-  "submit" | "cancel" | TFormCommandRec | Promise<TFormCommandRec>;
+  | "submit"
+  | "cancel"
+  | (TFormCommandRec & { type: "command" })
+  | { type: "submit"; id?: TKey; submitData?: unknown };
 
 export type TFormButtonProps = TButtonProps & {
-  action?: TFormButtonAction;
+  action?: TFormButtonAction | Promise<TFormButtonAction>;
   id?: string;
   label?: string;
 };

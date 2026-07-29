@@ -3,7 +3,7 @@ import {
   useFormContext,
 } from "@mrreality255/turbo-react-forms";
 import { TButton, TGlass, TViewport, TWindow } from "../atoms";
-import { TFormButtonProps, TFormWindowProps } from "./types";
+import { TFormButtonAction, TFormButtonProps, TFormWindowProps } from "./types";
 import { THorizLayout } from "../layout";
 import { TControlContainer } from "./ControlContainer";
 
@@ -66,7 +66,43 @@ export function TFormWindow(p: TFormWindowProps) {
     </>
   );
 
+  function handleButtonAction(action: TFormButtonAction | undefined) {
+    if (action === undefined) {
+      return;
+    }
+
+    switch (action) {
+      case "cancel":
+        frm.close();
+        return;
+      case "submit":
+        frm.submit();
+        return;
+      default:
+        switch (action.type) {
+          case "submit":
+            frm.submit(action.id, action.submitData);
+            return;
+          case "command":
+            frm.triggerCommand(action);
+            return;
+        }
+    }
+  }
+
   function handleButton(btn: TFormButtonProps) {
-    throw new Error("Function not implemented.");
+    if (btn.action instanceof Promise) {
+      frm.triggerLoading(
+        async () => {
+          return await btn.action;
+        },
+        (action) => {
+          handleButtonAction(action);
+        },
+      );
+      return;
+    }
+
+    handleButtonAction(btn.action);
   }
 }
