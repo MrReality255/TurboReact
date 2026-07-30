@@ -2,12 +2,12 @@ import {
   useClosingEffect,
   useFormContext,
 } from "@mrreality255/turbo-react-forms";
-import { TButton, TGlass, TViewport, TWindow } from "../atoms";
+import { TButton, TGlass, TLoadingBar, TViewport, TWindow } from "../atoms";
 import { TFormButtonAction, TFormButtonProps, TFormWindowProps } from "./types";
 import { THorizLayout } from "../layout";
 import { TControlContainer } from "./ControlContainer";
 
-export function TFormWindow(p: TFormWindowProps) {
+export function TFormWindow(p: TFormWindowProps & { isLoading: boolean }) {
   const ce = useClosingEffect({
     delay: 300,
     mode: "resize",
@@ -34,37 +34,42 @@ export function TFormWindow(p: TFormWindowProps) {
             caption={title}
             palette={"dialog"}
           >
+            <TGlass visible={p.isLoading} backdrop></TGlass>
             <TViewport rect={{ x: "0em", y: "1em", x2: "0em", y2: "1em" }}>
               <TControlContainer {...containerProps}>
                 {children}
               </TControlContainer>
             </TViewport>
             <TViewport rect={{ x: "0em", y2: "1em", x2: "0em" }} height="2em">
-              <THorizLayout
-                left={
-                  <>
-                    <TButton w0>What?</TButton>
-                  </>
-                }
-                alignMode="right"
-              >
-                {(p.buttonsRight ?? []).map((btn, idx) => (
-                  <TButton
-                    {...btn}
-                    key={btn.id ?? idx}
-                    onClick={btn.onClick ?? (() => handleButton(btn))}
-                  >
-                    {btn.label}
-                    {btn.children}
-                  </TButton>
-                ))}
-              </THorizLayout>
+              {p.isLoading ? (
+                <TLoadingBar></TLoadingBar>
+              ) : (
+                <THorizLayout
+                  left={<>{createButtons(p.buttonsLeft ?? [])}</>}
+                  alignMode="right"
+                >
+                  {createButtons(p.buttonsRight ?? [])}
+                </THorizLayout>
+              )}
             </TViewport>
           </TWindow>
         </TViewport>
       </TGlass>
     </>
   );
+
+  function createButtons(btns: TFormButtonProps[]) {
+    return btns.map((btn, idx) => (
+      <TButton
+        {...btn}
+        key={btn.id ?? idx}
+        onClick={btn.onClick ?? (() => handleButton(btn))}
+      >
+        {btn.label}
+        {btn.children}
+      </TButton>
+    ));
+  }
 
   function handleButtonAction(action: TFormButtonAction | undefined) {
     if (action === undefined) {
@@ -91,10 +96,11 @@ export function TFormWindow(p: TFormWindowProps) {
   }
 
   function handleButton(btn: TFormButtonProps) {
-    if (btn.action instanceof Promise) {
+    if (typeof btn.action === "function") {
+      const fctResult = btn.action();
       frm.triggerLoading(
         async () => {
-          return await btn.action;
+          return await fctResult;
         },
         (action) => {
           handleButtonAction(action);

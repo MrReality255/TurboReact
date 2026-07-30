@@ -17,7 +17,7 @@ export type TFormButtonAction =
   | { type: "submit"; id?: TKey; submitData?: unknown };
 
 export type TFormButtonProps = TButtonProps & {
-  action?: TFormButtonAction | Promise<TFormButtonAction>;
+  action?: TFormButtonAction | (() => Promise<TFormButtonAction>);
   id?: string;
   label?: string;
 };

@@ -1,6 +1,7 @@
 import {
   createFormHook,
   TFormControlBaseProps,
+  TFormInternalState,
   ViewUtils,
 } from "@mrreality255/turbo-react-forms";
 import {
@@ -74,8 +75,16 @@ const lib = createFormHook({
     );
   },
 
-  onRenderMainWrapper: (content: React.ReactNode, props: TFormWindowProps) => {
-    return <TFormWindow {...props}>{content}</TFormWindow>;
+  onRenderMainWrapper: (
+    content: React.ReactNode,
+    props: TFormWindowProps,
+    state: TFormInternalState<unknown>,
+  ) => {
+    return (
+      <TFormWindow {...props} isLoading={state.mode === "loading"}>
+        {content}
+      </TFormWindow>
+    );
   },
   onRenderSubform: (content, data, props: TSubformProps) => {
     const c = ViewUtils.wrap(
