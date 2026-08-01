@@ -1,5 +1,5 @@
 import { MiscUtils } from "@mrreality255/turbo-react-forms";
-import { TFormButtonAction, useForm } from "../turbo-react";
+import { TFormButtonAction, useForm } from "../../turbo-react";
 
 export function useTestDlg() {
   const frm = useForm<{ id: number }, { value: string }>({

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { TButton, THeading, TNameValue, TWindow } from "../turbo-react";
 import { DemoAppLayout } from "./DemoAppLayout";
-import { useTestDlg } from "./TestDlg";
-import { setServers } from "dns";
+import { useTestDlg } from "./components/TestDlg";
 
 export function DemoPageDialogs() {
   const dlg = useTestDlg();
