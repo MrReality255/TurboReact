@@ -6,6 +6,7 @@ import {
 } from "@mrreality255/turbo-react-forms";
 import {
   TControlRenderProps,
+  TFormEnvState,
   TFormWindowProps,
   TSubformProps,
   TTextBoxFieldProps,
@@ -54,6 +55,10 @@ const lib = createFormHook({
         );
       },
     },
+  },
+
+  onInit: () => {
+    return {} as TFormEnvState;
   },
 
   onRenderControl: (
@@ -118,4 +123,6 @@ function wrapInGroupBox(
 }
 
 export type TDemoLibControls = ReturnType<typeof lib.newEmptyList>;
+
 export const useForm = lib.useForm;
+export const useFormContext = lib.useFormContext;

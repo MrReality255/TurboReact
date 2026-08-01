@@ -1,22 +1,27 @@
-import {
-  useClosingEffect,
-  useFormContext,
-} from "@mrreality255/turbo-react-forms";
+import { useClosingEffect } from "@mrreality255/turbo-react-forms";
 import { TButton, TGlass, TLoadingBar, TViewport, TWindow } from "../atoms";
 import { TFormButtonAction, TFormButtonProps, TFormWindowProps } from "./types";
 import { THorizLayout } from "../layout";
 import { TControlContainer } from "./ControlContainer";
+import { useFormContext } from "./lib";
 
 export function TFormWindow(p: TFormWindowProps & { isLoading: boolean }) {
-  const ce = useClosingEffect({
+  const frm = useFormContext();
+  const ceFrm = useClosingEffect({
     delay: 300,
     mode: "resize",
     initialState: false,
     initialTargetState: true,
   });
-  const frm = useFormContext();
+
+  const ceErr = useClosingEffect({
+    delay: 200,
+    mode: "resize",
+    visible: frm.formEnv.error !== undefined,
+  });
+
   frm.hideMethodRef.current = (orig: () => void) => {
-    ce.hide(orig);
+    ceFrm.hide(orig);
   };
   const { title, children, ...containerProps } = p;
 
@@ -30,12 +35,23 @@ export function TFormWindow(p: TFormWindowProps & { isLoading: boolean }) {
               frm.close();
             }}
             fill
-            style={ce.get()}
+            style={ceFrm.get()}
             caption={title}
             palette={"dialog"}
           >
             <TGlass visible={p.isLoading} backdrop></TGlass>
-            <TViewport rect={{ x: "0em", y: "1em", x2: "0em", y2: "1em" }}>
+            {ceErr.isVisible ? (
+              <TWindow
+                palette="red"
+                noShadow
+                border="none"
+                innerPadding="none"
+                style={{ ...ceErr.get() }}
+              >
+                {frm.formEnv.error}
+              </TWindow>
+            ) : null}
+            <TViewport rect={{ x: "0em", y: "2em", x2: "0em", y2: "1em" }}>
               <TControlContainer {...containerProps}>
                 {children}
               </TControlContainer>

@@ -15,6 +15,15 @@ export function useTestDlg() {
           w0: true,
           disabled: !state.data.isValid(),
         },
+        {
+          action: async () => {
+            await MiscUtils.delay(1000);
+            return { type: "submit", submitData: 150, id: "err" };
+          },
+          label: "OK - err",
+          w1: true,
+          disabled: !state.data.isValid(),
+        },
         { action: "cancel", label: "Stornieren", w1: true },
       ],
       buttonsLeft: [
@@ -29,8 +38,14 @@ export function useTestDlg() {
       ],
     }),
     onSubmit: async (ctx) => {
+      if (ctx.id == "err") {
+        return {
+          preventClose: true,
+          submitData: { value: "34" },
+          ctxUpdateEnv: (e) => ({ error: "You choose the err button" }),
+        };
+      }
       return {
-        preventClose: true,
         id: 12,
         submitData: { value: "2332" },
         ctxUpdateFct: (n) => ({ id: n.id + 1 }),
@@ -51,19 +66,13 @@ export function useTestDlg() {
             },
           };
       }
-      return {};
+      return {
+        onUpdateEnv: (e) => ({ ...e, error: undefined }),
+      };
     },
     controls: (state) => {
       const isGroupDisabled = state.data.getValue("chk1") !== "true";
       return [
-        {
-          class: "plain",
-          renderProps: { column: "1 / 3" },
-          onRender: () => {
-            console.log(JSON.stringify(state.data.getRef(), null, 2));
-            return <div>is valid? {state.data.isValid() ? "y" : "n"}</div>;
-          },
-        },
         {
           id: "firstname",
           class: undefined,
@@ -83,7 +92,7 @@ export function useTestDlg() {
           renderProps: {
             column: "1 / 3",
           },
-          prop: { label: "Long text", prefix: "$", palette: "dark" },
+          prop: { label: "Long text", prefix: "$", palette: "green" },
         },
         {
           id: "sftmp1",

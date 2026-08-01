@@ -48,10 +48,10 @@
     "vitest": "^4.0.5"
   },
   "dependencies": {
-    "@mrreality255/turbo-react-forms": "^0.3.0",
+    "@mrreality255/turbo-react-forms": "^0.4.3",
     "luxon": "^3.7.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.5"
+    "react-router-dom": "^7.18.2"
   }
 }

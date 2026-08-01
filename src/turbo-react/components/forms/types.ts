@@ -44,6 +44,10 @@ export type TFormWindowProps = TControlContainerProps & {
   buttonsRight?: TFormButtonProps[];
 };
 
+export type TFormEnvState = {
+  error?: string;
+};
+
 export type TSubformProps = {
   groupBox?: TRemoveInputProps<TGroupBoxProps>;
   container?: TControlContainerProps;
