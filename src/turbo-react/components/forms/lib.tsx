@@ -1,7 +1,6 @@
 import {
     createFormHook,
     TFormControlBaseProps,
-    TFormControlOuterProps,
     TFormInternalState,
     ViewUtils,
 } from '@mrreality255/turbo-react-forms'
@@ -157,7 +156,7 @@ const lib = createFormHook({
             </TFormWindow>
         )
     },
-    onRenderSubform: (content, data, props: TSubformProps) => {
+    onRenderSubform: (content, _data, props: TSubformProps) => {
         const c = ViewUtils.wrap(
             <TControlContainer {...(props.container ?? {})}>
                 {content}
@@ -169,16 +168,16 @@ const lib = createFormHook({
 
         return <div>{c}</div>
     },
-    onRenderSubformControl: (content, data, idx) => {
+    onRenderSubformControl: (content) => {
         return content
     },
-    onRenderTemplate: (content, state, props) => {
+    onRenderTemplate: (content) => {
         return content
     },
-    onRenderTemplateRow: (content, idx, handle, stateProps, props) => {
+    onRenderTemplateRow: (content) => {
         return content
     },
-    onRenderTemplateRowControl: (content, rowIdx, stateProps, props) => {
+    onRenderTemplateRowControl: (content) => {
         return content
     },
 })
