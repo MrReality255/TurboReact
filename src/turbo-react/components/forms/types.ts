@@ -3,7 +3,13 @@ import {
   TFormControlWrapperProps,
   TKey,
 } from "@mrreality255/turbo-react-forms";
-import { TButtonProps, TGroupBoxProps, TTextBoxProps } from "../atoms";
+import {
+  TButtonProps,
+  TDropDownProps,
+  TGroupBoxProps,
+  TProgressBarProps,
+  TTextBoxProps,
+} from "../atoms";
 
 type TRemoveInputProps<R> = Omit<
   R,
@@ -54,6 +60,10 @@ export type TSubformProps = {
 };
 
 export type TTextBoxFieldProps = TRemoveInputProps<TTextBoxProps>;
+
+export type TDropDownFieldProps = TRemoveInputProps<TDropDownProps>;
+
+export type TProgressBarFieldProps = TRemoveInputProps<TProgressBarProps>;
 
 export type TControlRenderProps = {
   column?: string;

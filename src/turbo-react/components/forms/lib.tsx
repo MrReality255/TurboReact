@@ -1,21 +1,27 @@
 import {
   createFormHook,
   TFormControlBaseProps,
+  TFormControlOuterProps,
   TFormInternalState,
   ViewUtils,
 } from "@mrreality255/turbo-react-forms";
 import {
   TControlRenderProps,
+  TDropDownFieldProps,
   TFormEnvState,
   TFormWindowProps,
+  TProgressBarFieldProps,
   TSubformProps,
   TTextBoxFieldProps,
 } from "./types";
 import {
   TCheckbox,
+  TDropDown,
   TGroupBox,
   TGroupBoxProps,
   TLabelInputProps,
+  TProgressBar,
+  TRadioButton,
   TTextBox,
 } from "../atoms";
 import { TFormWindow } from "./FormWindow";
@@ -52,6 +58,56 @@ const lib = createFormHook({
             value={baseProps.value}
             onChange={(v) => baseProps.onValueChange(v ? "true" : "false")}
           ></TCheckbox>
+        );
+      },
+    },
+
+    dropDown: {
+      onRender: (
+        baseProps: TFormControlBaseProps,
+        props: TDropDownFieldProps,
+      ) => {
+        return (
+          <TDropDown
+            {...props}
+            disabled={baseProps.disabled}
+            readOnly={baseProps.readOnly}
+            value={baseProps.value}
+            onChange={(v) => baseProps.onValueChange(v)}
+          ></TDropDown>
+        );
+      },
+    },
+
+    radioButton: {
+      forcedDefaultValue: "false",
+      onRender: (baseProps: TFormControlBaseProps, props: TLabelInputProps) => {
+        return (
+          <TRadioButton
+            {...props}
+            disabled={baseProps.disabled}
+            readOnly={baseProps.readOnly}
+            value={baseProps.value}
+            onChange={(v) => baseProps.onValueChange(v ? "true" : "false")}
+          ></TRadioButton>
+        );
+      },
+    },
+
+    progressBar: {
+      forcedDefaultValue: "0",
+      onRender: (
+        baseProps: TFormControlBaseProps,
+        props: TProgressBarFieldProps,
+      ) => {
+        return (
+          <TProgressBar
+            {...props}
+            disabled={baseProps.disabled}
+            readOnly={baseProps.readOnly}
+            value={baseProps.value}
+            onChange={(v) => baseProps.onValueChange(v)}
+          ></TProgressBar>
         );
       },
     },

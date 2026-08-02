@@ -95,6 +95,27 @@ export function useTestDlg() {
           prop: { label: "Long text", prefix: "$", palette: "green" },
         },
         {
+          id: "ddl1",
+          class: undefined,
+          type: "dropDown",
+          prop: {
+            label: "Drop down list",
+            items: [
+              { id: "v1", label: "Value 1" },
+              { id: "v2", label: "Value 2" },
+              { id: "v3", label: "Value 3" },
+            ],
+          },
+        },
+        {
+          id: "prog1",
+          class: undefined,
+          type: "progressBar",
+          prop: {
+            label: "Progress bar",
+          },
+        },
+        {
           id: "sftmp1",
           class: "subform",
           renderProps: { column: "1 / 3" },
@@ -105,7 +126,7 @@ export function useTestDlg() {
                 id: "chk1",
                 class: undefined,
                 type: "checkBox",
-                prop: { label: "Activate" },
+                prop: { label: "Show additional group" },
               },
             ],
           },
