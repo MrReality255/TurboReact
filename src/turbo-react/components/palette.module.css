@@ -31,6 +31,7 @@
     /* Table */
     --plt-hdr-fg: #0ff;
     --plt-hdr-bg: #000;
+    --plt-tbl-sel-bg: #070;
     /* Window */
     --plt-wnd-bg: #006;
     --plt-wnd-fg: #fff;
@@ -95,6 +96,7 @@
     /* Table */
     --plt-hdr-fg: #ff0;
     --plt-hdr-bg: #050;
+    --plt-tbl-sel-bg: #050;
     /* Window */
     --plt-wnd-bg: #030;
     --plt-wnd-fg: #0f0;
@@ -159,6 +161,7 @@
     /* Table */
     --plt-hdr-fg: #fff;
     --plt-hdr-bg: #000;
+    --plt-tbl-sel-bg: #000;
     /* Window */
     --plt-wnd-bg: #066;
     --plt-wnd-fg: #fff;
@@ -211,7 +214,7 @@
     --plt-input-bg: #000;
     --plt-input-bg-focus: #222;
     --plt-input-fg: #ff0;
-    --plt-heading: inherit;
+    --plt-heading: #f90;
     /* ProgressBar */
     --plt-bar-bg: #660;
     --plt-bar-fg: #ff0;
@@ -223,6 +226,7 @@
     /* Table */
     --plt-hdr-fg: #ff0;
     --plt-hdr-bg: #000;
+    --plt-tbl-sel-bg: #440;
     /* Window */
     --plt-wnd-bg: #222;
     --plt-wnd-fg: #ff0;
@@ -287,6 +291,7 @@
     /* Table */
     --plt-hdr-fg: #fff;
     --plt-hdr-bg: #000;
+    --plt-tbl-sel-bg: #090;
     /* Window */
     --plt-wnd-bg: #999;
     --plt-wnd-fg: #000;
@@ -355,6 +360,7 @@
     /* Table */
     --plt-hdr-fg: #fff;
     --plt-hdr-bg: #500;
+    --plt-tbl-sel-bg: #400;
     /* Window */
     --plt-wnd-bg: #900;
     --plt-wnd-fg: #ff0;
@@ -423,6 +429,7 @@
     /* Table */
     --plt-hdr-fg: #ff0;
     --plt-hdr-bg: #055;
+    --plt-tbl-sel-bg: #090;
     /* Window */
     --plt-wnd-bg: #666;
     --plt-wnd-fg: #fff;
@@ -487,6 +494,7 @@
     /* Table */
     --plt-hdr-fg: #fff;
     --plt-hdr-bg: #000;
+    --plt-tbl-sel-bg: #444;
     /* Window */
     --plt-wnd-bg: #000;
     --plt-wnd-fg: #999;

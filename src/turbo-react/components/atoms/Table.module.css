@@ -34,6 +34,10 @@ table.tb > tbody > tr > td {
     padding: 3px;
 }
 
+table.tb > tbody > tr.selected > td {
+    background-color: var(--plt-tbl-sel-bg, rgba(0, 0, 0, 0.5)) !important;
+}
+
 table.tb > tbody > tr.alt > td {
     background-color: rgba(0, 0, 0, 0.2);
 }

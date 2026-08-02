@@ -13,7 +13,13 @@ import {
 } from '../turbo-react'
 
 export function DemoPageTables() {
-    const [selectedRow, setSelectedRow] = useState('')
+    const [selectedRow, setSelectedRow] = useState<{
+        value: string
+        id: number | undefined
+    }>({
+        value: '',
+        id: undefined,
+    })
     const [selectedCol, setSelectedCol] = useState('')
     const [data, setData] = useState(SampleTableData)
     const [widths, setWidths] = useState<Record<string, number>>({})
@@ -46,7 +52,7 @@ export function DemoPageTables() {
                                         {selectedCol}
                                     </TNameValue>
                                     <TNameValue name="Selected row">
-                                        {selectedRow}
+                                        {selectedRow.value}
                                     </TNameValue>
                                 </TRowLayout>
                             )
@@ -89,8 +95,12 @@ export function DemoPageTables() {
                                 setWidths((prev) => ({ ...prev, [id]: w }))
                             }
                             onRowClick={(item) =>
-                                setSelectedRow(JSON.stringify(item))
+                                setSelectedRow({
+                                    value: JSON.stringify(item),
+                                    id: item.id,
+                                })
                             }
+                            onGetSelected={(item) => item.id == selectedRow.id}
                             onHeaderClick={(hdr) => setSelectedCol(hdr.id)}
                         ></TTable>
                     </TVertLayout>

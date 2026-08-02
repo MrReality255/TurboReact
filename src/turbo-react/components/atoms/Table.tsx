@@ -26,7 +26,7 @@ export function TTable<T extends object>(props: TTableProps<T>) {
 
     const isColResizeControlled = !!props.onColumnWidth
     const columnWidths = isColResizeControlled
-        ? props.columnWidths ?? {}
+        ? (props.columnWidths ?? {})
         : internalWidths
 
     const handleResizeStart = useCallback(
@@ -105,6 +105,8 @@ export function TTable<T extends object>(props: TTableProps<T>) {
                 <tbody>
                     {props.data.map(function (row, idx) {
                         const key = props.rowKey ? props.rowKey(row, idx) : idx
+                        const isSelected =
+                            props.onGetSelected?.(row, idx) ?? false
                         return (
                             <tr
                                 onClick={() => props.onRowClick?.(row, idx)}
@@ -112,6 +114,7 @@ export function TTable<T extends object>(props: TTableProps<T>) {
                                 className={plt.styles({
                                     [styles.alt]: idx % 2 === 1,
                                     [styles.ptr]: !!props.onRowClick,
+                                    [styles.selected]: isSelected,
                                 })}
                             >
                                 {props.columns.map(function (p, c) {

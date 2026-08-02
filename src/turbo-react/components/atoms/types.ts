@@ -146,7 +146,9 @@ export type TTableProps<T extends object> = TPaletteProps & {
     columns: TTableColumnProps<T>[]
     columnWidths?: Record<string, number>
     rowKey?: (row: T, idx: number) => string | number
+
     onColumnWidth?: (columnId: string, width: number) => void
+    onGetSelected?: (row: T, idx: number) => boolean
     onHeaderClick?: (col: TTableColumnProps<T>, idx: number) => void
     onRowClick?: (value: T, idx: number) => void
 }
