@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
 export default function useAutoFocus(
-  p: { autoFocus?: boolean },
-  inputRef?: { current?: { focus: () => void } | null },
+    p: { autoFocus?: boolean },
+    inputRef?: { current?: { focus: () => void } | null }
 ) {
-  useEffect(() => {
-    if (p.autoFocus && inputRef) {
-      inputRef.current?.focus();
-    }
-  }, []);
+    useEffect(() => {
+        if (p.autoFocus && inputRef) {
+            inputRef.current?.focus()
+        }
+    }, [])
 }

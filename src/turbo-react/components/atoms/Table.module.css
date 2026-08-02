@@ -1,68 +1,68 @@
 table.tb {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: auto;
-  border-collapse: collapse;
-  overflow: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    overflow: auto;
 }
 
 table.tb.resizing {
-  user-select: none;
+    user-select: none;
 }
 
 tr.hdr {
-  background-color: var(--plt-hdr-bg, #000);
+    background-color: var(--plt-hdr-bg, #000);
 }
 
 table.tb > thead > tr > th {
-  font-weight: normal;
-  color: var(--plt-hdr-fg, #fff);
-  padding: 3px;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background-color: inherit;
+    font-weight: normal;
+    color: var(--plt-hdr-fg, #fff);
+    padding: 3px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: inherit;
 }
 
 .ptr {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 table.tb > tbody > tr > td {
-  padding: 3px;
+    padding: 3px;
 }
 
 table.tb > tbody > tr.alt > td {
-  background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 table.tb > tbody > tr:hover {
-  background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 th > span.icon {
-  position: absolute;
-  right: 0;
+    position: absolute;
+    right: 0;
 }
 
 th > span.iconR {
-  left: 0;
-  right: unset;
+    left: 0;
+    right: unset;
 }
 
 th .resizeHandle {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 5px;
-  cursor: col-resize;
-  user-select: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    cursor: col-resize;
+    user-select: none;
 }
 
 th .resizeHandle:hover,
 th .resizeHandleActive {
-  background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.3);
 }

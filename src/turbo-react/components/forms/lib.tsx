@@ -1,184 +1,196 @@
 import {
-  createFormHook,
-  TFormControlBaseProps,
-  TFormControlOuterProps,
-  TFormInternalState,
-  ViewUtils,
-} from "@mrreality255/turbo-react-forms";
+    createFormHook,
+    TFormControlBaseProps,
+    TFormControlOuterProps,
+    TFormInternalState,
+    ViewUtils,
+} from '@mrreality255/turbo-react-forms'
 import {
-  TControlRenderProps,
-  TDropDownFieldProps,
-  TFormEnvState,
-  TFormWindowProps,
-  TProgressBarFieldProps,
-  TSubformProps,
-  TTextBoxFieldProps,
-} from "./types";
+    TControlRenderProps,
+    TDropDownFieldProps,
+    TFormEnvState,
+    TFormWindowProps,
+    TProgressBarFieldProps,
+    TSubformProps,
+    TTextBoxFieldProps,
+} from './types'
 import {
-  TCheckbox,
-  TDropDown,
-  TGroupBox,
-  TGroupBoxProps,
-  TLabelInputProps,
-  TProgressBar,
-  TRadioButton,
-  TTextBox,
-} from "../atoms";
-import { TFormWindow } from "./FormWindow";
-import { ControlWrapper } from "./ControlWrapper";
-import { TControlContainer } from "./ControlContainer";
+    TCheckbox,
+    TDropDown,
+    TGroupBox,
+    TGroupBoxProps,
+    TLabelInputProps,
+    TProgressBar,
+    TRadioButton,
+    TTextBox,
+} from '../atoms'
+import { TFormWindow } from './FormWindow'
+import { ControlWrapper } from './ControlWrapper'
+import { TControlContainer } from './ControlContainer'
 
 const lib = createFormHook({
-  controls: {
-    textBox: {
-      onRender: (
-        baseProps: TFormControlBaseProps,
-        props: TTextBoxFieldProps,
-      ) => {
-        return (
-          <TTextBox
-            {...props}
-            disabled={baseProps.disabled}
-            readOnly={baseProps.readOnly}
-            value={baseProps.value}
-            onChange={(v) => baseProps.onValueChange(v)}
-          ></TTextBox>
-        );
-      },
+    controls: {
+        textBox: {
+            onRender: (
+                baseProps: TFormControlBaseProps,
+                props: TTextBoxFieldProps
+            ) => {
+                return (
+                    <TTextBox
+                        {...props}
+                        disabled={baseProps.disabled}
+                        readOnly={baseProps.readOnly}
+                        value={baseProps.value}
+                        onChange={(v) => baseProps.onValueChange(v)}
+                    ></TTextBox>
+                )
+            },
+        },
+
+        checkBox: {
+            forcedDefaultValue: 'false',
+            onRender: (
+                baseProps: TFormControlBaseProps,
+                props: TLabelInputProps
+            ) => {
+                return (
+                    <TCheckbox
+                        {...props}
+                        disabled={baseProps.disabled}
+                        readOnly={baseProps.readOnly}
+                        value={baseProps.value}
+                        onChange={(v) =>
+                            baseProps.onValueChange(v ? 'true' : 'false')
+                        }
+                    ></TCheckbox>
+                )
+            },
+        },
+
+        dropDown: {
+            onRender: (
+                baseProps: TFormControlBaseProps,
+                props: TDropDownFieldProps
+            ) => {
+                return (
+                    <TDropDown
+                        {...props}
+                        disabled={baseProps.disabled}
+                        readOnly={baseProps.readOnly}
+                        value={baseProps.value}
+                        onChange={(v) => baseProps.onValueChange(v)}
+                    ></TDropDown>
+                )
+            },
+        },
+
+        radioButton: {
+            forcedDefaultValue: 'false',
+            onRender: (
+                baseProps: TFormControlBaseProps,
+                props: TLabelInputProps
+            ) => {
+                return (
+                    <TRadioButton
+                        {...props}
+                        disabled={baseProps.disabled}
+                        readOnly={baseProps.readOnly}
+                        value={baseProps.value}
+                        onChange={(v) =>
+                            baseProps.onValueChange(v ? 'true' : 'false')
+                        }
+                    ></TRadioButton>
+                )
+            },
+        },
+
+        progressBar: {
+            forcedDefaultValue: '0',
+            onRender: (
+                baseProps: TFormControlBaseProps,
+                props: TProgressBarFieldProps
+            ) => {
+                return (
+                    <TProgressBar
+                        {...props}
+                        disabled={baseProps.disabled}
+                        readOnly={baseProps.readOnly}
+                        value={baseProps.value}
+                        onChange={(v) => baseProps.onValueChange(v)}
+                    ></TProgressBar>
+                )
+            },
+        },
     },
 
-    checkBox: {
-      forcedDefaultValue: "false",
-      onRender: (baseProps: TFormControlBaseProps, props: TLabelInputProps) => {
-        return (
-          <TCheckbox
-            {...props}
-            disabled={baseProps.disabled}
-            readOnly={baseProps.readOnly}
-            value={baseProps.value}
-            onChange={(v) => baseProps.onValueChange(v ? "true" : "false")}
-          ></TCheckbox>
-        );
-      },
+    onInit: () => {
+        return {} as TFormEnvState
     },
 
-    dropDown: {
-      onRender: (
-        baseProps: TFormControlBaseProps,
-        props: TDropDownFieldProps,
-      ) => {
+    onRenderControl: (
+        content,
+        visible,
+        ctrlProps,
+        renderProps: TControlRenderProps | undefined,
+        hintTr
+    ) => {
         return (
-          <TDropDown
-            {...props}
-            disabled={baseProps.disabled}
-            readOnly={baseProps.readOnly}
-            value={baseProps.value}
-            onChange={(v) => baseProps.onValueChange(v)}
-          ></TDropDown>
-        );
-      },
+            <ControlWrapper
+                visible={visible}
+                ctrlProps={ctrlProps}
+                renderProps={renderProps}
+                onHint={hintTr}
+            >
+                {content}
+            </ControlWrapper>
+        )
     },
 
-    radioButton: {
-      forcedDefaultValue: "false",
-      onRender: (baseProps: TFormControlBaseProps, props: TLabelInputProps) => {
+    onRenderMainWrapper: (
+        content: React.ReactNode,
+        props: TFormWindowProps,
+        state: TFormInternalState<unknown>
+    ) => {
         return (
-          <TRadioButton
-            {...props}
-            disabled={baseProps.disabled}
-            readOnly={baseProps.readOnly}
-            value={baseProps.value}
-            onChange={(v) => baseProps.onValueChange(v ? "true" : "false")}
-          ></TRadioButton>
-        );
-      },
+            <TFormWindow {...props} isLoading={state.mode === 'loading'}>
+                {content}
+            </TFormWindow>
+        )
     },
+    onRenderSubform: (content, data, props: TSubformProps) => {
+        const c = ViewUtils.wrap(
+            <TControlContainer {...(props.container ?? {})}>
+                {content}
+            </TControlContainer>,
+            props.groupBox
+                ? (c) => wrapInGroupBox(c, props.groupBox!)
+                : undefined
+        )
 
-    progressBar: {
-      forcedDefaultValue: "0",
-      onRender: (
-        baseProps: TFormControlBaseProps,
-        props: TProgressBarFieldProps,
-      ) => {
-        return (
-          <TProgressBar
-            {...props}
-            disabled={baseProps.disabled}
-            readOnly={baseProps.readOnly}
-            value={baseProps.value}
-            onChange={(v) => baseProps.onValueChange(v)}
-          ></TProgressBar>
-        );
-      },
+        return <div>{c}</div>
     },
-  },
-
-  onInit: () => {
-    return {} as TFormEnvState;
-  },
-
-  onRenderControl: (
-    content,
-    visible,
-    ctrlProps,
-    renderProps: TControlRenderProps | undefined,
-    hintTr,
-  ) => {
-    return (
-      <ControlWrapper
-        visible={visible}
-        ctrlProps={ctrlProps}
-        renderProps={renderProps}
-        onHint={hintTr}
-      >
-        {content}
-      </ControlWrapper>
-    );
-  },
-
-  onRenderMainWrapper: (
-    content: React.ReactNode,
-    props: TFormWindowProps,
-    state: TFormInternalState<unknown>,
-  ) => {
-    return (
-      <TFormWindow {...props} isLoading={state.mode === "loading"}>
-        {content}
-      </TFormWindow>
-    );
-  },
-  onRenderSubform: (content, data, props: TSubformProps) => {
-    const c = ViewUtils.wrap(
-      <TControlContainer {...(props.container ?? {})}>
-        {content}
-      </TControlContainer>,
-      props.groupBox ? (c) => wrapInGroupBox(c, props.groupBox!) : undefined,
-    );
-
-    return <div>{c}</div>;
-  },
-  onRenderSubformControl: (content, data, idx) => {
-    return content;
-  },
-  onRenderTemplate: (content, state, props) => {
-    return content;
-  },
-  onRenderTemplateRow: (content, idx, handle, stateProps, props) => {
-    return content;
-  },
-  onRenderTemplateRowControl: (content, rowIdx, stateProps, props) => {
-    return content;
-  },
-});
+    onRenderSubformControl: (content, data, idx) => {
+        return content
+    },
+    onRenderTemplate: (content, state, props) => {
+        return content
+    },
+    onRenderTemplateRow: (content, idx, handle, stateProps, props) => {
+        return content
+    },
+    onRenderTemplateRowControl: (content, rowIdx, stateProps, props) => {
+        return content
+    },
+})
 
 function wrapInGroupBox(
-  content: React.ReactNode,
-  groupBox: TGroupBoxProps,
+    content: React.ReactNode,
+    groupBox: TGroupBoxProps
 ): React.ReactNode {
-  return <TGroupBox {...groupBox}>{content}</TGroupBox>;
+    return <TGroupBox {...groupBox}>{content}</TGroupBox>
 }
 
-export type TDemoLibControls = ReturnType<typeof lib.newEmptyList>;
+export type TDemoLibControls = ReturnType<typeof lib.newEmptyList>
 
-export const useForm = lib.useForm;
-export const useFormContext = lib.useFormContext;
+export const useForm = lib.useForm
+export const useFormContext = lib.useFormContext

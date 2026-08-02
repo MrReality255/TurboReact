@@ -14,7 +14,7 @@ export * from "./useValue";
 export * from "./useWidth";
 */
 
-export * from "./useAutoFocus";
-export * from "./useMobile";
-export * from "./usePalette";
-export * from "./useWidth";
+export * from './useAutoFocus'
+export * from './useMobile'
+export * from './usePalette'
+export * from './useWidth'
