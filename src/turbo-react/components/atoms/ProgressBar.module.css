@@ -1,0 +1,41 @@
+div.editable {
+  cursor: pointer;
+}
+
+div.pb div.wrapper {
+  background-color: var(--plt-bar-bg, #660);
+  width: 100%;
+  height: 1.5em;
+}
+
+div.pb div.wrapper div {
+  background-color: var(--plt-bar-fg, #ff0);
+  height: 1.5em;
+}
+
+div.value {
+  width: 100%;
+  text-align: center;
+  color: var(--plt-bar-value, inherit);
+}
+
+div.editSpace {
+  position: relative;
+  width: 100%;
+  height: 1em;
+  overflow: hidden;
+}
+
+div.cursor {
+  position: absolute;
+  height: 0.5em;
+  color: var(--plt-bar-cursor, inherit);
+}
+
+div.cursor::before {
+  content: "▲";
+}
+
+div.pb:focus-within > label {
+  color: var(--plt-fg-hover, #fff);
+}

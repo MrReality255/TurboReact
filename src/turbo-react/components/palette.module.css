@@ -1,0 +1,522 @@
+/* Shared palette CSS custom properties */
+/* Each palette class defines variables that components reference */
+
+.blue {
+  /* General */
+  --plt-fg: #0ff;
+  --plt-bg: #006;
+  --plt-border: #099;
+  --plt-fg-hover: #fff;
+  --plt-bg-hover: #099;
+  --plt-accent: #aff;
+  --plt-fg-active: #fff;
+  --plt-bg-active: #0cc;
+  --plt-highlight: #090;
+  --plt-highlight-fg: #fff;
+  --plt-separator: #fff;
+  --plt-disabled: #999;
+  --plt-label: #0ff;
+  --plt-input-bg: #000;
+  --plt-input-bg-focus: #222;
+  --plt-input-fg: #ff0;
+  --plt-heading: #0ff;
+  /* ProgressBar */
+  --plt-bar-bg: #660;
+  --plt-bar-fg: #ff0;
+  --plt-bar-cursor: inherit;
+  --plt-bar-value: inherit;
+  /* GroupBox */
+  --plt-gb-bg: #066;
+  --plt-gb-label: #fff;
+  /* Table */
+  --plt-hdr-fg: #0ff;
+  --plt-hdr-bg: #000;
+  /* Window */
+  --plt-wnd-bg: #006;
+  --plt-wnd-fg: #fff;
+  --plt-wnd-close: #0f0;
+  --plt-wnd-content: #ff0;
+  /* Link button */
+  --plt-link-fg: #0f0;
+  --plt-link-fg-hover: #ff0;
+  --plt-link-bg-hover: #090;
+  /* Plain button */
+  --plt-plain-fg: #0cc;
+  --plt-plain-bg: #077;
+  --plt-plain-border: #099;
+  --plt-plain-shadow: none;
+  --plt-plain-fg-hover: #0ff;
+  --plt-plain-bg-hover: #099;
+  --plt-plain-shadow-hover: 0 0 6px #00ff88;
+  --plt-plain-fg-down: #fff;
+  --plt-plain-bg-down: #0cc;
+  --plt-plain-shadow-down: 0 0 6px #00ff88;
+  --plt-plain-default: #aff;
+  /* Scrollbar */
+  --sb-track: #003;
+  --sb-track-border: #006;
+  --sb-thumb: #0aa;
+  --sb-thumb-border: #0cc;
+  --sb-thumb-hover: #0ff;
+  --sb-thumb-active: #fff;
+  --sb-button: #006;
+  --sb-button-border: #099;
+  --sb-button-hover: #099;
+  --sb-corner: #003;
+}
+
+.green {
+  /* General */
+  --plt-fg: #0f0;
+  --plt-bg: #030;
+  --plt-border: #0f0;
+  --plt-fg-hover: #ff0;
+  --plt-bg-hover: #050;
+  --plt-accent: #ff0;
+  --plt-fg-active: #000;
+  --plt-bg-active: #0d0;
+  --plt-highlight: #0d0;
+  --plt-highlight-fg: #000;
+  --plt-separator: #0f0;
+  --plt-disabled: #999;
+  --plt-label: #ff0;
+  --plt-input-bg: #020;
+  --plt-input-bg-focus: #000;
+  --plt-input-fg: #ff0;
+  --plt-heading: inherit;
+  /* ProgressBar */
+  --plt-bar-bg: #060;
+  --plt-bar-fg: #0f0;
+  --plt-bar-cursor: inherit;
+  --plt-bar-value: inherit;
+  /* GroupBox */
+  --plt-gb-bg: #020;
+  --plt-gb-label: #ff0;
+  /* Table */
+  --plt-hdr-fg: #ff0;
+  --plt-hdr-bg: #050;
+  /* Window */
+  --plt-wnd-bg: #030;
+  --plt-wnd-fg: #0f0;
+  --plt-wnd-close: #0f0;
+  --plt-wnd-content: #0f0;
+  /* Link button */
+  --plt-link-fg: #0f0;
+  --plt-link-fg-hover: #ff0;
+  --plt-link-bg-hover: transparent;
+  /* Plain button */
+  --plt-plain-fg: #00ff00;
+  --plt-plain-bg: #003300;
+  --plt-plain-border: #00ff00;
+  --plt-plain-shadow: 0 0 4px #00ff00;
+  --plt-plain-fg-hover: #33cc00;
+  --plt-plain-bg-hover: #005500;
+  --plt-plain-shadow-hover: 0 0 6px #00ff88;
+  --plt-plain-fg-down: #ffff00;
+  --plt-plain-bg-down: #00aa00;
+  --plt-plain-shadow-down: 0 0 6px #00ff88;
+  --plt-plain-default: #ff0;
+  /* Scrollbar */
+  --sb-track: #010;
+  --sb-track-border: #030;
+  --sb-thumb: #0a0;
+  --sb-thumb-border: #0c0;
+  --sb-thumb-hover: #0f0;
+  --sb-thumb-active: #fff;
+  --sb-button: #030;
+  --sb-button-border: #060;
+  --sb-button-hover: #060;
+  --sb-corner: #010;
+}
+
+.cyan {
+  /* General */
+  --plt-fg: #fff;
+  --plt-bg: #066;
+  --plt-border: #099;
+  --plt-fg-hover: #0ff;
+  --plt-bg-hover: #000;
+  --plt-accent: #0ff;
+  --plt-fg-active: #fff;
+  --plt-bg-active: #00cccc;
+  --plt-highlight: #000;
+  --plt-highlight-fg: #ff0;
+  --plt-separator: #fff;
+  --plt-disabled: #999;
+  --plt-label: #fff;
+  --plt-input-bg: #000;
+  --plt-input-bg-focus: #222;
+  --plt-input-fg: #ff0;
+  --plt-heading: inherit;
+  /* ProgressBar */
+  --plt-bar-bg: #660;
+  --plt-bar-fg: #ff0;
+  --plt-bar-cursor: inherit;
+  --plt-bar-value: inherit;
+  /* GroupBox */
+  --plt-gb-bg: #000;
+  --plt-gb-label: #fff;
+  /* Table */
+  --plt-hdr-fg: #fff;
+  --plt-hdr-bg: #000;
+  /* Window */
+  --plt-wnd-bg: #066;
+  --plt-wnd-fg: #fff;
+  --plt-wnd-close: #fff;
+  --plt-wnd-content: #ff0;
+  /* Link button */
+  --plt-link-fg: #fff;
+  --plt-link-fg-hover: #ff7;
+  --plt-link-bg-hover: #000;
+  /* Plain button */
+  --plt-plain-fg: #000;
+  --plt-plain-bg: #099;
+  --plt-plain-border: #099;
+  --plt-plain-shadow: none;
+  --plt-plain-fg-hover: #0ff;
+  --plt-plain-bg-hover: #009999;
+  --plt-plain-shadow-hover: 0 0 6px #00ff88;
+  --plt-plain-fg-down: #fff;
+  --plt-plain-bg-down: #00cccc;
+  --plt-plain-shadow-down: 0 0 6px #00ff88;
+  --plt-plain-default: #0ff;
+  /* Scrollbar */
+  --sb-track: #033;
+  --sb-track-border: #066;
+  --sb-thumb: #0cc;
+  --sb-thumb-border: #099;
+  --sb-thumb-hover: #0ff;
+  --sb-thumb-active: #fff;
+  --sb-button: #066;
+  --sb-button-border: #099;
+  --sb-button-hover: #099;
+  --sb-corner: #033;
+}
+
+.dark {
+  /* General */
+  --plt-fg: #ff0;
+  --plt-bg: #222;
+  --plt-border: #550;
+  --plt-fg-hover: #330;
+  --plt-bg-hover: #990;
+  --plt-accent: #fff;
+  --plt-fg-active: #000;
+  --plt-bg-active: #cc0;
+  --plt-highlight: #cc0;
+  --plt-highlight-fg: #000;
+  --plt-separator: #ff0;
+  --plt-disabled: #999;
+  --plt-label: #ff0;
+  --plt-input-bg: #000;
+  --plt-input-bg-focus: #222;
+  --plt-input-fg: #ff0;
+  --plt-heading: inherit;
+  /* ProgressBar */
+  --plt-bar-bg: #660;
+  --plt-bar-fg: #ff0;
+  --plt-bar-cursor: inherit;
+  --plt-bar-value: inherit;
+  /* GroupBox */
+  --plt-gb-bg: #000;
+  --plt-gb-label: #ff0;
+  /* Table */
+  --plt-hdr-fg: #ff0;
+  --plt-hdr-bg: #000;
+  /* Window */
+  --plt-wnd-bg: #222;
+  --plt-wnd-fg: #ff0;
+  --plt-wnd-close: #ff0;
+  --plt-wnd-content: #ff0;
+  /* Link button */
+  --plt-link-fg: #bb0;
+  --plt-link-fg-hover: #000;
+  --plt-link-bg-hover: #bb0;
+  /* Plain button */
+  --plt-plain-fg: #ff0;
+  --plt-plain-bg: #770;
+  --plt-plain-border: #770;
+  --plt-plain-shadow: none;
+  --plt-plain-fg-hover: #330;
+  --plt-plain-bg-hover: #990;
+  --plt-plain-shadow-hover: 0 0 6px #888800;
+  --plt-plain-fg-down: #000;
+  --plt-plain-bg-down: #ff0;
+  --plt-plain-shadow-down: 0 0 6px #888800;
+  --plt-plain-default: #fff;
+  /* Scrollbar */
+  --sb-track: #111;
+  --sb-track-border: #333;
+  --sb-thumb: #990;
+  --sb-thumb-border: #bb0;
+  --sb-thumb-hover: #ff0;
+  --sb-thumb-active: #fff;
+  --sb-button: #333;
+  --sb-button-border: #550;
+  --sb-button-hover: #550;
+  --sb-corner: #111;
+}
+
+.grey {
+  /* General */
+  --plt-fg: #000;
+  --plt-bg: #999;
+  --plt-border: #666;
+  --plt-fg-hover: #000;
+  --plt-bg-hover: #bbb;
+  --plt-accent: #fff;
+  --plt-fg-active: #000;
+  --plt-bg-active: #ccc;
+  --plt-highlight: #090;
+  --plt-highlight-fg: #000;
+  --plt-separator: #333;
+  --plt-disabled: #333;
+  --plt-label: #333;
+  --plt-input-bg: #000;
+  --plt-input-bg-focus: #222;
+  --plt-input-fg: #fff;
+  --plt-heading: inherit;
+  /* ProgressBar */
+  --plt-bar-bg: #660;
+  --plt-bar-fg: #ff0;
+  --plt-bar-cursor: #ff0;
+  --plt-bar-value: #ff0;
+  /* GroupBox */
+  --plt-gb-bg: #088;
+  --plt-gb-label: #fff;
+  /* Table */
+  --plt-hdr-fg: #fff;
+  --plt-hdr-bg: #000;
+  /* Window */
+  --plt-wnd-bg: #999;
+  --plt-wnd-fg: #000;
+  --plt-wnd-close: #090;
+  --plt-wnd-content: #000;
+  /* Std button (overrides default green) */
+  --plt-std-btn-bg: #ddd;
+  --plt-std-btn-fg: #333;
+  --plt-std-btn-active: #ddd;
+  /* Link button */
+  --plt-link-fg: #222;
+  --plt-link-fg-hover: #000;
+  --plt-link-bg-hover: #090;
+  /* Plain button */
+  --plt-plain-fg: #000;
+  --plt-plain-bg: #777;
+  --plt-plain-border: #666;
+  --plt-plain-shadow: 0 0 4px #666;
+  --plt-plain-fg-hover: #000;
+  --plt-plain-bg-hover: #bbb;
+  --plt-plain-shadow-hover: 0 0 6px #ddd;
+  --plt-plain-fg-down: #000;
+  --plt-plain-bg-down: #bbb;
+  --plt-plain-shadow-down: 0 0 6px #ddd;
+  --plt-plain-default: #fff;
+  /* Scrollbar */
+  --sb-track: #444;
+  --sb-track-border: #666;
+  --sb-thumb: #aaa;
+  --sb-thumb-border: #ccc;
+  --sb-thumb-hover: #ddd;
+  --sb-thumb-active: #fff;
+  --sb-button: #666;
+  --sb-button-border: #888;
+  --sb-button-hover: #888;
+  --sb-corner: #444;
+}
+
+.red {
+  /* General */
+  --plt-fg: #ff0;
+  --plt-bg: #600;
+  --plt-border: #900;
+  --plt-fg-hover: #ff0;
+  --plt-bg-hover: #a00;
+  --plt-accent: #fff;
+  --plt-fg-active: #ff0;
+  --plt-bg-active: #f00;
+  --plt-highlight: #dd0;
+  --plt-highlight-fg: #000;
+  --plt-separator: #ff0;
+  --plt-disabled: #999;
+  --plt-label: #fff;
+  --plt-input-bg: #600;
+  --plt-input-bg-focus: #000;
+  --plt-input-fg: #ff0;
+  --plt-heading: inherit;
+  /* ProgressBar */
+  --plt-bar-bg: #660;
+  --plt-bar-fg: #ff0;
+  --plt-bar-cursor: inherit;
+  --plt-bar-value: inherit;
+  /* GroupBox */
+  --plt-gb-bg: #400;
+  --plt-gb-label: #fff;
+  /* Table */
+  --plt-hdr-fg: #fff;
+  --plt-hdr-bg: #500;
+  /* Window */
+  --plt-wnd-bg: #900;
+  --plt-wnd-fg: #ff0;
+  --plt-wnd-close: #ff0;
+  --plt-wnd-content: #ff0;
+  /* Std button (overrides default green) */
+  --plt-std-btn-bg: #f00;
+  --plt-std-btn-fg: #ff0;
+  --plt-std-btn-active: #f00;
+  /* Link button */
+  --plt-link-fg: #fff;
+  --plt-link-fg-hover: #ff0;
+  --plt-link-bg-hover: #f00;
+  /* Plain button */
+  --plt-plain-fg: #ff0;
+  --plt-plain-bg: #900;
+  --plt-plain-border: #900;
+  --plt-plain-shadow: 0 0 4px #f00;
+  --plt-plain-fg-hover: #ff0;
+  --plt-plain-bg-hover: #a00;
+  --plt-plain-shadow-hover: 0 0 6px #f00;
+  --plt-plain-fg-down: #ff0;
+  --plt-plain-bg-down: #f00;
+  --plt-plain-shadow-down: 0 0 6px #f00;
+  --plt-plain-default: #fff;
+  /* Scrollbar */
+  --sb-track: #200;
+  --sb-track-border: #600;
+  --sb-thumb: #c00;
+  --sb-thumb-border: #f00;
+  --sb-thumb-hover: #f44;
+  --sb-thumb-active: #fff;
+  --sb-button: #600;
+  --sb-button-border: #900;
+  --sb-button-hover: #900;
+  --sb-corner: #200;
+}
+
+.dialog {
+  /* General */
+  --plt-fg: #fff;
+  --plt-bg: #006;
+  --plt-border: #009;
+  --plt-fg-hover: #fff;
+  --plt-bg-hover: #008;
+  --plt-accent: #ff0;
+  --plt-fg-active: #fff;
+  --plt-bg-active: #009;
+  --plt-highlight: #090;
+  --plt-highlight-fg: #fff;
+  --plt-separator: #fff;
+  --plt-disabled: #999;
+  --plt-label: #111;
+  --plt-input-bg: #006;
+  --plt-input-bg-focus: #008;
+  --plt-input-fg: #fff;
+  --plt-heading: inherit;
+  /* ProgressBar */
+  --plt-bar-bg: #660;
+  --plt-bar-fg: #ff0;
+  --plt-bar-cursor: #ff0;
+  --plt-bar-value: #ff0;
+  /* GroupBox */
+  --plt-gb-bg: #066;
+  --plt-gb-label: #fff;
+  /* Table */
+  --plt-hdr-fg: #ff0;
+  --plt-hdr-bg: #055;
+  /* Window */
+  --plt-wnd-bg: #666;
+  --plt-wnd-fg: #fff;
+  --plt-wnd-close: #0f0;
+  --plt-wnd-content: #000;
+  /* Link button */
+  --plt-link-fg: #ff0;
+  --plt-link-fg-hover: #fff;
+  --plt-link-bg-hover: #090;
+  /* Plain button */
+  --plt-plain-fg: #0ff;
+  --plt-plain-bg: #006;
+  --plt-plain-border: #099;
+  --plt-plain-shadow: 0 0 4px #099;
+  --plt-plain-fg-hover: #fff;
+  --plt-plain-bg-hover: #009;
+  --plt-plain-shadow-hover: 0 0 6px #099;
+  --plt-plain-fg-down: #fff;
+  --plt-plain-bg-down: #00c;
+  --plt-plain-shadow-down: 0 0 6px #099;
+  --plt-plain-default: #fff;
+  /* Scrollbar */
+  --sb-track: #333;
+  --sb-track-border: #555;
+  --sb-thumb: #999;
+  --sb-thumb-border: #bbb;
+  --sb-thumb-hover: #ccc;
+  --sb-thumb-active: #fff;
+  --sb-button: #555;
+  --sb-button-border: #777;
+  --sb-button-hover: #777;
+  --sb-corner: #333;
+}
+
+.mono {
+  /* General */
+  --plt-fg: #ccc;
+  --plt-bg: #222;
+  --plt-border: #555;
+  --plt-fg-hover: #fff;
+  --plt-bg-hover: #444;
+  --plt-accent: #fff;
+  --plt-fg-active: #000;
+  --plt-bg-active: #999;
+  --plt-highlight: #999;
+  --plt-highlight-fg: #000;
+  --plt-separator: #666;
+  --plt-disabled: #444;
+  --plt-label: #ccc;
+  --plt-input-bg: #333;
+  --plt-input-bg-focus: #444;
+  --plt-input-fg: #fff;
+  --plt-heading: inherit;
+  /* ProgressBar */
+  --plt-bar-bg: #666;
+  --plt-bar-fg: #fff;
+  --plt-bar-cursor: #fff;
+  --plt-bar-value: #fff;
+  /* GroupBox */
+  --plt-gb-bg: #222;
+  --plt-gb-label: #ccc;
+  /* Table */
+  --plt-hdr-fg: #fff;
+  --plt-hdr-bg: #000;
+  /* Window */
+  --plt-wnd-bg: #000;
+  --plt-wnd-fg: #999;
+  --plt-wnd-close: #999;
+  --plt-wnd-content: #999;
+  /* Link button */
+  --plt-link-fg: #ccc;
+  --plt-link-fg-hover: #fff;
+  --plt-link-bg-hover: transparent;
+  /* Plain button */
+  --plt-plain-fg: #ccc;
+  --plt-plain-bg: #444;
+  --plt-plain-border: #666;
+  --plt-plain-shadow: 0 0 4px #666;
+  --plt-plain-fg-hover: #fff;
+  --plt-plain-bg-hover: #666;
+  --plt-plain-shadow-hover: 0 0 6px #888;
+  --plt-plain-fg-down: #000;
+  --plt-plain-bg-down: #999;
+  --plt-plain-shadow-down: 0 0 6px #888;
+  --plt-plain-default: #fff;
+  /* Scrollbar */
+  --sb-track: #111;
+  --sb-track-border: #333;
+  --sb-thumb: #777;
+  --sb-thumb-border: #999;
+  --sb-thumb-hover: #aaa;
+  --sb-thumb-active: #fff;
+  --sb-button: #333;
+  --sb-button-border: #555;
+  --sb-button-hover: #555;
+  --sb-corner: #111;
+}

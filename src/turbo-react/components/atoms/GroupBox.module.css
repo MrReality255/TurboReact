@@ -1,0 +1,10 @@
+div.gb {
+  background-color: var(--plt-gb-bg, #066);
+  overflow: hidden;
+  padding: 0.25em;
+  position: relative;
+}
+
+label.gb {
+  color: var(--plt-gb-label, #fff);
+}

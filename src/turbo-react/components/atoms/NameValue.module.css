@@ -1,0 +1,11 @@
+div.nv {
+  width: 100%;
+}
+
+div.nv > .label {
+  color: var(--plt-label, #fff);
+}
+
+.value {
+  flex-grow: 1;
+}

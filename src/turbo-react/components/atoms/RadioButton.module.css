@@ -1,0 +1,44 @@
+/* RadioButton-specific styles */
+
+.rbWrapper:focus-within > label {
+  color: var(--plt-fg-hover, #fff);
+}
+
+.rbWrapper:focus-within > input {
+  color: var(--plt-fg-hover, #fff);
+}
+
+label.rb {
+  cursor: pointer;
+}
+
+input.rb::before {
+  content: "( )";
+}
+
+input.rb:checked::before {
+  content: "(•)";
+}
+
+input.rb {
+  cursor: pointer;
+  font-family: monospace;
+  color: inherit;
+  appearance: none;
+}
+
+input.rb:disabled {
+  color: var(--plt-disabled, #999) !important;
+}
+
+label.rb.disabled {
+  color: var(--plt-disabled, #999) !important;
+}
+
+input.rb + label.rb:hover {
+  color: var(--plt-fg-hover, #fff);
+}
+
+input.rb:hover {
+  color: var(--plt-fg-hover, #fff);
+}

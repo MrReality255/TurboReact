@@ -1,0 +1,56 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #033;
+  font-family: monospace;
+  font-size: 14px;
+  color: #fff;
+}
+
+div.appLayout {
+}
+
+/* DOS-style scrollbars */
+:global(*) {
+  scrollbar-width: auto;
+  scrollbar-color: var(--sb-thumb) var(--sb-track);
+}
+
+:global(*::-webkit-scrollbar) {
+  width: 12px;
+  height: 12px;
+}
+
+:global(*::-webkit-scrollbar-track) {
+  background: var(--sb-track);
+  border: 1px solid var(--sb-track-border);
+}
+
+:global(*::-webkit-scrollbar-thumb) {
+  background: var(--sb-thumb);
+  border: 1px solid var(--sb-thumb-border);
+  min-height: 20px;
+}
+
+:global(*::-webkit-scrollbar-thumb:hover) {
+  background: var(--sb-thumb-hover);
+}
+
+:global(*::-webkit-scrollbar-thumb:active) {
+  background: var(--sb-thumb-active);
+}
+
+:global(*::-webkit-scrollbar-corner) {
+  background: var(--sb-corner);
+}
+
+:global(*::-webkit-scrollbar-button) {
+  background: var(--sb-button);
+  border: 1px solid var(--sb-button-border);
+  height: 12px;
+  width: 12px;
+}
+
+:global(*::-webkit-scrollbar-button:hover) {
+  background: var(--sb-button-hover);
+}

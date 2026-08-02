@@ -1,0 +1,50 @@
+input.tb {
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+  border-style: solid;
+  border-width: 0;
+  font-family: monospace;
+  text-decoration: none;
+  outline: none;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  background-color: inherit;
+  color: inherit;
+}
+
+input.tb:disabled {
+  color: #999;
+}
+
+input.tb[type="number"]::-webkit-inner-spin-button,
+input.tb[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+div.inputWrapper {
+  background-color: var(--plt-input-bg, #000);
+  color: var(--plt-input-fg, #ff0);
+  width: 100%;
+  display: flex;
+}
+
+div.inputWrapper:focus-within {
+  background-color: var(--plt-input-bg-focus, #222);
+}
+
+div.inputWrapper > div.prefix {
+  min-width: 1em;
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+}
+
+div.inputWrapper > div.prefix.empty {
+  min-width: 0.25em;
+}
+
+/* Label focus */
+div.tbWrapper:focus-within > label {
+  color: var(--plt-fg-hover, #fff);
+}
