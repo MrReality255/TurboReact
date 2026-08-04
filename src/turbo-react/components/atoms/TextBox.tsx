@@ -4,8 +4,13 @@ import styles from './TextBox.module.css'
 import usePalette from '../../hooks/usePalette'
 import { TTextBoxProps } from '.'
 import useAutoFocus from '../../hooks/useAutoFocus'
+import { DateTextBox } from './DateTextBox'
 
 export function TTextBox(p: TTextBoxProps) {
+    if (p.mode === 'date') {
+        return <DateTextBox {...p} />
+    }
+
     const plt = usePalette(styles, p)
     const id = useId()
     const ref = useRef<HTMLInputElement>(null)

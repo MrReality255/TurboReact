@@ -11,7 +11,7 @@ export interface ICompactKeyEvent {
     stopPropagation: () => void
 }
 export type TButtonVariant = 'standard' | 'plain' | 'link' | 'text'
-export type TTextBoxMode = 'text' | 'password' | 'number' | 'email'
+export type TTextBoxMode = 'date' | 'text' | 'password' | 'number' | 'email'
 export type TWindowInnerPadding = 'none' | 'space'
 
 export type TAlignType = 'left' | 'center' | 'right'
@@ -161,6 +161,7 @@ export type TTableValueProvider<T extends object> =
 export type TTextBoxProps = TInputProps & {
     align?: TAlignType
     autoComplete?: boolean
+    dateFormat?: string
     label?: string
     mode?: TTextBoxMode
     prefix?: string
